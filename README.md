@@ -48,9 +48,6 @@ skai-scrapping/
 - Python 3.8 ou supérieur
 - pip (gestionnaire de paquets Python)
 
-### Installation rapide
-
-`ash
 # Cloner le repository
 git clone https://github.com/teopaquet/skai-scrapping.git
 cd skai-scrapping
