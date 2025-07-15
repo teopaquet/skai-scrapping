@@ -16,7 +16,7 @@ Un système complet de collecte et d'analyse de données de flottes aériennes p
 
 ## 📁 Structure du projet
 
-`
+
 skai-scrapping/
 ├── src/                          # Code source principal
 │   ├── scrapers/                 # Scripts de scraping
@@ -40,7 +40,7 @@ skai-scrapping/
 ├── docs/                         # Documentation
 ├── examples/                     # Exemples d'utilisation
 └── requirements.txt              # Dépendances Python
-`
+
 
 ## 🛠️ Installation
 
