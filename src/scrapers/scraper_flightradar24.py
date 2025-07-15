@@ -15,6 +15,8 @@ from urllib.parse import urljoin
 import random
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
+import os
+import sys
 
 class FlightRadar24Scraper:
     def __init__(self):
@@ -276,7 +278,15 @@ def main():
     print("="*50)
     
     scraper = FlightRadar24Scraper()
-    csv_file = "flightradar24.csv"
+    # Chemin absolu vers le fichier CSV
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    project_root = os.path.dirname(os.path.dirname(script_dir))
+    csv_file = os.path.join(project_root, "data", "raw", "flightradar24.csv")
+    
+    # Vérifier que le fichier CSV existe
+    if not os.path.exists(csv_file):
+        print(f"Erreur: Le fichier {csv_file} n'existe pas!")
+        return
     
     # Options pour le test
     print("Options de scraping:")
@@ -284,7 +294,12 @@ def main():
     print("2. Test avec 50 compagnies")
     print("3. Scraper toutes les compagnies (ATTENTION: très long!)")
     
-    choice = input("Votre choix (1-3): ").strip()
+    # Accepter un argument en ligne de commande ou demander à l'utilisateur
+    if len(sys.argv) > 1:
+        choice = sys.argv[1]
+        print(f"Choix automatique: {choice}")
+    else:
+        choice = input("Votre choix (1-3): ").strip()
     
     if choice == "1":
         max_airlines = 10
@@ -300,9 +315,15 @@ def main():
     results = scraper.scrape_all_airlines(csv_file, max_airlines, delay_range)
     
     if results:
-        # Sauvegarder les résultats
-        scraper.save_results(results, 'fleet_data_complete.json')
-        scraper.save_results_csv(results, 'fleet_data_detailed.csv')
+        # Sauvegarder les résultats dans le dossier processed
+        processed_dir = os.path.join(project_root, "data", "processed")
+        os.makedirs(processed_dir, exist_ok=True)
+        
+        json_file = os.path.join(processed_dir, 'fleet_data_complete.json')
+        csv_file_output = os.path.join(processed_dir, 'fleet_data_detailed.csv')
+        
+        scraper.save_results(results, json_file)
+        scraper.save_results_csv(results, csv_file_output)
         scraper.generate_summary(results)
         
         print(f"\nScraping terminé! {len(results)} compagnies traitées.")

@@ -1,0 +1,178 @@
+Aircraft_Type_Detail,Total_Count,Airlines_Using,Aircraft_Code
+Airbus A320-214,79,2,A21N
+Piper Archer III,48,2,P06T
+Airbus A321-211,32,1,A320
+Airbus A320-232,29,2,A21N
+Boeing 737-8LJ,28,1,A359
+Boeing 737 MAX 9,27,1,B38M
+Piper Archer TX,26,1,C172
+Cessna 172S Skyhawk SP,26,2,BE58
+Boeing 737-852,25,1,B39M
+Embraer E190AR,24,1,B738
+ATR 72-600,20,1,A333
+Piper Seminole,18,2,P28S
+Boeing 777-3M0(ER),16,1,B738
+Airbus A321-271NX,15,1,A20N
+Mitsubishi CRJ-200ER(SF),15,1,CRJ1
+Boeing 787-9 Dreamliner,14,1,B788
+Tecnam P2008JC MkII,14,1,C172
+Swearingen Metroliner,14,1,SW3
+Airbus A330-302,12,1,A332
+Boeing 737 MAX 8,12,1,A332
+Airbus A330-343,11,1,A321
+Boeing 737-86X,10,1,B38M
+Boeing 737-8MC,10,1,A359
+McDonnell Douglas MD-83(SF),9,1,MD82
+Boeing 787-8 Dreamliner,8,1,B738
+Airbus A321-253NX(LR),8,1,A20N
+Airbus Helicopters H145,8,2,DH8D
+Boeing 737-8SH,8,1,B737
+Boeing 737-86N,8,2,B38M
+Cessna Citation Latitude,7,2,C25C
+Learjet 75,7,1,LJ45
+Airbus Helicopters H125,7,1,AS32
+Pilatus PC-12 NG,7,5,DA62
+Airbus A350-941,7,1,A333
+Boeing 737-8JP,6,2,AT76
+Boeing 737-887,6,1,B737
+MD-900 Explorer,6,1,EC45
+Boeing 737-76N,6,2,B733
+Boeing 737-4Q8(SF),5,1,B733
+Boeing 777-300(ER),5,1,B738
+Dornier 328-310 Jet,5,2,GLF5
+Bell 430,4,1,B412
+Boeing 737-522,4,1,B734
+Extra EA-300/L,4,1,DA62
+Piper Navajo C,4,1,E300
+Bombardier Challenger 605,4,1,C68A
+Boeing 737-8BK,4,1,B737
+Airbus A321-231,4,1,A320
+Boeing 737-81D,4,2,B737
+McDonnell Douglas MD-82(SF),4,1,DC93
+De Havilland Canada Dash 8-300,4,2,B412
+Boeing 767-338(ER)(BDSF),4,1,B762
+Hawker Beechcraft 400XP,3,1,A109
+Boeing 737-8HX,3,1,B737
+Boeing 737-86J,3,2,B737
+McDonnell Douglas DC-9-33F,3,1,DC91
+Ilyushin Il-76TD,3,1,AS50
+Cessna Citation CJ3+,3,1,BE40
+Cessna Citation XLS+,3,1,C25A
+Boeing 737-8GP,3,1,B38M
+Piper Archer II,3,2,DA42
+Tecnam P2006T,3,2,C82R
+Mitsubishi CRJ-200PF,3,1,CRJ1
+Diamond DA62,3,1,BE20
+De Havilland Canada Dash 8-400,3,2,DH8A
+Beech G58 Baron,3,1,B430
+Airbus A330-202,3,1,A320
+Boeing 737-4Y0(SF),3,1,B733
+Airbus A321-251NX,3,1,A20N
+Airbus A321-253NY(XLR),3,1,A20N
+Beech B200 Super King Air,3,2,B752
+Mitsubishi CRJ-200SF,3,1,CRJ1
+Beech 200 Super King Air,2,1,B752
+Cessna 182T Skylane,2,1,C172
+Cessna Citation Sovereign,2,2,C25B
+De Havilland Canada Dash 8-100,2,1,C208
+Boeing 727-2S2F(RE),2,1,B350
+Boeing 737-846,2,1,AT76
+Boeing 737-7BD,2,1,B38M
+Airbus Helicopters AS355 Ecureuil,2,1,AS50
+Socata TB-10 Tobago,2,1,PA44
+Pilatus PC-12,2,2,LJ45
+Learjet 60,2,2,GLF6
+Learjet 45,2,2,J328
+Embraer Legacy 600,2,1,E135
+Learjet 60XR,2,1,J328
+McDonnell Douglas DC-9-32F,2,1,DC91
+Mitsubishi CRJ-100(PF),2,1,CL60
+McDonnell Douglas DC-9-33CF,2,1,DC91
+McDonnell Douglas DC-9-15RC,2,1,CVLT
+Piper Navajo B,2,1,E300
+Saab 340B+,2,1,CRJ1
+Boeing 737-8MB,2,1,B737
+Boeing 737-85F,2,1,AT76
+Boeing 737-84P,2,1,B38M
+Cessna Citation CJ3,2,1,B350
+Boeing 767-383(ER)(BDSF),2,1,B762
+Leonardo AW169,2,1,A139
+Embraer ERJ-145LR,2,1,A319
+Airbus Helicopters AS365 Dauphin,1,1,AS55
+Bell 412EPI,1,1,A169
+Airbus Helicopters H215,1,1,A139
+Boeing 737-484(SF),1,1,B733
+Boeing 737-48E(SF),1,1,B733
+Boeing 737-4B6(SF),1,1,B733
+Boeing 737-42C(SF),1,1,B733
+Bell 412EP Sentinel,1,1,A169
+Bell 412EP,1,1,AS65
+Beech King Air B200,1,1,B752
+Boeing 737-3H6(SF),1,1,B505
+Boeing 737-3L9,1,1,B722
+Boeing 737-3M8(BDSF),1,1,B505
+Boeing 737-3Y0(SF),1,1,B505
+Boeing 737-4K5(SF),1,1,B733
+Boeing 737-436(SF),1,1,B733
+Boeing 737-448(SF),1,1,B733
+Boeing 737-46N(SF),1,1,B733
+Boeing 737-476(SF),1,1,B733
+Embraer E190SR,1,1,B738
+Douglas DC-9-33F,1,1,DC91
+Embraer E175STD,1,1,E190
+Dornier Do-328-310 Jet,1,1,GLF5
+Cessna Citation CJ2,1,1,BE20
+Cessna 172N Skyhawk,1,1,
+Cessna Citation M2,1,1,C25B
+Douglas DC-9-32F,1,1,DC91
+Douglas DC-9-15MC,1,1,CVLT
+Douglas DC-9-15(F),1,1,CVLT
+Douglas DC-9-33RC(F),1,1,DC91
+Britten-Norman Islander,1,1,BE20
+Cessna Citation CJ4,1,1,C25B
+Boeing 737-89L,1,1,AT76
+Boeing 737-86Q,1,1,AT76
+Boeing 757-256,1,1,B737
+Boeing 737-8LP,1,1,B737
+Boeing 737-86J(SF),1,1,B737
+Boeing 737-85F(SF),1,1,B737
+Boeing 737-8FZ,1,1,B39M
+Boeing 737-89M,1,1,AT76
+Bombardier Challenger 300,1,1,C680
+Bombardier Challenger 604,1,1,C208
+Cessna Citation Sovereign+,1,1,C56X
+Cessna Citation XLS,1,1,C25A
+Cessna Grand Caravan,1,1,C172
+Cessna Grand Caravan EX,1,1,B734
+Piper Cherokee Turbo Arrow III,1,1,P28A
+Mitsubishi CRJ-200LR(PF),1,1,CRJ1
+McDonnell Douglas MD‑83SF,1,1,MD82
+Mitsubishi CRJ-100ER,1,1,CL60
+Mitsubishi CRJ-200LR,1,1,CRJ1
+McDonnell Douglas MD-83,1,1,MD82
+Leonardo AW139,1,1,A109
+McDonnell Douglas DC-9-15(F),1,1,CVLT
+Ilyushin Il-76MD,1,1,AS50
+Gulfstream G550,1,1,CL30
+Fokker 50,1,1,E145
+Gulfstream G450,1,1,GLEX
+McDonnell Douglas DC-9-15MC,1,1,CVLT
+Pilatus PC-12/47,1,1,LJ45
+Pilatus PC-24,1,1,PC12
+Mudry CAP-10B,1,1,C182
+Saab 340B,1,1,CRJ1
+Piper Cherokee Warrior II,1,1,DA42
+Piper Aztec E,1,1,P06T
+Piper Cadet,1,1,DA42
+Pilatus PC-12 NGX,1,1,DA62
+Pilatus PC-12/45,1,1,C172
+Piper Seneca III,1,1,P28A
+Piper PA-23-250 Aztec,1,1,P06T
+Swearingen Merlin 3,1,1,MD83
+Robinson R44 Cadet,1,1,PA27
+Reims-Cessna FR182 Skylane RG,1,1,C172
+Reims-Cessna F172M Skyhawk,1,1,
+Swearingen SA227-AC Metro III,1,1,SW3
+Sikorsky S-76C,1,1,EXPL
+Zlin Z-50LS,1,1,R44
+Convair CV-640,0,1,CRJ2

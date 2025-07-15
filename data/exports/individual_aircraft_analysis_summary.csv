@@ -1,0 +1,36 @@
+Airline_Name,IATA_ICAO,Total_Fleet_Size,Aircraft_Types_Detail,Aircraft_Codes,Aircraft_Count_Observed,Number_of_Aircraft_Types,Fleet_Coverage_Percent
+Aeroflot,SU / AFL,169,"Airbus A321-251NX, Airbus A320-214, Airbus A321-211, Airbus A330-343, Airbus A350-941, Boeing 737-8LJ, Boeing 737-8MC, Boeing 777-3M0(ER), Boeing 777-300(ER)","A20N, A21N, A320, A321, A333, A359, B738",164,9,97.04
+Aeromexico,AM / AMX,125,"Boeing 737 MAX 9, Boeing 737-86J, Boeing 737-852, Boeing 737-81D, Boeing 737-8JP, Boeing 737-8FZ, Boeing 787-8 Dreamliner, Boeing 787-9 Dreamliner","B38M, B39M, B738, B788",83,8,66.4
+AeroGuard Flight Training Center,ASI,113,"Cessna 172S Skyhawk SP, Piper Archer TX, Piper Archer III, Piper Seminole","C152, C172, P28A",111,4,98.23
+Aeronaves TSM,VTM,97,"Boeing 737-3H6(SF), Boeing 737-3Y0(SF), Boeing 737-3M8(BDSF), Boeing 737-4B6(SF), Boeing 737-4Y0(SF), Boeing 737-4K5(SF), Boeing 737-4Q8(SF), Boeing 737-476(SF), Boeing 737-484(SF), Boeing 737-48E(SF), Boeing 737-46N(SF), Boeing 737-436(SF), Boeing 737-42C(SF), Boeing 737-448(SF), Cessna Grand Caravan EX, Bombardier Challenger 604, Mitsubishi CRJ-100(PF), Mitsubishi CRJ-100ER, Mitsubishi CRJ-200ER(SF), Mitsubishi CRJ-200SF, Mitsubishi CRJ-200PF, Mitsubishi CRJ-200LR(PF), Mitsubishi CRJ-200LR, Convair CV-640, McDonnell Douglas DC-9-15RC, Douglas DC-9-15(F), Douglas DC-9-15MC, McDonnell Douglas DC-9-15MC, McDonnell Douglas DC-9-15(F), Douglas DC-9-33RC(F), McDonnell Douglas DC-9-33F, McDonnell Douglas DC-9-33CF, McDonnell Douglas DC-9-32F, Douglas DC-9-33F, Douglas DC-9-32F, McDonnell Douglas MD-82(SF), McDonnell Douglas MD-83(SF), McDonnell Douglas MD‑83SF, McDonnell Douglas MD-83, Swearingen Merlin 3, Swearingen Metroliner, Swearingen SA227-AC Metro III","B505, B733, B734, C208, CL60, CRJ1, CRJ2, CVLT, DC91, DC93, MD82, MD83, SW3",95,42,97.94
+Aerolineas Argentinas,AR / ARG,84,"Boeing 737 MAX 8, Boeing 737-7BD, Boeing 737-76N, Boeing 737-86J(SF), Boeing 737-81D, Boeing 737-86J, Boeing 737-8BK, Boeing 737-8HX, Boeing 737-8SH, Boeing 737-8LP, Boeing 737-8MB, Boeing 737-887, Boeing 737-85F(SF), Embraer E190AR","A332, B38M, B737, B738",73,14,86.9
+Aer Lingus,EI / EIN,80,"Airbus A321-253NX(LR), Airbus A321-253NY(XLR), Airbus A320-214, Airbus A330-202, Airbus A330-302, ATR 72-600","A20N, A21N, A320, A332, A333",73,6,91.25
+Aegean Airlines,A3 / AEE,68,"Airbus A321-271NX, Airbus A320-232, Airbus A321-231","A20N, A21N, A320",47,3,69.12
+Aero Asahi,AKF,39,"Leonardo AW139, Airbus Helicopters H215, Airbus Helicopters H125, Airbus Helicopters AS355 Ecureuil, Airbus Helicopters AS365 Dauphin, Bell 412EP, Bell 430, Beech G58 Baron, Cessna 172S Skyhawk SP, Cessna Grand Caravan, Airbus Helicopters H145, MD-900 Explorer, Sikorsky S-76C","A109, A139, AS32, AS50, AS55, AS65, B412, B430, BE58, C172, C208, EC45, EXPL",38,13,97.44
+9 Air,AQ / JYH,27,"Boeing 737-86X, Boeing 737-8GP, Boeing 737-86N, Boeing 737-84P",B38M,22,4,81.48
+Aerolineas Ejecutivas,LET,26,"Hawker Beechcraft 400XP, Cessna Citation CJ3+, Cessna Citation M2, Cessna Citation Latitude, Bombardier Challenger 605, Learjet 45, Learjet 75","A109, BE40, C25B, C25M, C68A, CL60, LJ45",25,7,96.15
+2Excel Aviation,BRO,24,"Boeing 727-2S2F(RE), Boeing 737-3L9, Boeing 737-76N, Boeing 757-256, Beech King Air B200, Beech 200 Super King Air, Beech B200 Super King Air, Diamond DA62, Extra EA-300/L, Piper Navajo C, Piper Navajo B","B350, B722, B733, B737, B752, BE20, DA62, E300",23,11,95.83
+Advanced Air,AN / WSN,23,"Cessna Citation CJ3, Cessna Citation Sovereign, Bombardier Challenger 300, Gulfstream G550, Dornier 328-310 Jet, Dornier Do-328-310 Jet, Learjet 45, Pilatus PC-12, Pilatus PC-12/47, Pilatus PC-12 NG","B350, C25B, C680, CL30, GLF5, J328, LJ45",14,10,60.87
+Aerodynamics Academy,DNC,17,"Reims-Cessna F172M Skyhawk, Cessna 172N Skyhawk, Tecnam P2008JC MkII",C172,16,3,94.12
+Aeroclub Barcelona-Sabadell,BSO,14,"Cessna 182T Skylane, Mudry CAP-10B, Tecnam P2006T, Piper Aztec E, Piper PA-23-250 Aztec, Robinson R44 Cadet, Zlin Z-50LS","C172, C182, CP10, P06T, PA27, R44",9,7,64.29
+Abu Dhabi Aviation,BAR,14,"Leonardo AW169, Bell 412EP Sentinel, Bell 412EPI, De Havilland Canada Dash 8-300, De Havilland Canada Dash 8-400, Airbus Helicopters H145","A139, A169, B412, DH8C, DH8D",10,6,71.43
+Aero Charter,GLT,13,"Beech B200 Super King Air, Cessna Citation CJ2, Cessna Citation XLS+, Cessna Citation XLS, Cessna Citation Sovereign+, Cessna Citation Sovereign, Pilatus PC-12 NG","B350, BE20, C25A, C56X, C680",10,7,76.92
+Aeroitalia,XZ / AEZ,13,"Boeing 737-8JP, Boeing 737-85F, Boeing 737-86N, Boeing 737-89M, Boeing 737-86Q, Boeing 737-89L, Boeing 737-846, Embraer E190SR, Embraer E175STD","AT76, B738, E190",11,9,84.62
+Aero-Beta Flight Training,ABA,12,"Reims-Cessna FR182 Skylane RG, Tecnam P2006T, Piper Archer II, Piper Archer III, Piper Cherokee Turbo Arrow III, Piper Seminole, Socata TB-10 Tobago","C172, C82R, P06T, P28A, P28S, PA44",10,7,83.33
+ABX Air,GB / ABX,11,"Boeing 767-383(ER)(BDSF), Boeing 767-338(ER)(BDSF)",B762,6,2,54.55
+Aero,N2 / NIG,7,"Boeing 737-522, De Havilland Canada Dash 8-300","B734, B735",5,2,71.43
+748 Air Services,FE / IHO,6,"De Havilland Canada Dash 8-100, De Havilland Canada Dash 8-400","C208, DH8A",4,2,66.67
+Aero Ways,TKK,6,"Cessna Citation CJ4, Cessna Citation Latitude, Pilatus PC-12 NG, Pilatus PC-24","C25B, C25C, C68A, PC12",4,4,66.67
+Aero-Dienst,ADN,5,"Dornier 328-310 Jet, Learjet 60XR","CL35, J328",4,2,80.0
+Advanced Flight Training,ADV,5,"Piper Cherokee Warrior II, Piper Archer II, Piper Cadet, Piper Seneca III","DA42, P28A",4,4,80.0
+Abakan Air,S5 / NKP,5,"Ilyushin Il-76MD, Ilyushin Il-76TD",AS50,4,2,80.0
+Aero Mongolia,M0 / MNG,5,"Embraer ERJ-145LR, Fokker 50","A319, E145",3,2,60.0
+Aero,5E / BLK,5,Embraer Legacy 600,E135,2,1,40.0
+Aero Sotravia,ASR,5,Britten-Norman Islander,BE20,1,1,20.0
+247 Aviation,EMC,4,"Pilatus PC-12 NGX, Pilatus PC-12 NG",DA62,2,2,50.0
+Aerolineas Sosa,P4 / NSO,4,"Saab 340B, Saab 340B+",CRJ1,3,2,75.0
+Aero-Tech Services,TEK,4,"Pilatus PC-12, Pilatus PC-12/45, Pilatus PC-12 NG",C172,3,3,75.0
+Aero Dili,8G / DTL,2,Airbus A320-232,A319,1,1,50.0
+Aegean Executive,AEW,2,Learjet 60,GLF6,1,1,50.0
+ACASS Ireland,SON,2,Gulfstream G450,GLEX,1,1,50.0
+Aeromas,MSM,2,Learjet 60,C208,1,1,50.0
