@@ -34,7 +34,7 @@ except ImportError:
 
 class FlightRadar24Scraper:
 
-    def send_csv_telegram(self, file_path):
+    def send_csv_telegram(self, file_path:str):
         """Envoie un fichier CSV via Telegram si les variables d'env sont définies."""
         bot_token = os.environ.get('TELEGRAM_BOT_TOKEN')
         chat_id = os.environ.get('TELEGRAM_CHAT_ID')
@@ -120,7 +120,7 @@ class FlightRadar24Scraper:
             print(f"Erreur lors de l'extraction des codes: {e}")
             return []
 
-    def scrape_fleet_data(self, airline_code, airline_name):
+    def scrape_fleet_data(self, airline_code: str, airline_name: str) -> dict:
         """Scrape les données de flotte pour une compagnie donnée"""
         fleet_url = f"{self.base_url}/data/airlines/{airline_code}/fleet"
         
@@ -186,8 +186,6 @@ class FlightRadar24Scraper:
                                                     aircraft_details.append({
                                                         'registration': registration,
                                                         'detailed_type': detailed_type,
-                                                        'serial_number': serial_number,
-                                                        'age': age
                                                     })
                                 
                                 fleet_details.append({
@@ -303,8 +301,6 @@ class FlightRadar24Scraper:
                                     'aircraft_type': aircraft['type'],
                                     'registration': detail['registration'],
                                     'detailed_aircraft_type': detail['detailed_type'],
-                                    'serial_number': detail.get('serial_number', 'N/A'),
-                                    'age': detail.get('age', 'N/A'),
                                     'total_fleet_size': airline['total_aircraft'],
                                     'status': airline['status']
                                 })
@@ -317,8 +313,6 @@ class FlightRadar24Scraper:
                                 'aircraft_type': aircraft['type'],
                                 'registration': 'N/A',
                                 'detailed_aircraft_type': aircraft['type'],
-                                'serial_number': 'N/A',
-                                'age': 'N/A',
                                 'total_fleet_size': airline['total_aircraft'],
                                 'status': airline['status']
                             })
@@ -331,8 +325,6 @@ class FlightRadar24Scraper:
                         'aircraft_type': 'N/A',
                         'registration': 'N/A',
                         'detailed_aircraft_type': 'N/A',
-                        'serial_number': 'N/A',
-                        'age': 'N/A',
                         'total_fleet_size': airline['total_aircraft'],
                         'status': airline['status']
                     })

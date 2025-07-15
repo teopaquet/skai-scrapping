@@ -10,15 +10,11 @@
         "aircraft_details": [
           {
             "registration": "N881YV",
-            "detailed_type": "Boeing 767-241(ER)(BDSF)",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Boeing 767-241(ER)(BDSF)"
           },
           {
             "registration": "N999YV",
-            "detailed_type": "Boeing 767-241(ER)(BDSF)",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Boeing 767-241(ER)(BDSF)"
           }
         ]
       }
@@ -38,15 +34,11 @@
         "aircraft_details": [
           {
             "registration": "G-CMNW",
-            "detailed_type": "Diamond DA62",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Diamond DA62"
           },
           {
             "registration": "G-CMWG",
-            "detailed_type": "Diamond DA62",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Diamond DA62"
           }
         ]
       },
@@ -56,15 +48,11 @@
         "aircraft_details": [
           {
             "registration": "G-ISJE",
-            "detailed_type": "Pilatus PC-12 NGX",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Pilatus PC-12 NGX"
           },
           {
             "registration": "G-LUSO",
-            "detailed_type": "Pilatus PC-12 NG",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Pilatus PC-12 NG"
           }
         ]
       }
@@ -84,9 +72,7 @@
         "aircraft_details": [
           {
             "registration": "G-HMGH",
-            "detailed_type": "Beech King Air 350i",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Beech King Air 350i"
           }
         ]
       },
@@ -96,15 +82,11 @@
         "aircraft_details": [
           {
             "registration": "G-OSRA",
-            "detailed_type": "Boeing 727-2S2F(RE)",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Boeing 727-2S2F(RE)"
           },
           {
             "registration": "G-OSRB",
-            "detailed_type": "Boeing 727-2S2F(RE)",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Boeing 727-2S2F(RE)"
           }
         ]
       },
@@ -114,9 +96,7 @@
         "aircraft_details": [
           {
             "registration": "G-SWRD",
-            "detailed_type": "Boeing 737-3L9",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Boeing 737-3L9"
           }
         ]
       },
@@ -126,9 +106,7 @@
         "aircraft_details": [
           {
             "registration": "G-NEWG",
-            "detailed_type": "Boeing 737-76N",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Boeing 737-76N"
           }
         ]
       },
@@ -138,9 +116,7 @@
         "aircraft_details": [
           {
             "registration": "G-FTAI",
-            "detailed_type": "Boeing 757-256",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Boeing 757-256"
           }
         ]
       },
@@ -150,33 +126,23 @@
         "aircraft_details": [
           {
             "registration": "G-CIFE",
-            "detailed_type": "Beech King Air B200",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Beech King Air B200"
           },
           {
             "registration": "G-IASM",
-            "detailed_type": "Beech 200 Super King Air",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Beech 200 Super King Air"
           },
           {
             "registration": "G-IMEA",
-            "detailed_type": "Beech 200 Super King Air",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Beech 200 Super King Air"
           },
           {
             "registration": "G-JASS",
-            "detailed_type": "Beech B200 Super King Air",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Beech B200 Super King Air"
           },
           {
             "registration": "G-WCCP",
-            "detailed_type": "Beech B200 Super King Air",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Beech B200 Super King Air"
           }
         ]
       },
@@ -186,21 +152,15 @@
         "aircraft_details": [
           {
             "registration": "G-HMGD",
-            "detailed_type": "Diamond DA62",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Diamond DA62"
           },
           {
             "registration": "G-HMGE",
-            "detailed_type": "Diamond DA62",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Diamond DA62"
           },
           {
             "registration": "G-ZEAA",
-            "detailed_type": "Diamond DA62",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Diamond DA62"
           }
         ]
       },
@@ -210,27 +170,19 @@
         "aircraft_details": [
           {
             "registration": "G-OFFO",
-            "detailed_type": "Extra EA-300/L",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Extra EA-300/L"
           },
           {
             "registration": "G-ZXCL",
-            "detailed_type": "Extra EA-300/L",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Extra EA-300/L"
           },
           {
             "registration": "G-ZXEL",
-            "detailed_type": "Extra EA-300/L",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Extra EA-300/L"
           },
           {
             "registration": "G-ZXLL",
-            "detailed_type": "Extra EA-300/L",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Extra EA-300/L"
           }
         ]
       },
@@ -240,39 +192,27 @@
         "aircraft_details": [
           {
             "registration": "G-BEZL",
-            "detailed_type": "Piper Navajo C",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Piper Navajo C"
           },
           {
             "registration": "G-BPYR",
-            "detailed_type": "Piper Navajo C",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Piper Navajo C"
           },
           {
             "registration": "G-OUCP",
-            "detailed_type": "Piper Navajo C",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Piper Navajo C"
           },
           {
             "registration": "G-RHYM",
-            "detailed_type": "Piper Navajo B",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Piper Navajo B"
           },
           {
             "registration": "G-UKCS",
-            "detailed_type": "Piper Navajo B",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Piper Navajo B"
           },
           {
             "registration": "G-UMMI",
-            "detailed_type": "Piper Navajo C",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Piper Navajo C"
           }
         ]
       }
@@ -292,9 +232,7 @@
         "aircraft_details": [
           {
             "registration": "N319ST",
-            "detailed_type": "Gulfstream G550",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Gulfstream G550"
           }
         ]
       }
@@ -314,21 +252,15 @@
         "aircraft_details": [
           {
             "registration": "9H-FIT",
-            "detailed_type": "Boeing 737-4Y0",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Boeing 737-4Y0"
           },
           {
             "registration": "9H-FUN",
-            "detailed_type": "Boeing 737-46J",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Boeing 737-46J"
           },
           {
             "registration": "9H-RUN",
-            "detailed_type": "Boeing 737-4Y0",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Boeing 737-4Y0"
           }
         ]
       }
@@ -357,15 +289,11 @@
         "aircraft_details": [
           {
             "registration": "5Y-FAJ",
-            "detailed_type": "Cessna Grand Caravan",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Cessna Grand Caravan"
           },
           {
             "registration": "5Y-MHO",
-            "detailed_type": "Cessna Grand Caravan EX",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Cessna Grand Caravan EX"
           }
         ]
       },
@@ -375,15 +303,11 @@
         "aircraft_details": [
           {
             "registration": "5Y-IHO",
-            "detailed_type": "De Havilland Canada Dash 8-100",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "De Havilland Canada Dash 8-100"
           },
           {
             "registration": "5Y-RHM",
-            "detailed_type": "De Havilland Canada Dash 8-100",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "De Havilland Canada Dash 8-100"
           }
         ]
       },
@@ -393,15 +317,11 @@
         "aircraft_details": [
           {
             "registration": "5Y-SMJ",
-            "detailed_type": "De Havilland Canada Dash 8-400",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "De Havilland Canada Dash 8-400"
           },
           {
             "registration": "5Y-VVI",
-            "detailed_type": "De Havilland Canada Dash 8-400",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "De Havilland Canada Dash 8-400"
           }
         ]
       }
@@ -421,21 +341,15 @@
         "aircraft_details": [
           {
             "registration": "N260AC",
-            "detailed_type": "Boeing 737-8AS(SF)",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Boeing 737-8AS(SF)"
           },
           {
             "registration": "N330FL",
-            "detailed_type": "Boeing 737-86D(BCF)",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Boeing 737-86D(BCF)"
           },
           {
             "registration": "N782AC",
-            "detailed_type": "Boeing 737-85R(SF)",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Boeing 737-85R(SF)"
           }
         ]
       }
@@ -455,33 +369,23 @@
         "aircraft_details": [
           {
             "registration": "B-206J",
-            "detailed_type": "Boeing 737 MAX 8",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Boeing 737 MAX 8"
           },
           {
             "registration": "B-206L",
-            "detailed_type": "Boeing 737 MAX 8",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Boeing 737 MAX 8"
           },
           {
             "registration": "B-208H",
-            "detailed_type": "Boeing 737 MAX 8",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Boeing 737 MAX 8"
           },
           {
             "registration": "B-224U",
-            "detailed_type": "Boeing 737 MAX 8",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Boeing 737 MAX 8"
           },
           {
             "registration": "B-224V",
-            "detailed_type": "Boeing 737 MAX 8",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Boeing 737 MAX 8"
           }
         ]
       },
@@ -491,135 +395,91 @@
         "aircraft_details": [
           {
             "registration": "B-1172",
-            "detailed_type": "Boeing 737-86X",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Boeing 737-86X"
           },
           {
             "registration": "B-1233",
-            "detailed_type": "Boeing 737-86X",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Boeing 737-86X"
           },
           {
             "registration": "B-1472",
-            "detailed_type": "Boeing 737-86X",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Boeing 737-86X"
           },
           {
             "registration": "B-1473",
-            "detailed_type": "Boeing 737-86X",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Boeing 737-86X"
           },
           {
             "registration": "B-1551",
-            "detailed_type": "Boeing 737-86X",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Boeing 737-86X"
           },
           {
             "registration": "B-1552",
-            "detailed_type": "Boeing 737-86X",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Boeing 737-86X"
           },
           {
             "registration": "B-1553",
-            "detailed_type": "Boeing 737-86X",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Boeing 737-86X"
           },
           {
             "registration": "B-1556",
-            "detailed_type": "Boeing 737-86X",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Boeing 737-86X"
           },
           {
             "registration": "B-1592",
-            "detailed_type": "Boeing 737-86X",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Boeing 737-86X"
           },
           {
             "registration": "B-1715",
-            "detailed_type": "Boeing 737-8GP",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Boeing 737-8GP"
           },
           {
             "registration": "B-1716",
-            "detailed_type": "Boeing 737-8GP",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Boeing 737-8GP"
           },
           {
             "registration": "B-1719",
-            "detailed_type": "Boeing 737-8GP",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Boeing 737-8GP"
           },
           {
             "registration": "B-208K",
-            "detailed_type": "Boeing 737-86X",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Boeing 737-86X"
           },
           {
             "registration": "B-220S",
-            "detailed_type": "Boeing 737-86N",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Boeing 737-86N"
           },
           {
             "registration": "B-220Y",
-            "detailed_type": "Boeing 737-86N",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Boeing 737-86N"
           },
           {
             "registration": "B-221M",
-            "detailed_type": "Boeing 737-86N",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Boeing 737-86N"
           },
           {
             "registration": "B-6989",
-            "detailed_type": "Boeing 737-86N",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Boeing 737-86N"
           },
           {
             "registration": "B-6990",
-            "detailed_type": "Boeing 737-86N",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Boeing 737-86N"
           },
           {
             "registration": "B-6991",
-            "detailed_type": "Boeing 737-86N",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Boeing 737-86N"
           },
           {
             "registration": "B-6992",
-            "detailed_type": "Boeing 737-86N",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Boeing 737-86N"
           },
           {
             "registration": "B-7105",
-            "detailed_type": "Boeing 737-84P",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Boeing 737-84P"
           },
           {
             "registration": "B-7113",
-            "detailed_type": "Boeing 737-84P",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Boeing 737-84P"
           }
         ]
       }
@@ -639,9 +499,7 @@
         "aircraft_details": [
           {
             "registration": "RA-04051",
-            "detailed_type": "Aerospatiale 350B3 Ecureuil",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Aerospatiale 350B3 Ecureuil"
           }
         ]
       },
@@ -651,27 +509,19 @@
         "aircraft_details": [
           {
             "registration": "RA-76370",
-            "detailed_type": "Ilyushin Il-76MD",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Ilyushin Il-76MD"
           },
           {
             "registration": "RA-76445",
-            "detailed_type": "Ilyushin Il-76TD",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Ilyushin Il-76TD"
           },
           {
             "registration": "RA-76463",
-            "detailed_type": "Ilyushin Il-76TD",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Ilyushin Il-76TD"
           },
           {
             "registration": "RA-76476",
-            "detailed_type": "Ilyushin Il-76TD",
-            "serial_number": "",
-            "age": ""
+            "detailed_type": "Ilyushin Il-76TD"
           }
         ]
       }
