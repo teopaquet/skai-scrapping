@@ -1,0 +1,189 @@
+[
+  {
+    "code": "2i-csb",
+    "name": "21 Air",
+    "total_aircraft": 2,
+    "fleet_details": [
+      {
+        "type": "B762",
+        "count": 2
+      }
+    ],
+    "status": "success",
+    "original_sigle": "2I / CSB",
+    "original_aircraft_info": "2 aircraft"
+  },
+  {
+    "code": "emc",
+    "name": "247 Aviation",
+    "total_aircraft": 4,
+    "fleet_details": [
+      {
+        "type": "DA62",
+        "count": 2
+      },
+      {
+        "type": "PC12",
+        "count": 2
+      }
+    ],
+    "status": "success",
+    "original_sigle": "EMC",
+    "original_aircraft_info": "4 aircraft"
+  },
+  {
+    "code": "bro",
+    "name": "2Excel Aviation",
+    "total_aircraft": 24,
+    "fleet_details": [
+      {
+        "type": "B350",
+        "count": 1
+      },
+      {
+        "type": "B722",
+        "count": 2
+      },
+      {
+        "type": "B733",
+        "count": 1
+      },
+      {
+        "type": "B737",
+        "count": 1
+      },
+      {
+        "type": "B752",
+        "count": 1
+      },
+      {
+        "type": "BE20",
+        "count": 5
+      },
+      {
+        "type": "DA62",
+        "count": 3
+      },
+      {
+        "type": "E300",
+        "count": 4
+      },
+      {
+        "type": "PA31",
+        "count": 6
+      }
+    ],
+    "status": "success",
+    "original_sigle": "BRO",
+    "original_aircraft_info": "24 aircraft"
+  },
+  {
+    "code": "lva",
+    "name": "30 West Jets",
+    "total_aircraft": 1,
+    "fleet_details": [
+      {
+        "type": "GLF5",
+        "count": 1
+      }
+    ],
+    "status": "success",
+    "original_sigle": "LVA",
+    "original_aircraft_info": "1 aircraft"
+  },
+  {
+    "code": "dak",
+    "name": "4Airways",
+    "total_aircraft": 3,
+    "fleet_details": [
+      {
+        "type": "B734",
+        "count": 3
+      }
+    ],
+    "status": "success",
+    "original_sigle": "DAK",
+    "original_aircraft_info": "3 aircraft"
+  },
+  {
+    "code": "iho",
+    "name": "748 Air Services",
+    "total_aircraft": 0,
+    "fleet_details": [],
+    "status": "success",
+    "original_sigle": "IHO",
+    "original_aircraft_info": "6 aircraft"
+  },
+  {
+    "code": "fe-iho",
+    "name": "748 Air Services",
+    "total_aircraft": 6,
+    "fleet_details": [
+      {
+        "type": "C208",
+        "count": 2
+      },
+      {
+        "type": "DH8A",
+        "count": 2
+      },
+      {
+        "type": "DH8D",
+        "count": 2
+      }
+    ],
+    "status": "success",
+    "original_sigle": "FE / IHO",
+    "original_aircraft_info": "6 aircraft"
+  },
+  {
+    "code": "txg",
+    "name": "7Air Cargo",
+    "total_aircraft": 3,
+    "fleet_details": [
+      {
+        "type": "B738",
+        "count": 3
+      }
+    ],
+    "status": "success",
+    "original_sigle": "TXG",
+    "original_aircraft_info": "3 aircraft"
+  },
+  {
+    "code": "aq-jyh",
+    "name": "9 Air",
+    "total_aircraft": 27,
+    "fleet_details": [
+      {
+        "type": "B38M",
+        "count": 5
+      },
+      {
+        "type": "B738",
+        "count": 22
+      }
+    ],
+    "status": "success",
+    "original_sigle": "AQ / JYH",
+    "original_aircraft_info": "27 aircraft"
+  },
+  {
+    "code": "s5-nkp",
+    "name": "Abakan Air",
+    "total_aircraft": 5,
+    "fleet_details": [
+      {
+        "type": "AS50",
+        "count": 1
+      },
+      {
+        "type": "IL76",
+        "count": 4
+      }
+    ],
+    "status": "success",
+    "original_sigle": "S5 / NKP",
+    "original_aircraft_info": "5 aircraft"
+  }
+]

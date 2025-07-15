@@ -1,0 +1,885 @@
+airline_code,airline_name,sigle,registration,aircraft_type_detail,aircraft_type_code,serial_number,age,total_fleet_size
+emc,247 Aviation,EMC,G-ISJE,Pilatus PC-12 NGX,DA62,N/A,N/A,4
+emc,247 Aviation,EMC,G-LUSO,Pilatus PC-12 NG,DA62,N/A,N/A,4
+bro,2Excel Aviation,BRO,G-OSRA,Boeing 727-2S2F(RE),B350,N/A,N/A,24
+bro,2Excel Aviation,BRO,G-OSRB,Boeing 727-2S2F(RE),B350,N/A,N/A,24
+bro,2Excel Aviation,BRO,G-SWRD,Boeing 737-3L9,B722,N/A,N/A,24
+bro,2Excel Aviation,BRO,G-NEWG,Boeing 737-76N,B733,N/A,N/A,24
+bro,2Excel Aviation,BRO,G-FTAI,Boeing 757-256,B737,N/A,N/A,24
+bro,2Excel Aviation,BRO,G-CIFE,Beech King Air B200,B752,N/A,N/A,24
+bro,2Excel Aviation,BRO,G-IASM,Beech 200 Super King Air,B752,N/A,N/A,24
+bro,2Excel Aviation,BRO,G-IMEA,Beech 200 Super King Air,B752,N/A,N/A,24
+bro,2Excel Aviation,BRO,G-JASS,Beech B200 Super King Air,B752,N/A,N/A,24
+bro,2Excel Aviation,BRO,G-WCCP,Beech B200 Super King Air,B752,N/A,N/A,24
+bro,2Excel Aviation,BRO,G-HMGD,Diamond DA62,BE20,N/A,N/A,24
+bro,2Excel Aviation,BRO,G-HMGE,Diamond DA62,BE20,N/A,N/A,24
+bro,2Excel Aviation,BRO,G-ZEAA,Diamond DA62,BE20,N/A,N/A,24
+bro,2Excel Aviation,BRO,G-OFFO,Extra EA-300/L,DA62,N/A,N/A,24
+bro,2Excel Aviation,BRO,G-ZXCL,Extra EA-300/L,DA62,N/A,N/A,24
+bro,2Excel Aviation,BRO,G-ZXEL,Extra EA-300/L,DA62,N/A,N/A,24
+bro,2Excel Aviation,BRO,G-ZXLL,Extra EA-300/L,DA62,N/A,N/A,24
+bro,2Excel Aviation,BRO,G-BEZL,Piper Navajo C,E300,N/A,N/A,24
+bro,2Excel Aviation,BRO,G-BPYR,Piper Navajo C,E300,N/A,N/A,24
+bro,2Excel Aviation,BRO,G-OUCP,Piper Navajo C,E300,N/A,N/A,24
+bro,2Excel Aviation,BRO,G-RHYM,Piper Navajo B,E300,N/A,N/A,24
+bro,2Excel Aviation,BRO,G-UKCS,Piper Navajo B,E300,N/A,N/A,24
+bro,2Excel Aviation,BRO,G-UMMI,Piper Navajo C,E300,N/A,N/A,24
+fe-iho,748 Air Services,FE / IHO,5Y-IHO,De Havilland Canada Dash 8-100,C208,N/A,N/A,6
+fe-iho,748 Air Services,FE / IHO,5Y-RHM,De Havilland Canada Dash 8-100,C208,N/A,N/A,6
+fe-iho,748 Air Services,FE / IHO,5Y-SMJ,De Havilland Canada Dash 8-400,DH8A,N/A,N/A,6
+fe-iho,748 Air Services,FE / IHO,5Y-VVI,De Havilland Canada Dash 8-400,DH8A,N/A,N/A,6
+aq-jyh,9 Air,AQ / JYH,B-1172,Boeing 737-86X,B38M,N/A,N/A,27
+aq-jyh,9 Air,AQ / JYH,B-1233,Boeing 737-86X,B38M,N/A,N/A,27
+aq-jyh,9 Air,AQ / JYH,B-1472,Boeing 737-86X,B38M,N/A,N/A,27
+aq-jyh,9 Air,AQ / JYH,B-1473,Boeing 737-86X,B38M,N/A,N/A,27
+aq-jyh,9 Air,AQ / JYH,B-1551,Boeing 737-86X,B38M,N/A,N/A,27
+aq-jyh,9 Air,AQ / JYH,B-1552,Boeing 737-86X,B38M,N/A,N/A,27
+aq-jyh,9 Air,AQ / JYH,B-1553,Boeing 737-86X,B38M,N/A,N/A,27
+aq-jyh,9 Air,AQ / JYH,B-1556,Boeing 737-86X,B38M,N/A,N/A,27
+aq-jyh,9 Air,AQ / JYH,B-1592,Boeing 737-86X,B38M,N/A,N/A,27
+aq-jyh,9 Air,AQ / JYH,B-1715,Boeing 737-8GP,B38M,N/A,N/A,27
+aq-jyh,9 Air,AQ / JYH,B-1716,Boeing 737-8GP,B38M,N/A,N/A,27
+aq-jyh,9 Air,AQ / JYH,B-1719,Boeing 737-8GP,B38M,N/A,N/A,27
+aq-jyh,9 Air,AQ / JYH,B-208K,Boeing 737-86X,B38M,N/A,N/A,27
+aq-jyh,9 Air,AQ / JYH,B-220S,Boeing 737-86N,B38M,N/A,N/A,27
+aq-jyh,9 Air,AQ / JYH,B-220Y,Boeing 737-86N,B38M,N/A,N/A,27
+aq-jyh,9 Air,AQ / JYH,B-221M,Boeing 737-86N,B38M,N/A,N/A,27
+aq-jyh,9 Air,AQ / JYH,B-6989,Boeing 737-86N,B38M,N/A,N/A,27
+aq-jyh,9 Air,AQ / JYH,B-6990,Boeing 737-86N,B38M,N/A,N/A,27
+aq-jyh,9 Air,AQ / JYH,B-6991,Boeing 737-86N,B38M,N/A,N/A,27
+aq-jyh,9 Air,AQ / JYH,B-6992,Boeing 737-86N,B38M,N/A,N/A,27
+aq-jyh,9 Air,AQ / JYH,B-7105,Boeing 737-84P,B38M,N/A,N/A,27
+aq-jyh,9 Air,AQ / JYH,B-7113,Boeing 737-84P,B38M,N/A,N/A,27
+s5-nkp,Abakan Air,S5 / NKP,RA-76370,Ilyushin Il-76MD,AS50,N/A,N/A,5
+s5-nkp,Abakan Air,S5 / NKP,RA-76445,Ilyushin Il-76TD,AS50,N/A,N/A,5
+s5-nkp,Abakan Air,S5 / NKP,RA-76463,Ilyushin Il-76TD,AS50,N/A,N/A,5
+s5-nkp,Abakan Air,S5 / NKP,RA-76476,Ilyushin Il-76TD,AS50,N/A,N/A,5
+bar,Abu Dhabi Aviation,BAR,A6-AWV,Leonardo AW169,A139,N/A,N/A,14
+bar,Abu Dhabi Aviation,BAR,A6-AWX,Leonardo AW169,A139,N/A,N/A,14
+bar,Abu Dhabi Aviation,BAR,A6-HBN,Bell 412EP Sentinel,A169,N/A,N/A,14
+bar,Abu Dhabi Aviation,BAR,A6-HBT,Bell 412EPI,A169,N/A,N/A,14
+bar,Abu Dhabi Aviation,BAR,A6-ADB,De Havilland Canada Dash 8-300,B412,N/A,N/A,14
+bar,Abu Dhabi Aviation,BAR,A6-ADD,De Havilland Canada Dash 8-300,B412,N/A,N/A,14
+bar,Abu Dhabi Aviation,BAR,A6-ADE,De Havilland Canada Dash 8-300,B412,N/A,N/A,14
+bar,Abu Dhabi Aviation,BAR,A6-ADK,De Havilland Canada Dash 8-400,DH8C,N/A,N/A,14
+bar,Abu Dhabi Aviation,BAR,A6-MPD,Airbus Helicopters H145,DH8D,N/A,N/A,14
+bar,Abu Dhabi Aviation,BAR,A6-MPE,Airbus Helicopters H145,DH8D,N/A,N/A,14
+gb-abx,ABX Air,GB / ABX,N219CY,Boeing 767-383(ER)(BDSF),B762,N/A,N/A,11
+gb-abx,ABX Air,GB / ABX,N226CY,Boeing 767-383(ER)(BDSF),B762,N/A,N/A,11
+gb-abx,ABX Air,GB / ABX,N317CM,Boeing 767-338(ER)(BDSF),B762,N/A,N/A,11
+gb-abx,ABX Air,GB / ABX,N362CM,Boeing 767-338(ER)(BDSF),B762,N/A,N/A,11
+gb-abx,ABX Air,GB / ABX,N363CM,Boeing 767-338(ER)(BDSF),B762,N/A,N/A,11
+gb-abx,ABX Air,GB / ABX,N364CM,Boeing 767-338(ER)(BDSF),B762,N/A,N/A,11
+son,ACASS Ireland,SON,EJ-SCOT,Gulfstream G450,GLEX,N/A,N/A,2
+an-wsn,Advanced Air,AN / WSN,N124BL,Cessna Citation CJ3,B350,N/A,N/A,23
+an-wsn,Advanced Air,AN / WSN,N841AM,Cessna Citation CJ3,B350,N/A,N/A,23
+an-wsn,Advanced Air,AN / WSN,N88JJ,Cessna Citation Sovereign,C25B,N/A,N/A,23
+an-wsn,Advanced Air,AN / WSN,N332AR,Bombardier Challenger 300,C680,N/A,N/A,23
+an-wsn,Advanced Air,AN / WSN,N711EG,Gulfstream G550,CL30,N/A,N/A,23
+an-wsn,Advanced Air,AN / WSN,N192T,Dornier 328-310 Jet,GLF5,N/A,N/A,23
+an-wsn,Advanced Air,AN / WSN,N192TS,Dornier 328-310 Jet,GLF5,N/A,N/A,23
+an-wsn,Advanced Air,AN / WSN,N334MS,Dornier Do-328-310 Jet,GLF5,N/A,N/A,23
+an-wsn,Advanced Air,AN / WSN,N395MS,Dornier 328-310 Jet,GLF5,N/A,N/A,23
+an-wsn,Advanced Air,AN / WSN,N39KJ,Learjet 45,J328,N/A,N/A,23
+an-wsn,Advanced Air,AN / WSN,N361GB,Pilatus PC-12,LJ45,N/A,N/A,23
+an-wsn,Advanced Air,AN / WSN,N686PC,Pilatus PC-12/47,LJ45,N/A,N/A,23
+an-wsn,Advanced Air,AN / WSN,N88AQ,Pilatus PC-12 NG,LJ45,N/A,N/A,23
+an-wsn,Advanced Air,AN / WSN,N927JC,Pilatus PC-12 NG,LJ45,N/A,N/A,23
+adv,Advanced Flight Training,ADV,G-LFSJ,Piper Cherokee Warrior II,DA42,N/A,N/A,5
+adv,Advanced Flight Training,ADV,G-NIKE,Piper Archer II,DA42,N/A,N/A,5
+adv,Advanced Flight Training,ADV,G-SACT,Piper Cadet,DA42,N/A,N/A,5
+adv,Advanced Flight Training,ADV,G-BOCU,Piper Seneca III,P28A,N/A,N/A,5
+a3-aee,Aegean Airlines,A3 / AEE,SX-NAA,Airbus A321-271NX,A20N,N/A,N/A,68
+a3-aee,Aegean Airlines,A3 / AEE,SX-NAB,Airbus A321-271NX,A20N,N/A,N/A,68
+a3-aee,Aegean Airlines,A3 / AEE,SX-NAC,Airbus A321-271NX,A20N,N/A,N/A,68
+a3-aee,Aegean Airlines,A3 / AEE,SX-NAD,Airbus A321-271NX,A20N,N/A,N/A,68
+a3-aee,Aegean Airlines,A3 / AEE,SX-NAE,Airbus A321-271NX,A20N,N/A,N/A,68
+a3-aee,Aegean Airlines,A3 / AEE,SX-NAF,Airbus A321-271NX,A20N,N/A,N/A,68
+a3-aee,Aegean Airlines,A3 / AEE,SX-NAG,Airbus A321-271NX,A20N,N/A,N/A,68
+a3-aee,Aegean Airlines,A3 / AEE,SX-NAH,Airbus A321-271NX,A20N,N/A,N/A,68
+a3-aee,Aegean Airlines,A3 / AEE,SX-NAJ,Airbus A321-271NX,A20N,N/A,N/A,68
+a3-aee,Aegean Airlines,A3 / AEE,SX-NAK,Airbus A321-271NX,A20N,N/A,N/A,68
+a3-aee,Aegean Airlines,A3 / AEE,SX-NAL,Airbus A321-271NX,A20N,N/A,N/A,68
+a3-aee,Aegean Airlines,A3 / AEE,SX-NAM,Airbus A321-271NX,A20N,N/A,N/A,68
+a3-aee,Aegean Airlines,A3 / AEE,SX-NAO,Airbus A321-271NX,A20N,N/A,N/A,68
+a3-aee,Aegean Airlines,A3 / AEE,SX-NAP,Airbus A321-271NX,A20N,N/A,N/A,68
+a3-aee,Aegean Airlines,A3 / AEE,SX-NAQ,Airbus A321-271NX,A20N,N/A,N/A,68
+a3-aee,Aegean Airlines,A3 / AEE,SX-DGB,Airbus A320-232,A21N,N/A,N/A,68
+a3-aee,Aegean Airlines,A3 / AEE,SX-DGD,Airbus A320-232,A21N,N/A,N/A,68
+a3-aee,Aegean Airlines,A3 / AEE,SX-DGE,Airbus A320-232,A21N,N/A,N/A,68
+a3-aee,Aegean Airlines,A3 / AEE,SX-DGI,Airbus A320-232,A21N,N/A,N/A,68
+a3-aee,Aegean Airlines,A3 / AEE,SX-DGJ,Airbus A320-232,A21N,N/A,N/A,68
+a3-aee,Aegean Airlines,A3 / AEE,SX-DGY,Airbus A320-232,A21N,N/A,N/A,68
+a3-aee,Aegean Airlines,A3 / AEE,SX-DGZ,Airbus A320-232,A21N,N/A,N/A,68
+a3-aee,Aegean Airlines,A3 / AEE,SX-DNA,Airbus A320-232,A21N,N/A,N/A,68
+a3-aee,Aegean Airlines,A3 / AEE,SX-DNB,Airbus A320-232,A21N,N/A,N/A,68
+a3-aee,Aegean Airlines,A3 / AEE,SX-DNC,Airbus A320-232,A21N,N/A,N/A,68
+a3-aee,Aegean Airlines,A3 / AEE,SX-DND,Airbus A320-232,A21N,N/A,N/A,68
+a3-aee,Aegean Airlines,A3 / AEE,SX-DNE,Airbus A320-232,A21N,N/A,N/A,68
+a3-aee,Aegean Airlines,A3 / AEE,SX-DVG,Airbus A320-232,A21N,N/A,N/A,68
+a3-aee,Aegean Airlines,A3 / AEE,SX-DVH,Airbus A320-232,A21N,N/A,N/A,68
+a3-aee,Aegean Airlines,A3 / AEE,SX-DVI,Airbus A320-232,A21N,N/A,N/A,68
+a3-aee,Aegean Airlines,A3 / AEE,SX-DVJ,Airbus A320-232,A21N,N/A,N/A,68
+a3-aee,Aegean Airlines,A3 / AEE,SX-DVK,Airbus A320-232,A21N,N/A,N/A,68
+a3-aee,Aegean Airlines,A3 / AEE,SX-DVL,Airbus A320-232,A21N,N/A,N/A,68
+a3-aee,Aegean Airlines,A3 / AEE,SX-DVM,Airbus A320-232,A21N,N/A,N/A,68
+a3-aee,Aegean Airlines,A3 / AEE,SX-DVN,Airbus A320-232,A21N,N/A,N/A,68
+a3-aee,Aegean Airlines,A3 / AEE,SX-DVQ,Airbus A320-232,A21N,N/A,N/A,68
+a3-aee,Aegean Airlines,A3 / AEE,SX-DVR,Airbus A320-232,A21N,N/A,N/A,68
+a3-aee,Aegean Airlines,A3 / AEE,SX-DVS,Airbus A320-232,A21N,N/A,N/A,68
+a3-aee,Aegean Airlines,A3 / AEE,SX-DVT,Airbus A320-232,A21N,N/A,N/A,68
+a3-aee,Aegean Airlines,A3 / AEE,SX-DVV,Airbus A320-232,A21N,N/A,N/A,68
+a3-aee,Aegean Airlines,A3 / AEE,SX-DVW,Airbus A320-232,A21N,N/A,N/A,68
+a3-aee,Aegean Airlines,A3 / AEE,SX-DVX,Airbus A320-232,A21N,N/A,N/A,68
+a3-aee,Aegean Airlines,A3 / AEE,SX-DVY,Airbus A320-232,A21N,N/A,N/A,68
+a3-aee,Aegean Airlines,A3 / AEE,SX-DGA,Airbus A321-231,A320,N/A,N/A,68
+a3-aee,Aegean Airlines,A3 / AEE,SX-DNG,Airbus A321-231,A320,N/A,N/A,68
+a3-aee,Aegean Airlines,A3 / AEE,SX-DNH,Airbus A321-231,A320,N/A,N/A,68
+a3-aee,Aegean Airlines,A3 / AEE,SX-DVZ,Airbus A321-231,A320,N/A,N/A,68
+aew,Aegean Executive,AEW,SX-BNR,Learjet 60,GLF6,N/A,N/A,2
+ei-ein,Aer Lingus,EI / EIN,EI-LRA,Airbus A321-253NX(LR),A20N,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-LRB,Airbus A321-253NX(LR),A20N,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-LRC,Airbus A321-253NX(LR),A20N,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-LRD,Airbus A321-253NX(LR),A20N,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-LRE,Airbus A321-253NX(LR),A20N,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-LRF,Airbus A321-253NX(LR),A20N,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-LRG,Airbus A321-253NX(LR),A20N,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-LRH,Airbus A321-253NX(LR),A20N,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-XLR,Airbus A321-253NY(XLR),A20N,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-XLT,Airbus A321-253NY(XLR),A20N,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-XLV,Airbus A321-253NY(XLR),A20N,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-DEE,Airbus A320-214,A21N,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-DEF,Airbus A320-214,A21N,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-DEG,Airbus A320-214,A21N,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-DEH,Airbus A320-214,A21N,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-DEI,Airbus A320-214,A21N,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-DEJ,Airbus A320-214,A21N,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-DEK,Airbus A320-214,A21N,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-DEL,Airbus A320-214,A21N,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-DEM,Airbus A320-214,A21N,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-DEN,Airbus A320-214,A21N,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-DEO,Airbus A320-214,A21N,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-DEP,Airbus A320-214,A21N,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-DER,Airbus A320-214,A21N,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-DES,Airbus A320-214,A21N,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-DVE,Airbus A320-214,A21N,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-DVG,Airbus A320-214,A21N,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-DVH,Airbus A320-214,A21N,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-DVI,Airbus A320-214,A21N,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-DVK,Airbus A320-214,A21N,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-DVL,Airbus A320-214,A21N,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-DVM,Airbus A320-214,A21N,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-DVN,Airbus A320-214,A21N,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-EDP,Airbus A320-214,A21N,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-EDS,Airbus A320-214,A21N,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-FNJ,Airbus A320-214,A21N,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-GAL,Airbus A320-214,A21N,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-GAM,Airbus A320-214,A21N,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-DAA,Airbus A330-202,A320,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-DUO,Airbus A330-202,A320,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-GEY,Airbus A330-202,A320,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-DUZ,Airbus A330-302,A332,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-EAV,Airbus A330-302,A332,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-EIK,Airbus A330-302,A332,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-EIL,Airbus A330-302,A332,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-EIM,Airbus A330-302,A332,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-EIN,Airbus A330-302,A332,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-FNG,Airbus A330-302,A332,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-FNH,Airbus A330-302,A332,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-GAJ,Airbus A330-302,A332,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-GCF,Airbus A330-302,A332,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,G-EIDY,Airbus A330-302,A332,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,G-EILA,Airbus A330-302,A332,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-FAT,ATR 72-600,A333,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-FAV,ATR 72-600,A333,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-FSL,ATR 72-600,A333,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-GPN,ATR 72-600,A333,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-GPO,ATR 72-600,A333,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-GPP,ATR 72-600,A333,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-GZV,ATR 72-600,A333,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-HDH,ATR 72-600,A333,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-HDI,ATR 72-600,A333,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-HDK,ATR 72-600,A333,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-HNA,ATR 72-600,A333,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-HPJ,ATR 72-600,A333,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,EI-HPK,ATR 72-600,A333,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,G-CMJJ,ATR 72-600,A333,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,G-CMJL,ATR 72-600,A333,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,G-CMJM,ATR 72-600,A333,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,G-CMJN,ATR 72-600,A333,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,G-CMMK,ATR 72-600,A333,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,G-CMMN,ATR 72-600,A333,N/A,N/A,80
+ei-ein,Aer Lingus,EI / EIN,G-CMMT,ATR 72-600,A333,N/A,N/A,80
+5e-blk,Aero,5E / BLK,G-LIST,Embraer Legacy 600,E135,N/A,N/A,5
+5e-blk,Aero,5E / BLK,N809TD,Embraer Legacy 600,E135,N/A,N/A,5
+n2-nig,Aero,N2 / NIG,5N-BKQ,Boeing 737-522,B734,N/A,N/A,7
+n2-nig,Aero,N2 / NIG,5N-BKR,Boeing 737-522,B734,N/A,N/A,7
+n2-nig,Aero,N2 / NIG,5N-BLE,Boeing 737-522,B734,N/A,N/A,7
+n2-nig,Aero,N2 / NIG,5N-BLG,Boeing 737-522,B734,N/A,N/A,7
+n2-nig,Aero,N2 / NIG,5N-BJO,De Havilland Canada Dash 8-300,B735,N/A,N/A,7
+akf,Aero Asahi,AKF,JA08DX,Leonardo AW139,A109,N/A,N/A,39
+akf,Aero Asahi,AKF,JA9690,Airbus Helicopters H215,A139,N/A,N/A,39
+akf,Aero Asahi,AKF,JA6505,Airbus Helicopters H125,AS32,N/A,N/A,39
+akf,Aero Asahi,AKF,JA6508,Airbus Helicopters H125,AS32,N/A,N/A,39
+akf,Aero Asahi,AKF,JA6509,Airbus Helicopters H125,AS32,N/A,N/A,39
+akf,Aero Asahi,AKF,JA6512,Airbus Helicopters H125,AS32,N/A,N/A,39
+akf,Aero Asahi,AKF,JA6513,Airbus Helicopters H125,AS32,N/A,N/A,39
+akf,Aero Asahi,AKF,JA6514,Airbus Helicopters H125,AS32,N/A,N/A,39
+akf,Aero Asahi,AKF,JA6516,Airbus Helicopters H125,AS32,N/A,N/A,39
+akf,Aero Asahi,AKF,JA9573,Airbus Helicopters AS355 Ecureuil,AS50,N/A,N/A,39
+akf,Aero Asahi,AKF,JA9580,Airbus Helicopters AS355 Ecureuil,AS50,N/A,N/A,39
+akf,Aero Asahi,AKF,JA004M,Airbus Helicopters AS365 Dauphin,AS55,N/A,N/A,39
+akf,Aero Asahi,AKF,JA6929,Bell 412EP,AS65,N/A,N/A,39
+akf,Aero Asahi,AKF,JA01AX,Bell 430,B412,N/A,N/A,39
+akf,Aero Asahi,AKF,JA02AX,Bell 430,B412,N/A,N/A,39
+akf,Aero Asahi,AKF,JA06NR,Bell 430,B412,N/A,N/A,39
+akf,Aero Asahi,AKF,JA6900,Bell 430,B412,N/A,N/A,39
+akf,Aero Asahi,AKF,JA58GA,Beech G58 Baron,B430,N/A,N/A,39
+akf,Aero Asahi,AKF,JA58GB,Beech G58 Baron,B430,N/A,N/A,39
+akf,Aero Asahi,AKF,JA58GC,Beech G58 Baron,B430,N/A,N/A,39
+akf,Aero Asahi,AKF,JA01AL,Cessna 172S Skyhawk SP,BE58,N/A,N/A,39
+akf,Aero Asahi,AKF,JA02AL,Cessna 172S Skyhawk SP,BE58,N/A,N/A,39
+akf,Aero Asahi,AKF,JA03AL,Cessna 172S Skyhawk SP,BE58,N/A,N/A,39
+akf,Aero Asahi,AKF,JA80AP,Cessna 172S Skyhawk SP,BE58,N/A,N/A,39
+akf,Aero Asahi,AKF,JA882B,Cessna Grand Caravan,C172,N/A,N/A,39
+akf,Aero Asahi,AKF,JA117A,Airbus Helicopters H145,C208,N/A,N/A,39
+akf,Aero Asahi,AKF,JA117R,Airbus Helicopters H145,C208,N/A,N/A,39
+akf,Aero Asahi,AKF,JA6910,Airbus Helicopters H145,C208,N/A,N/A,39
+akf,Aero Asahi,AKF,JA6916,Airbus Helicopters H145,C208,N/A,N/A,39
+akf,Aero Asahi,AKF,JA6924,Airbus Helicopters H145,C208,N/A,N/A,39
+akf,Aero Asahi,AKF,JA6925,Airbus Helicopters H145,C208,N/A,N/A,39
+akf,Aero Asahi,AKF,JA6790,MD-900 Explorer,EC45,N/A,N/A,39
+akf,Aero Asahi,AKF,JA6902,MD-900 Explorer,EC45,N/A,N/A,39
+akf,Aero Asahi,AKF,JA6908,MD-900 Explorer,EC45,N/A,N/A,39
+akf,Aero Asahi,AKF,JA6909,MD-900 Explorer,EC45,N/A,N/A,39
+akf,Aero Asahi,AKF,JA6911,MD-900 Explorer,EC45,N/A,N/A,39
+akf,Aero Asahi,AKF,JA6914,MD-900 Explorer,EC45,N/A,N/A,39
+akf,Aero Asahi,AKF,JA6901,Sikorsky S-76C,EXPL,N/A,N/A,39
+glt,Aero Charter,GLT,N925BB,Beech B200 Super King Air,B350,N/A,N/A,13
+glt,Aero Charter,GLT,N800GF,Cessna Citation CJ2,BE20,N/A,N/A,13
+glt,Aero Charter,GLT,N157XL,Cessna Citation XLS+,C25A,N/A,N/A,13
+glt,Aero Charter,GLT,N393RA,Cessna Citation XLS+,C25A,N/A,N/A,13
+glt,Aero Charter,GLT,N787TY,Cessna Citation XLS+,C25A,N/A,N/A,13
+glt,Aero Charter,GLT,N906AC,Cessna Citation XLS,C25A,N/A,N/A,13
+glt,Aero Charter,GLT,N7202,Cessna Citation Sovereign+,C56X,N/A,N/A,13
+glt,Aero Charter,GLT,N720DK,Cessna Citation Sovereign,C56X,N/A,N/A,13
+glt,Aero Charter,GLT,N345NX,Pilatus PC-12 NG,C680,N/A,N/A,13
+glt,Aero Charter,GLT,N401LX,Pilatus PC-12 NG,C680,N/A,N/A,13
+8g-dtl,Aero Dili,8G / DTL,4W-AAL,Airbus A320-232,A319,N/A,N/A,2
+m0-mng,Aero Mongolia,M0 / MNG,JU-1800,Embraer ERJ-145LR,A319,N/A,N/A,5
+m0-mng,Aero Mongolia,M0 / MNG,JU-1802,Embraer ERJ-145LR,A319,N/A,N/A,5
+m0-mng,Aero Mongolia,M0 / MNG,JU-8250,Fokker 50,E145,N/A,N/A,5
+asr,Aero Sotravia,ASR,F-GDHD,Britten-Norman Islander,BE20,N/A,N/A,5
+tkk,Aero Ways,TKK,N316KA,Cessna Citation CJ4,C25B,N/A,N/A,6
+tkk,Aero Ways,TKK,N311VU,Cessna Citation Latitude,C25C,N/A,N/A,6
+tkk,Aero Ways,TKK,N788SC,Pilatus PC-12 NG,C68A,N/A,N/A,6
+tkk,Aero Ways,TKK,N620JK,Pilatus PC-24,PC12,N/A,N/A,6
+aba,Aero-Beta Flight Training,ABA,D-EXBB,Reims-Cessna FR182 Skylane RG,C172,N/A,N/A,12
+aba,Aero-Beta Flight Training,ABA,D-GLGM,Tecnam P2006T,C82R,N/A,N/A,12
+aba,Aero-Beta Flight Training,ABA,D-EFSR,Piper Archer II,P06T,N/A,N/A,12
+aba,Aero-Beta Flight Training,ABA,D-EMLH,Piper Archer II,P06T,N/A,N/A,12
+aba,Aero-Beta Flight Training,ABA,D-ERIE,Piper Archer III,P06T,N/A,N/A,12
+aba,Aero-Beta Flight Training,ABA,D-EOEO,Piper Cherokee Turbo Arrow III,P28A,N/A,N/A,12
+aba,Aero-Beta Flight Training,ABA,D-GFHB,Piper Seminole,P28S,N/A,N/A,12
+aba,Aero-Beta Flight Training,ABA,D-GMAX,Piper Seminole,P28S,N/A,N/A,12
+aba,Aero-Beta Flight Training,ABA,D-EAKC,Socata TB-10 Tobago,PA44,N/A,N/A,12
+aba,Aero-Beta Flight Training,ABA,D-EAOJ,Socata TB-10 Tobago,PA44,N/A,N/A,12
+adn,Aero-Dienst,ADN,D-BADA,Dornier 328-310 Jet,CL35,N/A,N/A,5
+adn,Aero-Dienst,ADN,D-BADC,Dornier 328-310 Jet,CL35,N/A,N/A,5
+adn,Aero-Dienst,ADN,D-CADA,Learjet 60XR,J328,N/A,N/A,5
+adn,Aero-Dienst,ADN,D-CURE,Learjet 60XR,J328,N/A,N/A,5
+tek,Aero-Tech Services,TEK,N610GH,Pilatus PC-12,C172,N/A,N/A,4
+tek,Aero-Tech Services,TEK,N644SD,Pilatus PC-12/45,C172,N/A,N/A,4
+tek,Aero-Tech Services,TEK,N757TS,Pilatus PC-12 NG,C172,N/A,N/A,4
+bso,Aeroclub Barcelona-Sabadell,BSO,EC-KOP,Cessna 182T Skylane,C172,N/A,N/A,14
+bso,Aeroclub Barcelona-Sabadell,BSO,EC-KOQ,Cessna 182T Skylane,C172,N/A,N/A,14
+bso,Aeroclub Barcelona-Sabadell,BSO,EC-FVK,Mudry CAP-10B,C182,N/A,N/A,14
+bso,Aeroclub Barcelona-Sabadell,BSO,EC-LHB,Tecnam P2006T,CP10,N/A,N/A,14
+bso,Aeroclub Barcelona-Sabadell,BSO,EC-MZV,Tecnam P2006T,CP10,N/A,N/A,14
+bso,Aeroclub Barcelona-Sabadell,BSO,EC-GGF,Piper Aztec E,P06T,N/A,N/A,14
+bso,Aeroclub Barcelona-Sabadell,BSO,EC-MPU,Piper PA-23-250 Aztec,P06T,N/A,N/A,14
+bso,Aeroclub Barcelona-Sabadell,BSO,EC-NIK,Robinson R44 Cadet,PA27,N/A,N/A,14
+bso,Aeroclub Barcelona-Sabadell,BSO,EC-LGS,Zlin Z-50LS,R44,N/A,N/A,14
+dnc,Aerodynamics Academy,DNC,EC-MYK,Reims-Cessna F172M Skyhawk,,N/A,N/A,17
+dnc,Aerodynamics Academy,DNC,EC-MYL,Cessna 172N Skyhawk,,N/A,N/A,17
+dnc,Aerodynamics Academy,DNC,EC-OJP,Tecnam P2008JC MkII,C172,N/A,N/A,17
+dnc,Aerodynamics Academy,DNC,EC-OKA,Tecnam P2008JC MkII,C172,N/A,N/A,17
+dnc,Aerodynamics Academy,DNC,EC-OKK,Tecnam P2008JC MkII,C172,N/A,N/A,17
+dnc,Aerodynamics Academy,DNC,EC-OKL,Tecnam P2008JC MkII,C172,N/A,N/A,17
+dnc,Aerodynamics Academy,DNC,EC-OKR,Tecnam P2008JC MkII,C172,N/A,N/A,17
+dnc,Aerodynamics Academy,DNC,EC-OLK,Tecnam P2008JC MkII,C172,N/A,N/A,17
+dnc,Aerodynamics Academy,DNC,EC-OLL,Tecnam P2008JC MkII,C172,N/A,N/A,17
+dnc,Aerodynamics Academy,DNC,EC-OLM,Tecnam P2008JC MkII,C172,N/A,N/A,17
+dnc,Aerodynamics Academy,DNC,EC-OMD,Tecnam P2008JC MkII,C172,N/A,N/A,17
+dnc,Aerodynamics Academy,DNC,EC-OME,Tecnam P2008JC MkII,C172,N/A,N/A,17
+dnc,Aerodynamics Academy,DNC,EC-OMF,Tecnam P2008JC MkII,C172,N/A,N/A,17
+dnc,Aerodynamics Academy,DNC,EC-OMG,Tecnam P2008JC MkII,C172,N/A,N/A,17
+dnc,Aerodynamics Academy,DNC,EC-OMI,Tecnam P2008JC MkII,C172,N/A,N/A,17
+dnc,Aerodynamics Academy,DNC,EC-OMJ,Tecnam P2008JC MkII,C172,N/A,N/A,17
+su-afl,Aeroflot,SU / AFL,RA-73703,Airbus A321-251NX,A20N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73704,Airbus A321-251NX,A20N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73705,Airbus A321-251NX,A20N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73167,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73168,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73169,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73170,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73171,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73172,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73173,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73175,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73176,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73179,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73180,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73738,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73739,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73740,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73743,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73744,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73745,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73746,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73747,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73748,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73749,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73750,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73752,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73753,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73754,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73755,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73756,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73757,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73758,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73759,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73760,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73761,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73762,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73763,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73764,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73765,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73766,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73767,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73768,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73769,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73770,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73771,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73772,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73773,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73774,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73775,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73776,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73777,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73778,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73779,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73780,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73781,Airbus A320-214,A21N,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73160,Airbus A321-211,A320,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73161,Airbus A321-211,A320,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73163,Airbus A321-211,A320,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73164,Airbus A321-211,A320,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73165,Airbus A321-211,A320,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73166,Airbus A321-211,A320,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73177,Airbus A321-211,A320,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73178,Airbus A321-211,A320,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73706,Airbus A321-211,A320,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73707,Airbus A321-211,A320,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73708,Airbus A321-211,A320,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73709,Airbus A321-211,A320,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73710,Airbus A321-211,A320,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73711,Airbus A321-211,A320,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73712,Airbus A321-211,A320,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73713,Airbus A321-211,A320,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73714,Airbus A321-211,A320,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73715,Airbus A321-211,A320,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73716,Airbus A321-211,A320,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73717,Airbus A321-211,A320,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73718,Airbus A321-211,A320,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73719,Airbus A321-211,A320,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73720,Airbus A321-211,A320,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73721,Airbus A321-211,A320,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73722,Airbus A321-211,A320,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73723,Airbus A321-211,A320,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73724,Airbus A321-211,A320,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73725,Airbus A321-211,A320,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73726,Airbus A321-211,A320,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73727,Airbus A321-211,A320,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73728,Airbus A321-211,A320,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73729,Airbus A321-211,A320,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73159,Airbus A330-343,A321,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73700,Airbus A330-343,A321,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73701,Airbus A330-343,A321,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73782,Airbus A330-343,A321,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73783,Airbus A330-343,A321,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73784,Airbus A330-343,A321,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73785,Airbus A330-343,A321,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73786,Airbus A330-343,A321,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73787,Airbus A330-343,A321,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73788,Airbus A330-343,A321,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73789,Airbus A330-343,A321,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73151,Airbus A350-941,A333,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73152,Airbus A350-941,A333,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73153,Airbus A350-941,A333,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73154,Airbus A350-941,A333,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73155,Airbus A350-941,A333,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73156,Airbus A350-941,A333,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73157,Airbus A350-941,A333,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73093,Boeing 737-8LJ,A359,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73094,Boeing 737-8LJ,A359,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73095,Boeing 737-8LJ,A359,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73096,Boeing 737-8LJ,A359,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73097,Boeing 737-8LJ,A359,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73098,Boeing 737-8LJ,A359,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73099,Boeing 737-8LJ,A359,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73100,Boeing 737-8MC,A359,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73101,Boeing 737-8MC,A359,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73102,Boeing 737-8LJ,A359,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73103,Boeing 737-8LJ,A359,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73104,Boeing 737-8MC,A359,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73105,Boeing 737-8MC,A359,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73106,Boeing 737-8MC,A359,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73107,Boeing 737-8MC,A359,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73108,Boeing 737-8LJ,A359,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73109,Boeing 737-8LJ,A359,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73110,Boeing 737-8MC,A359,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73111,Boeing 737-8MC,A359,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73112,Boeing 737-8LJ,A359,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73113,Boeing 737-8MC,A359,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73114,Boeing 737-8LJ,A359,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73115,Boeing 737-8LJ,A359,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73116,Boeing 737-8LJ,A359,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73117,Boeing 737-8MC,A359,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73118,Boeing 737-8LJ,A359,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73119,Boeing 737-8LJ,A359,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73120,Boeing 737-8LJ,A359,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73121,Boeing 737-8LJ,A359,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73122,Boeing 737-8LJ,A359,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73123,Boeing 737-8LJ,A359,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73124,Boeing 737-8LJ,A359,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73125,Boeing 737-8LJ,A359,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73126,Boeing 737-8LJ,A359,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73127,Boeing 737-8LJ,A359,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73128,Boeing 737-8LJ,A359,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73129,Boeing 737-8LJ,A359,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73189,Boeing 737-8LJ,A359,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73130,Boeing 777-3M0(ER),B738,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73131,Boeing 777-3M0(ER),B738,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73132,Boeing 777-3M0(ER),B738,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73133,Boeing 777-3M0(ER),B738,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73134,Boeing 777-3M0(ER),B738,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73135,Boeing 777-3M0(ER),B738,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73136,Boeing 777-3M0(ER),B738,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73137,Boeing 777-3M0(ER),B738,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73138,Boeing 777-3M0(ER),B738,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73139,Boeing 777-3M0(ER),B738,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73140,Boeing 777-3M0(ER),B738,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73141,Boeing 777-300(ER),B738,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73142,Boeing 777-300(ER),B738,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73143,Boeing 777-300(ER),B738,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73144,Boeing 777-3M0(ER),B738,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73146,Boeing 777-300(ER),B738,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73147,Boeing 777-3M0(ER),B738,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73148,Boeing 777-3M0(ER),B738,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73150,Boeing 777-3M0(ER),B738,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73158,Boeing 777-300(ER),B738,N/A,N/A,169
+su-afl,Aeroflot,SU / AFL,RA-73697,Boeing 777-3M0(ER),B738,N/A,N/A,169
+asi,AeroGuard Flight Training Center,ASI,N1280K,Cessna 172S Skyhawk SP,C152,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N404EP,Cessna 172S Skyhawk SP,C152,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N427CR,Cessna 172S Skyhawk SP,C152,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N434ER,Cessna 172S Skyhawk SP,C152,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N436ER,Cessna 172S Skyhawk SP,C152,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N437ER,Cessna 172S Skyhawk SP,C152,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N454ER,Cessna 172S Skyhawk SP,C152,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N472TW,Cessna 172S Skyhawk SP,C152,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N5520S,Cessna 172S Skyhawk SP,C152,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N632CR,Cessna 172S Skyhawk SP,C152,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N634CR,Cessna 172S Skyhawk SP,C152,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N635CR,Cessna 172S Skyhawk SP,C152,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N636CR,Cessna 172S Skyhawk SP,C152,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N637CR,Cessna 172S Skyhawk SP,C152,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N637ER,Cessna 172S Skyhawk SP,C152,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N638ER,Cessna 172S Skyhawk SP,C152,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N647CR,Cessna 172S Skyhawk SP,C152,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N649ER,Cessna 172S Skyhawk SP,C152,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N792FA,Cessna 172S Skyhawk SP,C152,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N793FA,Cessna 172S Skyhawk SP,C152,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N794FA,Cessna 172S Skyhawk SP,C152,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N795FA,Cessna 172S Skyhawk SP,C152,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N169AG,Piper Archer TX,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N175AG,Piper Archer TX,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N195MA,Piper Archer TX,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N254AG,Piper Archer TX,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N276AG,Piper Archer TX,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N281TW,Piper Archer TX,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N288PA,Piper Archer III,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N3044U,Piper Archer III,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N309PA,Piper Archer III,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N332PA,Piper Archer III,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N345AG,Piper Archer TX,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N396AG,Piper Archer III,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N404AG,Piper Archer TX,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N4131T,Piper Archer III,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N4133D,Piper Archer III,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N4140W,Piper Archer III,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N4143A,Piper Archer III,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N4144X,Piper Archer III,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N4146D,Piper Archer III,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N41487,Piper Archer III,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N4148D,Piper Archer III,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N415PA,Piper Archer III,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N4166H,Piper Archer III,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N4167K,Piper Archer III,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N416PA,Piper Archer III,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N4177L,Piper Archer III,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N417PA,Piper Archer III,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N4188T,Piper Archer III,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N418PA,Piper Archer III,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N419PA,Piper Archer III,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N423PA,Piper Archer III,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N424PA,Piper Archer III,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N428PA,Piper Archer III,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N433MA,Piper Archer III,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N442PA,Piper Archer III,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N443PA,Piper Archer III,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N445PA,Piper Archer III,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N457AG,Piper Archer TX,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N5144X,Piper Archer III,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N53216,Piper Archer III,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N53339,Piper Archer III,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N5356X,Piper Archer III,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N5357N,Piper Archer III,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N562AG,Piper Archer TX,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N597AG,Piper Archer TX,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N655AG,Piper Archer TX,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N663WT,Piper Archer III,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N709CA,Piper Archer TX,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N740PA,Piper Archer TX,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N742PA,Piper Archer TX,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N743PA,Piper Archer TX,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N744PA,Piper Archer TX,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N745PA,Piper Archer TX,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N746PA,Piper Archer TX,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N748PA,Piper Archer TX,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N749PA,Piper Archer TX,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N776CA,Piper Archer TX,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N819PA,Piper Archer TX,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N821PA,Piper Archer TX,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N822PA,Piper Archer TX,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N823PA,Piper Archer TX,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N8647E,Piper Archer III,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N901PA,Piper Archer III,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N903EE,Piper Archer III,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N912PA,Piper Archer III,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N915PA,Piper Archer III,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N918PA,Piper Archer III,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N921PA,Piper Archer III,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N925PA,Piper Archer III,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N9277D,Piper Archer III,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N9299B,Piper Archer III,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N929PA,Piper Archer III,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N979C,Piper Archer III,C172,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N286PA,Piper Seminole,P28A,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N287PA,Piper Seminole,P28A,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N292PA,Piper Seminole,P28A,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N302PA,Piper Seminole,P28A,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N303PA,Piper Seminole,P28A,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N316PA,Piper Seminole,P28A,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N317PA,Piper Seminole,P28A,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N318PA,Piper Seminole,P28A,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N433PA,Piper Seminole,P28A,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N434PA,Piper Seminole,P28A,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N435PA,Piper Seminole,P28A,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N436PA,Piper Seminole,P28A,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N438PA,Piper Seminole,P28A,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N440PA,Piper Seminole,P28A,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N9256X,Piper Seminole,P28A,N/A,N/A,113
+asi,AeroGuard Flight Training Center,ASI,N971PA,Piper Seminole,P28A,N/A,N/A,113
+xz-aez,Aeroitalia,XZ / AEZ,9H-BRU,Boeing 737-8JP,AT76,N/A,N/A,13
+xz-aez,Aeroitalia,XZ / AEZ,9H-CRI,Boeing 737-85F,AT76,N/A,N/A,13
+xz-aez,Aeroitalia,XZ / AEZ,9H-FRA,Boeing 737-85F,AT76,N/A,N/A,13
+xz-aez,Aeroitalia,XZ / AEZ,9H-FSJ,Boeing 737-86N,AT76,N/A,N/A,13
+xz-aez,Aeroitalia,XZ / AEZ,9H-GAE,Boeing 737-89M,AT76,N/A,N/A,13
+xz-aez,Aeroitalia,XZ / AEZ,9H-GEF,Boeing 737-86Q,AT76,N/A,N/A,13
+xz-aez,Aeroitalia,XZ / AEZ,9H-GFP,Boeing 737-89L,AT76,N/A,N/A,13
+xz-aez,Aeroitalia,XZ / AEZ,9H-MAB,Boeing 737-846,AT76,N/A,N/A,13
+xz-aez,Aeroitalia,XZ / AEZ,9H-MDG,Boeing 737-846,AT76,N/A,N/A,13
+xz-aez,Aeroitalia,XZ / AEZ,SX-PTM,Embraer E190SR,B738,N/A,N/A,13
+xz-aez,Aeroitalia,XZ / AEZ,SX-ASK,Embraer E175STD,E190,N/A,N/A,13
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-GVD,Boeing 737 MAX 8,A332,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-GVE,Boeing 737 MAX 8,A332,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-HKU,Boeing 737 MAX 8,A332,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-HKV,Boeing 737 MAX 8,A332,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-HKW,Boeing 737 MAX 8,A332,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-KEI,Boeing 737 MAX 8,A332,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-KEJ,Boeing 737 MAX 8,A332,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-KID,Boeing 737 MAX 8,A332,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-KIT,Boeing 737 MAX 8,A332,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-KIU,Boeing 737 MAX 8,A332,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-KKD,Boeing 737 MAX 8,A332,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-KKE,Boeing 737 MAX 8,A332,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-BYY,Boeing 737-7BD,B38M,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-BZA,Boeing 737-76N,B38M,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-BZO,Boeing 737-76N,B38M,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-CAD,Boeing 737-76N,B38M,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-CAP,Boeing 737-76N,B38M,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-CBF,Boeing 737-76N,B38M,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-GOO,Boeing 737-7BD,B38M,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-CTC,Boeing 737-86J(SF),B737,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-CXS,Boeing 737-81D,B737,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-CXT,Boeing 737-81D,B737,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-FQC,Boeing 737-86J,B737,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-FQY,Boeing 737-81D,B737,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-FQZ,Boeing 737-8BK,B737,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-FRK,Boeing 737-8BK,B737,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-FRQ,Boeing 737-8BK,B737,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-FSK,Boeing 737-8BK,B737,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-FUA,Boeing 737-8HX,B737,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-FUB,Boeing 737-8HX,B737,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-FUC,Boeing 737-8SH,B737,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-FVM,Boeing 737-8SH,B737,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-FVN,Boeing 737-8SH,B737,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-FVO,Boeing 737-8SH,B737,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-FWS,Boeing 737-8LP,B737,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-FXQ,Boeing 737-8MB,B737,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-FYK,Boeing 737-8MB,B737,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-GFQ,Boeing 737-8SH,B737,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-GGK,Boeing 737-8SH,B737,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-GGQ,Boeing 737-8HX,B737,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-GKS,Boeing 737-887,B737,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-GKT,Boeing 737-887,B737,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-GKU,Boeing 737-887,B737,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-GUB,Boeing 737-8SH,B737,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-GUC,Boeing 737-8SH,B737,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-GVA,Boeing 737-887,B737,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-GVB,Boeing 737-887,B737,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-GVC,Boeing 737-887,B737,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-KHQ,Boeing 737-85F(SF),B737,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-CDY,Embraer E190AR,B738,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-CDZ,Embraer E190AR,B738,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-CET,Embraer E190AR,B738,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-CEU,Embraer E190AR,B738,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-CEV,Embraer E190AR,B738,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-CHO,Embraer E190AR,B738,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-CHQ,Embraer E190AR,B738,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-CHR,Embraer E190AR,B738,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-CHS,Embraer E190AR,B738,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-CID,Embraer E190AR,B738,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-CIE,Embraer E190AR,B738,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-CIF,Embraer E190AR,B738,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-CIG,Embraer E190AR,B738,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-CIH,Embraer E190AR,B738,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-CKZ,Embraer E190AR,B738,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-CMA,Embraer E190AR,B738,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-CMB,Embraer E190AR,B738,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-CPI,Embraer E190AR,B738,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-CPJ,Embraer E190AR,B738,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-CPK,Embraer E190AR,B738,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-FPS,Embraer E190AR,B738,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-FPT,Embraer E190AR,B738,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-GIK,Embraer E190AR,B738,N/A,N/A,84
+ar-arg,Aerolineas Argentinas,AR / ARG,LV-GIQ,Embraer E190AR,B738,N/A,N/A,84
+let,Aerolineas Ejecutivas,LET,XA-ABS,Hawker Beechcraft 400XP,A109,N/A,N/A,26
+let,Aerolineas Ejecutivas,LET,XA-ETP,Hawker Beechcraft 400XP,A109,N/A,N/A,26
+let,Aerolineas Ejecutivas,LET,XB-SGJ,Hawker Beechcraft 400XP,A109,N/A,N/A,26
+let,Aerolineas Ejecutivas,LET,XA-LEY,Cessna Citation CJ3+,BE40,N/A,N/A,26
+let,Aerolineas Ejecutivas,LET,XA-MCT,Cessna Citation CJ3+,BE40,N/A,N/A,26
+let,Aerolineas Ejecutivas,LET,XA-MCU,Cessna Citation CJ3+,BE40,N/A,N/A,26
+let,Aerolineas Ejecutivas,LET,XA-CDM,Cessna Citation M2,C25B,N/A,N/A,26
+let,Aerolineas Ejecutivas,LET,XA-AGV,Cessna Citation Latitude,C25M,N/A,N/A,26
+let,Aerolineas Ejecutivas,LET,XA-MLC,Cessna Citation Latitude,C25M,N/A,N/A,26
+let,Aerolineas Ejecutivas,LET,XA-MLD,Cessna Citation Latitude,C25M,N/A,N/A,26
+let,Aerolineas Ejecutivas,LET,XA-MLE,Cessna Citation Latitude,C25M,N/A,N/A,26
+let,Aerolineas Ejecutivas,LET,XA-MLT,Cessna Citation Latitude,C25M,N/A,N/A,26
+let,Aerolineas Ejecutivas,LET,XA-MLU,Cessna Citation Latitude,C25M,N/A,N/A,26
+let,Aerolineas Ejecutivas,LET,XA-LPZ,Bombardier Challenger 605,C68A,N/A,N/A,26
+let,Aerolineas Ejecutivas,LET,XA-MJT,Bombardier Challenger 605,C68A,N/A,N/A,26
+let,Aerolineas Ejecutivas,LET,XA-MXJ,Bombardier Challenger 605,C68A,N/A,N/A,26
+let,Aerolineas Ejecutivas,LET,XA-NDY,Bombardier Challenger 605,C68A,N/A,N/A,26
+let,Aerolineas Ejecutivas,LET,XA-SAA,Learjet 45,CL60,N/A,N/A,26
+let,Aerolineas Ejecutivas,LET,XA-MBC,Learjet 75,LJ45,N/A,N/A,26
+let,Aerolineas Ejecutivas,LET,XA-MBD,Learjet 75,LJ45,N/A,N/A,26
+let,Aerolineas Ejecutivas,LET,XA-MBE,Learjet 75,LJ45,N/A,N/A,26
+let,Aerolineas Ejecutivas,LET,XA-MBN,Learjet 75,LJ45,N/A,N/A,26
+let,Aerolineas Ejecutivas,LET,XA-MBO,Learjet 75,LJ45,N/A,N/A,26
+let,Aerolineas Ejecutivas,LET,XA-MBS,Learjet 75,LJ45,N/A,N/A,26
+let,Aerolineas Ejecutivas,LET,XA-MBT,Learjet 75,LJ45,N/A,N/A,26
+p4-nso,Aerolineas Sosa,P4 / NSO,HR-HJS,Saab 340B,CRJ1,N/A,N/A,4
+p4-nso,Aerolineas Sosa,P4 / NSO,HR-JFP,Saab 340B+,CRJ1,N/A,N/A,4
+p4-nso,Aerolineas Sosa,P4 / NSO,HR-SES,Saab 340B+,CRJ1,N/A,N/A,4
+msm,Aeromas,MSM,CX-SCA,Learjet 60,C208,N/A,N/A,2
+am-amx,Aeromexico,AM / AMX,N115AM,Boeing 737 MAX 9,B38M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,N469AM,Boeing 737 MAX 9,B38M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,N499AM,Boeing 737 MAX 9,B38M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,N769AM,Boeing 737 MAX 9,B38M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,N837AM,Boeing 737 MAX 9,B38M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,N838AM,Boeing 737 MAX 9,B38M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,N866AM,Boeing 737 MAX 9,B38M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,N867AM,Boeing 737 MAX 9,B38M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,N891AM,Boeing 737 MAX 9,B38M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,N974AM,Boeing 737 MAX 9,B38M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-AMF,Boeing 737 MAX 9,B38M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-BBB,Boeing 737 MAX 9,B38M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-GPS,Boeing 737 MAX 9,B38M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-GQS,Boeing 737 MAX 9,B38M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-HSB,Boeing 737 MAX 9,B38M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-IMH,Boeing 737 MAX 9,B38M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-JGQ,Boeing 737 MAX 9,B38M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-JSO,Boeing 737 MAX 9,B38M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-MAZ,Boeing 737 MAX 9,B38M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-MFO,Boeing 737 MAX 9,B38M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-MIJ,Boeing 737 MAX 9,B38M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-MJJ,Boeing 737 MAX 9,B38M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-MKJ,Boeing 737 MAX 9,B38M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-NNN,Boeing 737 MAX 9,B38M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-SGP,Boeing 737 MAX 9,B38M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-SRB,Boeing 737 MAX 9,B38M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-SRK,Boeing 737 MAX 9,B38M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,N368AR,Boeing 737-86J,B39M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,N377AR,Boeing 737-86J,B39M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,N825AM,Boeing 737-852,B39M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,N845AM,Boeing 737-852,B39M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,N875AM,Boeing 737-852,B39M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,N950AM,Boeing 737-852,B39M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,N957AM,Boeing 737-852,B39M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,N958AM,Boeing 737-852,B39M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-ADT,Boeing 737-852,B39M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-ADU,Boeing 737-852,B39M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-AMA,Boeing 737-852,B39M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-AMB,Boeing 737-852,B39M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-AMC,Boeing 737-852,B39M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-AME,Boeing 737-852,B39M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-AMG,Boeing 737-81D,B39M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-AMJ,Boeing 737-852,B39M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-AMK,Boeing 737-852,B39M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-AML,Boeing 737-852,B39M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-AMM,Boeing 737-852,B39M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-AMN,Boeing 737-852,B39M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-AMO,Boeing 737-852,B39M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-AMS,Boeing 737-852,B39M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-AMU,Boeing 737-852,B39M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-AMV,Boeing 737-852,B39M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-DRA,Boeing 737-852,B39M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-DRC,Boeing 737-852,B39M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-EBN,Boeing 737-8JP,B39M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-JOY,Boeing 737-852,B39M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-OCA,Boeing 737-8JP,B39M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-OCB,Boeing 737-8JP,B39M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-OCC,Boeing 737-8JP,B39M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-OOO,Boeing 737-8FZ,B39M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-PPP,Boeing 737-8JP,B39M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-ZAM,Boeing 737-852,B39M,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,N782AM,Boeing 787-8 Dreamliner,B738,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,N783AM,Boeing 787-8 Dreamliner,B738,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,N964AM,Boeing 787-8 Dreamliner,B738,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,N965AM,Boeing 787-8 Dreamliner,B738,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,N966AM,Boeing 787-8 Dreamliner,B738,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,N967AM,Boeing 787-8 Dreamliner,B738,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-AMR,Boeing 787-8 Dreamliner,B738,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-AMX,Boeing 787-8 Dreamliner,B738,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,N128AM,Boeing 787-9 Dreamliner,B788,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,N183AM,Boeing 787-9 Dreamliner,B788,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,N438AM,Boeing 787-9 Dreamliner,B788,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,N446AM,Boeing 787-9 Dreamliner,B788,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,N742AM,Boeing 787-9 Dreamliner,B788,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,N748AM,Boeing 787-9 Dreamliner,B788,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-ADC,Boeing 787-9 Dreamliner,B788,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-ADD,Boeing 787-9 Dreamliner,B788,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-ADG,Boeing 787-9 Dreamliner,B788,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-ADH,Boeing 787-9 Dreamliner,B788,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-ADL,Boeing 787-9 Dreamliner,B788,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-DHM,Boeing 787-9 Dreamliner,B788,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-DHN,Boeing 787-9 Dreamliner,B788,N/A,N/A,125
+am-amx,Aeromexico,AM / AMX,XA-MFG,Boeing 787-9 Dreamliner,B788,N/A,N/A,125
+vtm,Aeronaves TSM,VTM,XA-VFI,Boeing 737-3H6(SF),B505,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-VHF,Boeing 737-3Y0(SF),B505,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-VHQ,Boeing 737-3M8(BDSF),B505,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-ADQ,Boeing 737-4B6(SF),B733,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-EGD,Boeing 737-4Y0(SF),B733,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-EGT,Boeing 737-4K5(SF),B733,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-ILS,Boeing 737-4Y0(SF),B733,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-LIC,Boeing 737-4Q8(SF),B733,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-TIF,Boeing 737-476(SF),B733,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-UGJ,Boeing 737-484(SF),B733,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-UNH,Boeing 737-48E(SF),B733,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-VFJ,Boeing 737-4Q8(SF),B733,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-VFM,Boeing 737-4Y0(SF),B733,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-VFT,Boeing 737-4Q8(SF),B733,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-VGB,Boeing 737-46N(SF),B733,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-VGY,Boeing 737-436(SF),B733,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-VHB,Boeing 737-42C(SF),B733,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-VHE,Boeing 737-448(SF),B733,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-VHS,Boeing 737-4Q8(SF),B733,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-VHV,Boeing 737-4Q8(SF),B733,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XB-RDA,Cessna Grand Caravan EX,B734,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XB-LUA,Bombardier Challenger 604,C208,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-ESA,Mitsubishi CRJ-100(PF),CL60,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-SPO,Mitsubishi CRJ-100(PF),CL60,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XB-EGD,Mitsubishi CRJ-100ER,CL60,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-ADS,Mitsubishi CRJ-200ER(SF),CRJ1,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-RGC,Mitsubishi CRJ-200ER(SF),CRJ1,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-TRQ,Mitsubishi CRJ-200ER(SF),CRJ1,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-URL,Mitsubishi CRJ-200ER(SF),CRJ1,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-VAD,Mitsubishi CRJ-200SF,CRJ1,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-VBF,Mitsubishi CRJ-200SF,CRJ1,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-VCS,Mitsubishi CRJ-200PF,CRJ1,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-VCX,Mitsubishi CRJ-200PF,CRJ1,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-VDL,Mitsubishi CRJ-200SF,CRJ1,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-VEZ,Mitsubishi CRJ-200ER(SF),CRJ1,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-VFF,Mitsubishi CRJ-200ER(SF),CRJ1,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-VFL,Mitsubishi CRJ-200ER(SF),CRJ1,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-VFQ,Mitsubishi CRJ-200ER(SF),CRJ1,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-VFX,Mitsubishi CRJ-200PF,CRJ1,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-VFZ,Mitsubishi CRJ-200LR(PF),CRJ1,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-VGC,Mitsubishi CRJ-200ER(SF),CRJ1,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-VGX,Mitsubishi CRJ-200ER(SF),CRJ1,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-VHA,Mitsubishi CRJ-200ER(SF),CRJ1,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-VHC,Mitsubishi CRJ-200ER(SF),CRJ1,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-VHH,Mitsubishi CRJ-200ER(SF),CRJ1,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-VHM,Mitsubishi CRJ-200ER(SF),CRJ1,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-VHN,Mitsubishi CRJ-200ER(SF),CRJ1,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XB-DGD,Mitsubishi CRJ-200LR,CRJ1,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,,Convair CV-640,CRJ2,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-NTP,McDonnell Douglas DC-9-15RC,CVLT,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-TIG,Douglas DC-9-15(F),CVLT,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-UXP,Douglas DC-9-15MC,CVLT,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-UXR,McDonnell Douglas DC-9-15MC,CVLT,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-VFC,McDonnell Douglas DC-9-15(F),CVLT,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-VFD,McDonnell Douglas DC-9-15RC,CVLT,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-DHL,Douglas DC-9-33RC(F),DC91,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-UPS,McDonnell Douglas DC-9-33F,DC91,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-UQT,McDonnell Douglas DC-9-33CF,DC91,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-UTW,McDonnell Douglas DC-9-32F,DC91,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-UUT,McDonnell Douglas DC-9-32F,DC91,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-UZJ,Douglas DC-9-33F,DC91,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-VBE,McDonnell Douglas DC-9-33CF,DC91,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-VFA,McDonnell Douglas DC-9-33F,DC91,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-VGK,Douglas DC-9-32F,DC91,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-VGM,McDonnell Douglas DC-9-33F,DC91,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-UTX,McDonnell Douglas MD-82(SF),DC93,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-UXI,McDonnell Douglas MD-82(SF),DC93,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-UZC,McDonnell Douglas MD-82(SF),DC93,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-VBG,McDonnell Douglas MD-82(SF),DC93,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-TBC,McDonnell Douglas MD-83(SF),MD82,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-TSM,McDonnell Douglas MD‑83SF,MD82,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-UFO,McDonnell Douglas MD-83(SF),MD82,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-UVG,McDonnell Douglas MD-83(SF),MD82,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-UZI,McDonnell Douglas MD-83(SF),MD82,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-UZV,McDonnell Douglas MD-83(SF),MD82,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-UZX,McDonnell Douglas MD-83(SF),MD82,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-VCB,McDonnell Douglas MD-83(SF),MD82,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-VCU,McDonnell Douglas MD-83(SF),MD82,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-VDC,McDonnell Douglas MD-83(SF),MD82,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-VDR,McDonnell Douglas MD-83,MD82,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-UUM,Swearingen Merlin 3,MD83,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-DCX,Swearingen Metroliner,SW3,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-EEE,Swearingen SA227-AC Metro III,SW3,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-EGC,Swearingen Metroliner,SW3,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-MIO,Swearingen Metroliner,SW3,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-PNG,Swearingen Metroliner,SW3,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-SLW,Swearingen Metroliner,SW3,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-TYX,Swearingen Metroliner,SW3,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-UKJ,Swearingen Metroliner,SW3,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-UMW,Swearingen Metroliner,SW3,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-UNQ,Swearingen Metroliner,SW3,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-UOS,Swearingen Metroliner,SW3,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-USB,Swearingen Metroliner,SW3,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-USG,Swearingen Metroliner,SW3,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XA-UUL,Swearingen Metroliner,SW3,N/A,N/A,97
+vtm,Aeronaves TSM,VTM,XB-MGD,Swearingen Metroliner,SW3,N/A,N/A,97

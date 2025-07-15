@@ -1,0 +1,24 @@
+airline_code,airline_name,sigle,aircraft_type,aircraft_count,total_fleet_size,status
+2i-csb,21 Air,2I / CSB,B762,2,2,success
+emc,247 Aviation,EMC,DA62,2,4,success
+emc,247 Aviation,EMC,PC12,2,4,success
+bro,2Excel Aviation,BRO,B350,1,24,success
+bro,2Excel Aviation,BRO,B722,2,24,success
+bro,2Excel Aviation,BRO,B733,1,24,success
+bro,2Excel Aviation,BRO,B737,1,24,success
+bro,2Excel Aviation,BRO,B752,1,24,success
+bro,2Excel Aviation,BRO,BE20,5,24,success
+bro,2Excel Aviation,BRO,DA62,3,24,success
+bro,2Excel Aviation,BRO,E300,4,24,success
+bro,2Excel Aviation,BRO,PA31,6,24,success
+lva,30 West Jets,LVA,GLF5,1,1,success
+dak,4Airways,DAK,B734,3,3,success
+iho,748 Air Services,IHO,N/A,0,0,success
+fe-iho,748 Air Services,FE / IHO,C208,2,6,success
+fe-iho,748 Air Services,FE / IHO,DH8A,2,6,success
+fe-iho,748 Air Services,FE / IHO,DH8D,2,6,success
+txg,7Air Cargo,TXG,B738,3,3,success
+aq-jyh,9 Air,AQ / JYH,B38M,5,27,success
+aq-jyh,9 Air,AQ / JYH,B738,22,27,success
+s5-nkp,Abakan Air,S5 / NKP,AS50,1,5,success
+s5-nkp,Abakan Air,S5 / NKP,IL76,4,5,success
