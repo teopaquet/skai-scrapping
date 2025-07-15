@@ -1,77 +1,77 @@
-airline_code,airline_name,sigle,aircraft_type,registration,detailed_aircraft_type,serial_number,age,total_fleet_size,status
-2i-csb,21 Air,2I / CSB,B762,N881YV,Boeing 767-241(ER)(BDSF),,,2,success
-2i-csb,21 Air,2I / CSB,B762,N999YV,Boeing 767-241(ER)(BDSF),,,2,success
-emc,247 Aviation,EMC,DA62,G-CMNW,Diamond DA62,,,4,success
-emc,247 Aviation,EMC,DA62,G-CMWG,Diamond DA62,,,4,success
-emc,247 Aviation,EMC,PC12,G-ISJE,Pilatus PC-12 NGX,,,4,success
-emc,247 Aviation,EMC,PC12,G-LUSO,Pilatus PC-12 NG,,,4,success
-bro,2Excel Aviation,BRO,B350,G-HMGH,Beech King Air 350i,,,24,success
-bro,2Excel Aviation,BRO,B722,G-OSRA,Boeing 727-2S2F(RE),,,24,success
-bro,2Excel Aviation,BRO,B722,G-OSRB,Boeing 727-2S2F(RE),,,24,success
-bro,2Excel Aviation,BRO,B733,G-SWRD,Boeing 737-3L9,,,24,success
-bro,2Excel Aviation,BRO,B737,G-NEWG,Boeing 737-76N,,,24,success
-bro,2Excel Aviation,BRO,B752,G-FTAI,Boeing 757-256,,,24,success
-bro,2Excel Aviation,BRO,BE20,G-CIFE,Beech King Air B200,,,24,success
-bro,2Excel Aviation,BRO,BE20,G-IASM,Beech 200 Super King Air,,,24,success
-bro,2Excel Aviation,BRO,BE20,G-IMEA,Beech 200 Super King Air,,,24,success
-bro,2Excel Aviation,BRO,BE20,G-JASS,Beech B200 Super King Air,,,24,success
-bro,2Excel Aviation,BRO,BE20,G-WCCP,Beech B200 Super King Air,,,24,success
-bro,2Excel Aviation,BRO,DA62,G-HMGD,Diamond DA62,,,24,success
-bro,2Excel Aviation,BRO,DA62,G-HMGE,Diamond DA62,,,24,success
-bro,2Excel Aviation,BRO,DA62,G-ZEAA,Diamond DA62,,,24,success
-bro,2Excel Aviation,BRO,E300,G-OFFO,Extra EA-300/L,,,24,success
-bro,2Excel Aviation,BRO,E300,G-ZXCL,Extra EA-300/L,,,24,success
-bro,2Excel Aviation,BRO,E300,G-ZXEL,Extra EA-300/L,,,24,success
-bro,2Excel Aviation,BRO,E300,G-ZXLL,Extra EA-300/L,,,24,success
-bro,2Excel Aviation,BRO,PA31,G-BEZL,Piper Navajo C,,,24,success
-bro,2Excel Aviation,BRO,PA31,G-BPYR,Piper Navajo C,,,24,success
-bro,2Excel Aviation,BRO,PA31,G-OUCP,Piper Navajo C,,,24,success
-bro,2Excel Aviation,BRO,PA31,G-RHYM,Piper Navajo B,,,24,success
-bro,2Excel Aviation,BRO,PA31,G-UKCS,Piper Navajo B,,,24,success
-bro,2Excel Aviation,BRO,PA31,G-UMMI,Piper Navajo C,,,24,success
-lva,30 West Jets,LVA,GLF5,N319ST,Gulfstream G550,,,1,success
-dak,4Airways,DAK,B734,9H-FIT,Boeing 737-4Y0,,,3,success
-dak,4Airways,DAK,B734,9H-FUN,Boeing 737-46J,,,3,success
-dak,4Airways,DAK,B734,9H-RUN,Boeing 737-4Y0,,,3,success
-iho,748 Air Services,IHO,N/A,N/A,N/A,N/A,N/A,0,success
-fe-iho,748 Air Services,FE / IHO,C208,5Y-FAJ,Cessna Grand Caravan,,,6,success
-fe-iho,748 Air Services,FE / IHO,C208,5Y-MHO,Cessna Grand Caravan EX,,,6,success
-fe-iho,748 Air Services,FE / IHO,DH8A,5Y-IHO,De Havilland Canada Dash 8-100,,,6,success
-fe-iho,748 Air Services,FE / IHO,DH8A,5Y-RHM,De Havilland Canada Dash 8-100,,,6,success
-fe-iho,748 Air Services,FE / IHO,DH8D,5Y-SMJ,De Havilland Canada Dash 8-400,,,6,success
-fe-iho,748 Air Services,FE / IHO,DH8D,5Y-VVI,De Havilland Canada Dash 8-400,,,6,success
-txg,7Air Cargo,TXG,B738,N260AC,Boeing 737-8AS(SF),,,3,success
-txg,7Air Cargo,TXG,B738,N330FL,Boeing 737-86D(BCF),,,3,success
-txg,7Air Cargo,TXG,B738,N782AC,Boeing 737-85R(SF),,,3,success
-aq-jyh,9 Air,AQ / JYH,B38M,B-206J,Boeing 737 MAX 8,,,27,success
-aq-jyh,9 Air,AQ / JYH,B38M,B-206L,Boeing 737 MAX 8,,,27,success
-aq-jyh,9 Air,AQ / JYH,B38M,B-208H,Boeing 737 MAX 8,,,27,success
-aq-jyh,9 Air,AQ / JYH,B38M,B-224U,Boeing 737 MAX 8,,,27,success
-aq-jyh,9 Air,AQ / JYH,B38M,B-224V,Boeing 737 MAX 8,,,27,success
-aq-jyh,9 Air,AQ / JYH,B738,B-1172,Boeing 737-86X,,,27,success
-aq-jyh,9 Air,AQ / JYH,B738,B-1233,Boeing 737-86X,,,27,success
-aq-jyh,9 Air,AQ / JYH,B738,B-1472,Boeing 737-86X,,,27,success
-aq-jyh,9 Air,AQ / JYH,B738,B-1473,Boeing 737-86X,,,27,success
-aq-jyh,9 Air,AQ / JYH,B738,B-1551,Boeing 737-86X,,,27,success
-aq-jyh,9 Air,AQ / JYH,B738,B-1552,Boeing 737-86X,,,27,success
-aq-jyh,9 Air,AQ / JYH,B738,B-1553,Boeing 737-86X,,,27,success
-aq-jyh,9 Air,AQ / JYH,B738,B-1556,Boeing 737-86X,,,27,success
-aq-jyh,9 Air,AQ / JYH,B738,B-1592,Boeing 737-86X,,,27,success
-aq-jyh,9 Air,AQ / JYH,B738,B-1715,Boeing 737-8GP,,,27,success
-aq-jyh,9 Air,AQ / JYH,B738,B-1716,Boeing 737-8GP,,,27,success
-aq-jyh,9 Air,AQ / JYH,B738,B-1719,Boeing 737-8GP,,,27,success
-aq-jyh,9 Air,AQ / JYH,B738,B-208K,Boeing 737-86X,,,27,success
-aq-jyh,9 Air,AQ / JYH,B738,B-220S,Boeing 737-86N,,,27,success
-aq-jyh,9 Air,AQ / JYH,B738,B-220Y,Boeing 737-86N,,,27,success
-aq-jyh,9 Air,AQ / JYH,B738,B-221M,Boeing 737-86N,,,27,success
-aq-jyh,9 Air,AQ / JYH,B738,B-6989,Boeing 737-86N,,,27,success
-aq-jyh,9 Air,AQ / JYH,B738,B-6990,Boeing 737-86N,,,27,success
-aq-jyh,9 Air,AQ / JYH,B738,B-6991,Boeing 737-86N,,,27,success
-aq-jyh,9 Air,AQ / JYH,B738,B-6992,Boeing 737-86N,,,27,success
-aq-jyh,9 Air,AQ / JYH,B738,B-7105,Boeing 737-84P,,,27,success
-aq-jyh,9 Air,AQ / JYH,B738,B-7113,Boeing 737-84P,,,27,success
-s5-nkp,Abakan Air,S5 / NKP,AS50,RA-04051,Aerospatiale 350B3 Ecureuil,,,5,success
-s5-nkp,Abakan Air,S5 / NKP,IL76,RA-76370,Ilyushin Il-76MD,,,5,success
-s5-nkp,Abakan Air,S5 / NKP,IL76,RA-76445,Ilyushin Il-76TD,,,5,success
-s5-nkp,Abakan Air,S5 / NKP,IL76,RA-76463,Ilyushin Il-76TD,,,5,success
-s5-nkp,Abakan Air,S5 / NKP,IL76,RA-76476,Ilyushin Il-76TD,,,5,success
+airline_code,airline_name,sigle,aircraft_type,registration,detailed_aircraft_type,total_fleet_size,status
+2i-csb,21 Air,2I / CSB,B762,N881YV,Boeing 767-241(ER)(BDSF),2,success
+2i-csb,21 Air,2I / CSB,B762,N999YV,Boeing 767-241(ER)(BDSF),2,success
+emc,247 Aviation,EMC,DA62,G-CMNW,Diamond DA62,4,success
+emc,247 Aviation,EMC,DA62,G-CMWG,Diamond DA62,4,success
+emc,247 Aviation,EMC,PC12,G-ISJE,Pilatus PC-12 NGX,4,success
+emc,247 Aviation,EMC,PC12,G-LUSO,Pilatus PC-12 NG,4,success
+bro,2Excel Aviation,BRO,B350,G-HMGH,Beech King Air 350i,24,success
+bro,2Excel Aviation,BRO,B722,G-OSRA,Boeing 727-2S2F(RE),24,success
+bro,2Excel Aviation,BRO,B722,G-OSRB,Boeing 727-2S2F(RE),24,success
+bro,2Excel Aviation,BRO,B733,G-SWRD,Boeing 737-3L9,24,success
+bro,2Excel Aviation,BRO,B737,G-NEWG,Boeing 737-76N,24,success
+bro,2Excel Aviation,BRO,B752,G-FTAI,Boeing 757-256,24,success
+bro,2Excel Aviation,BRO,BE20,G-CIFE,Beech King Air B200,24,success
+bro,2Excel Aviation,BRO,BE20,G-IASM,Beech 200 Super King Air,24,success
+bro,2Excel Aviation,BRO,BE20,G-IMEA,Beech 200 Super King Air,24,success
+bro,2Excel Aviation,BRO,BE20,G-JASS,Beech B200 Super King Air,24,success
+bro,2Excel Aviation,BRO,BE20,G-WCCP,Beech B200 Super King Air,24,success
+bro,2Excel Aviation,BRO,DA62,G-HMGD,Diamond DA62,24,success
+bro,2Excel Aviation,BRO,DA62,G-HMGE,Diamond DA62,24,success
+bro,2Excel Aviation,BRO,DA62,G-ZEAA,Diamond DA62,24,success
+bro,2Excel Aviation,BRO,E300,G-OFFO,Extra EA-300/L,24,success
+bro,2Excel Aviation,BRO,E300,G-ZXCL,Extra EA-300/L,24,success
+bro,2Excel Aviation,BRO,E300,G-ZXEL,Extra EA-300/L,24,success
+bro,2Excel Aviation,BRO,E300,G-ZXLL,Extra EA-300/L,24,success
+bro,2Excel Aviation,BRO,PA31,G-BEZL,Piper Navajo C,24,success
+bro,2Excel Aviation,BRO,PA31,G-BPYR,Piper Navajo C,24,success
+bro,2Excel Aviation,BRO,PA31,G-OUCP,Piper Navajo C,24,success
+bro,2Excel Aviation,BRO,PA31,G-RHYM,Piper Navajo B,24,success
+bro,2Excel Aviation,BRO,PA31,G-UKCS,Piper Navajo B,24,success
+bro,2Excel Aviation,BRO,PA31,G-UMMI,Piper Navajo C,24,success
+lva,30 West Jets,LVA,GLF5,N319ST,Gulfstream G550,1,success
+dak,4Airways,DAK,B734,9H-FIT,Boeing 737-4Y0,3,success
+dak,4Airways,DAK,B734,9H-FUN,Boeing 737-46J,3,success
+dak,4Airways,DAK,B734,9H-RUN,Boeing 737-4Y0,3,success
+iho,748 Air Services,IHO,N/A,N/A,N/A,0,success
+fe-iho,748 Air Services,FE / IHO,C208,5Y-FAJ,Cessna Grand Caravan,6,success
+fe-iho,748 Air Services,FE / IHO,C208,5Y-MHO,Cessna Grand Caravan EX,6,success
+fe-iho,748 Air Services,FE / IHO,DH8A,5Y-IHO,De Havilland Canada Dash 8-100,6,success
+fe-iho,748 Air Services,FE / IHO,DH8A,5Y-RHM,De Havilland Canada Dash 8-100,6,success
+fe-iho,748 Air Services,FE / IHO,DH8D,5Y-SMJ,De Havilland Canada Dash 8-400,6,success
+fe-iho,748 Air Services,FE / IHO,DH8D,5Y-VVI,De Havilland Canada Dash 8-400,6,success
+txg,7Air Cargo,TXG,B738,N260AC,Boeing 737-8AS(SF),3,success
+txg,7Air Cargo,TXG,B738,N330FL,Boeing 737-86D(BCF),3,success
+txg,7Air Cargo,TXG,B738,N782AC,Boeing 737-85R(SF),3,success
+aq-jyh,9 Air,AQ / JYH,B38M,B-206J,Boeing 737 MAX 8,27,success
+aq-jyh,9 Air,AQ / JYH,B38M,B-206L,Boeing 737 MAX 8,27,success
+aq-jyh,9 Air,AQ / JYH,B38M,B-208H,Boeing 737 MAX 8,27,success
+aq-jyh,9 Air,AQ / JYH,B38M,B-224U,Boeing 737 MAX 8,27,success
+aq-jyh,9 Air,AQ / JYH,B38M,B-224V,Boeing 737 MAX 8,27,success
+aq-jyh,9 Air,AQ / JYH,B738,B-1172,Boeing 737-86X,27,success
+aq-jyh,9 Air,AQ / JYH,B738,B-1233,Boeing 737-86X,27,success
+aq-jyh,9 Air,AQ / JYH,B738,B-1472,Boeing 737-86X,27,success
+aq-jyh,9 Air,AQ / JYH,B738,B-1473,Boeing 737-86X,27,success
+aq-jyh,9 Air,AQ / JYH,B738,B-1551,Boeing 737-86X,27,success
+aq-jyh,9 Air,AQ / JYH,B738,B-1552,Boeing 737-86X,27,success
+aq-jyh,9 Air,AQ / JYH,B738,B-1553,Boeing 737-86X,27,success
+aq-jyh,9 Air,AQ / JYH,B738,B-1556,Boeing 737-86X,27,success
+aq-jyh,9 Air,AQ / JYH,B738,B-1592,Boeing 737-86X,27,success
+aq-jyh,9 Air,AQ / JYH,B738,B-1715,Boeing 737-8GP,27,success
+aq-jyh,9 Air,AQ / JYH,B738,B-1716,Boeing 737-8GP,27,success
+aq-jyh,9 Air,AQ / JYH,B738,B-1719,Boeing 737-8GP,27,success
+aq-jyh,9 Air,AQ / JYH,B738,B-208K,Boeing 737-86X,27,success
+aq-jyh,9 Air,AQ / JYH,B738,B-220S,Boeing 737-86N,27,success
+aq-jyh,9 Air,AQ / JYH,B738,B-220Y,Boeing 737-86N,27,success
+aq-jyh,9 Air,AQ / JYH,B738,B-221M,Boeing 737-86N,27,success
+aq-jyh,9 Air,AQ / JYH,B738,B-6989,Boeing 737-86N,27,success
+aq-jyh,9 Air,AQ / JYH,B738,B-6990,Boeing 737-86N,27,success
+aq-jyh,9 Air,AQ / JYH,B738,B-6991,Boeing 737-86N,27,success
+aq-jyh,9 Air,AQ / JYH,B738,B-6992,Boeing 737-86N,27,success
+aq-jyh,9 Air,AQ / JYH,B738,B-7105,Boeing 737-84P,27,success
+aq-jyh,9 Air,AQ / JYH,B738,B-7113,Boeing 737-84P,27,success
+s5-nkp,Abakan Air,S5 / NKP,AS50,RA-04051,Aerospatiale 350B3 Ecureuil,5,success
+s5-nkp,Abakan Air,S5 / NKP,IL76,RA-76370,Ilyushin Il-76MD,5,success
+s5-nkp,Abakan Air,S5 / NKP,IL76,RA-76445,Ilyushin Il-76TD,5,success
+s5-nkp,Abakan Air,S5 / NKP,IL76,RA-76463,Ilyushin Il-76TD,5,success
+s5-nkp,Abakan Air,S5 / NKP,IL76,RA-76476,Ilyushin Il-76TD,5,success
