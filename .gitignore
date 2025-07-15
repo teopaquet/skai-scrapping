@@ -1,0 +1,32 @@
+.env
+__pycache__/
+.vscode/
+.idea/
+.DS_Store
+*.pyc
+*.pyo
+*.pyd
+*.swp
+*.swo
+*.bak
+*.tmp
+*.log
+*.sqlite3
+*.db
+*.egg-info/
+dist/
+build/
+venv/
+.venv/
+env/
+.env/
+ENV/
+env.bak/
+node_modules/
+# Data and export folders
+data/exports/
+data/processed/
+data/raw/
+# Notebooks
+*.ipynb_checkpoints/
+*.ipynb
