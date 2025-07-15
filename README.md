@@ -19,7 +19,7 @@ Un système complet de collecte et d'analyse de données de flottes aériennes p
 ### Prérequis
 - Python 3.8 ou supérieur
 - pip (gestionnaire de paquets Python)
-- 
+
 # Cloner le repository
 git clone https://github.com/teopaquet/skai-scrapping.git
 cd skai-scrapping
