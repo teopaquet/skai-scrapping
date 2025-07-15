@@ -1,3 +1,4 @@
+import requests as pyrequests  # pour éviter conflit avec requests de bs4
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
@@ -9,6 +10,7 @@ import requests
 from bs4 import BeautifulSoup
 import time
 import re
+
 import json
 import pandas as pd
 from urllib.parse import urljoin
@@ -17,8 +19,40 @@ from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 import os
 import sys
+# Ajout du support .env pour Docker
+try:
+    from dotenv import load_dotenv
+    # Recherche le .env à la racine du projet (2 niveaux au-dessus de ce fichier)
+    dotenv_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../.env'))
+    if os.path.exists(dotenv_path):
+        load_dotenv(dotenv_path)
+        print(f"[ENV] Fichier .env chargé depuis {dotenv_path}")
+    else:
+        print(f"[ENV] Aucun fichier .env trouvé à {dotenv_path}")
+except ImportError:
+    print("[ENV] python-dotenv non installé, les variables d'environnement doivent être définies manuellement.")
 
 class FlightRadar24Scraper:
+
+    def send_csv_telegram(self, file_path):
+        """Envoie un fichier CSV via Telegram si les variables d'env sont définies."""
+        bot_token = os.environ.get('TELEGRAM_BOT_TOKEN')
+        chat_id = os.environ.get('TELEGRAM_CHAT_ID')
+        if not bot_token or not chat_id:
+            print("[TELEGRAM] Variables d'environnement non définies, envoi ignoré.")
+            return
+        url = f"https://api.telegram.org/bot{bot_token}/sendDocument"
+        try:
+            with open(file_path, 'rb') as f:
+                files = {'document': f}
+                data = {'chat_id': chat_id, 'caption': os.path.basename(file_path)}
+                response = pyrequests.post(url, data=data, files=files, timeout=60)
+            if response.status_code == 200:
+                print(f"[TELEGRAM] Fichier envoyé avec succès : {file_path}")
+            else:
+                print(f"[TELEGRAM] Erreur lors de l'envoi : {response.text}")
+        except Exception as e:
+            print(f"[TELEGRAM] Exception lors de l'envoi : {e}")
     def __init__(self):
         self.session = requests.Session()
         self.base_url = "https://www.flightradar24.com"
@@ -235,6 +269,7 @@ class FlightRadar24Scraper:
                 print(f"Sauvegarde intermédiaire après {i} compagnies...")
                 self.save_results(results, temp_json)
                 self.save_results_csv(results, temp_csv)
+                self.send_csv_telegram(temp_csv)
             # Délai aléatoire entre les requêtes
             if i < total:
                 delay = random.uniform(delay_range[0], delay_range[1])
