@@ -18,4 +18,4 @@ COPY data/ ./data/
 COPY .env ./
 
 # Commande par défaut : lance le scraper
-CMD ["python", "src/scrapers/scraper_flightradar24.py", "1"]
+CMD ["python", "src/scrapers/scraper_flightradar24.py", "3"]
