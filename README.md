@@ -14,34 +14,6 @@ Un système complet de collecte et d'analyse de données de flottes aériennes p
 - **📋 Export multi-format** : CSV, JSON, graphiques PNG
 - **🔄 Données en temps réel** : Mise à jour automatique des informations
 
-## 📁 Structure du projet
-
-`
-skai-scrapping/
-├── src/                          # Code source principal
-│   ├── scrapers/                 # Scripts de scraping
-│   │   └── scraper_flightradar24.py
-│   ├── analyzers/                # Outils d'analyse
-│   │   ├── analyzer_fleet_data.py
-│   │   └── analyse_airlines.py
-│   └── utils/                    # Utilitaires communs
-├── data/                         # Données collectées
-│   ├── raw/                      # Données brutes
-│   │   ├── individual_aircraft.csv
-│   │   └── flightradar24.csv
-│   ├── processed/                # Données traitées
-│   │   ├── fleet_data_complete.json
-│   │   └── fleet_data_detailed.csv
-│   ├── exports/                  # Fichiers d'export
-│   │   ├── individual_aircraft_analysis_summary.csv
-│   │   └── individual_aircraft_detailed_analysis.csv
-│   └── visualizations/           # Graphiques et charts
-│       └── individual_aircraft_analysis_charts.png
-├── docs/                         # Documentation
-├── examples/                     # Exemples d'utilisation
-└── requirements.txt              # Dépendances Python
-`
-
 ## 🛠️ Installation
 
 ### Prérequis

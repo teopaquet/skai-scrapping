@@ -106,7 +106,7 @@ class FlightRadar24Scraper:
                 if strong_tag:
                     total_aircraft = int(strong_tag.text.strip())
             
-            # Extraire les détails de la flotte
+            # Extraire les détails de la flotte avec registrations
             fleet_details = []
             aircraft_list = soup.find('dl', id='list-aircraft')
             
@@ -123,9 +123,43 @@ class FlightRadar24Scraper:
                             
                             try:
                                 count = int(aircraft_count)
+                                
+                                # Récupérer les détails des aircraft individuels
+                                aircraft_details = []
+                                dd = dt.find_next_sibling('dd')
+                                if dd:
+                                    table = dd.find('table')
+                                    if table:
+                                        tbody = table.find('tbody')
+                                        if tbody:
+                                            rows = tbody.find_all('tr')
+                                            for row in rows:
+                                                tds = row.find_all('td')
+                                                if len(tds) >= 2:
+                                                    # Registration - extraire le texte de l'élément <a>
+                                                    reg_cell = tds[0]
+                                                    reg_link = reg_cell.find('a', class_='regLinks')
+                                                    registration = reg_link.text.strip() if reg_link else reg_cell.text.strip()
+                                                    
+                                                    # Aircraft type détaillé - récupérer le type complet
+                                                    detailed_type_cell = tds[1]
+                                                    detailed_type = detailed_type_cell.text.strip() if detailed_type_cell else aircraft_type
+                                                    
+                                                    # Informations supplémentaires si disponibles
+                                                    serial_number = tds[2].text.strip() if len(tds) > 2 else 'N/A'
+                                                    age = tds[3].text.strip() if len(tds) > 3 else 'N/A'
+                                                    
+                                                    aircraft_details.append({
+                                                        'registration': registration,
+                                                        'detailed_type': detailed_type,
+                                                        'serial_number': serial_number,
+                                                        'age': age
+                                                    })
+                                
                                 fleet_details.append({
                                     'type': aircraft_type,
-                                    'count': count
+                                    'count': count,
+                                    'aircraft_details': aircraft_details
                                 })
                             except ValueError:
                                 continue
@@ -160,36 +194,52 @@ class FlightRadar24Scraper:
             }
 
     def scrape_all_airlines(self, csv_file, max_airlines=None, delay_range=(1, 3)):
-        """Scrape toutes les compagnies aériennes"""
+        """Scrape toutes les compagnies aériennes avec retry et sauvegarde intermédiaire"""
         airline_codes = self.extract_airline_codes_from_csv(csv_file)
-        
         if not airline_codes:
             print("Aucun code de compagnie trouvé")
             return []
-        
         # Limiter le nombre de compagnies si spécifié
         if max_airlines:
             airline_codes = airline_codes[:max_airlines]
             print(f"Limitation à {max_airlines} compagnies pour test")
-        
         results = []
         total = len(airline_codes)
-        
+        # Pour la sauvegarde intermédiaire
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        project_root = os.path.dirname(os.path.dirname(script_dir))
+        processed_dir = os.path.join(project_root, "data", "processed")
+        os.makedirs(processed_dir, exist_ok=True)
         for i, airline in enumerate(airline_codes, 1):
             print(f"Progression: {i}/{total}")
-            
-            result = self.scrape_fleet_data(airline['code'], airline['name'])
+            # Retry automatique sur blocage réseau
+            max_retries = 5
+            retry_wait = 30  # secondes (attente initiale)
+            for attempt in range(1, max_retries + 1):
+                result = self.scrape_fleet_data(airline['code'], airline['name'])
+                if result.get('status') == 'success':
+                    break
+                else:
+                    print(f"[RETRY] Tentative {attempt}/{max_retries} pour {airline['name']} après blocage/erreur...")
+                    if attempt < max_retries:
+                        wait_time = retry_wait * attempt
+                        print(f"Attente de {wait_time} secondes avant retry...")
+                        time.sleep(wait_time)
             result['original_sigle'] = airline['sigle']
             result['original_aircraft_info'] = airline['aircraft_info']
-            
             results.append(result)
-            
+            # Sauvegarde intermédiaire toutes les 100 compagnies
+            if i % 100 == 0 or i == total:
+                temp_json = os.path.join(processed_dir, f'fleet_data_partial_{i}.json')
+                temp_csv = os.path.join(processed_dir, f'fleet_data_partial_{i}.csv')
+                print(f"Sauvegarde intermédiaire après {i} compagnies...")
+                self.save_results(results, temp_json)
+                self.save_results_csv(results, temp_csv)
             # Délai aléatoire entre les requêtes
             if i < total:
                 delay = random.uniform(delay_range[0], delay_range[1])
                 print(f"Attente de {delay:.1f}s...")
                 time.sleep(delay)
-        
         return results
 
     def save_results(self, results, filename='fleet_data.json'):
@@ -202,21 +252,41 @@ class FlightRadar24Scraper:
             print(f"Erreur lors de la sauvegarde: {e}")
 
     def save_results_csv(self, results, filename='fleet_data.csv'):
-        """Sauvegarde les résultats en CSV détaillé"""
+        """Sauvegarde les résultats en CSV détaillé avec registrations"""
         try:
             rows = []
             for airline in results:
                 if airline['fleet_details']:
                     for aircraft in airline['fleet_details']:
-                        rows.append({
-                            'airline_code': airline['code'],
-                            'airline_name': airline['name'],
-                            'sigle': airline['original_sigle'],
-                            'aircraft_type': aircraft['type'],
-                            'aircraft_count': aircraft['count'],
-                            'total_fleet_size': airline['total_aircraft'],
-                            'status': airline['status']
-                        })
+                        # Si on a des détails individuels d'aircraft
+                        if aircraft.get('aircraft_details'):
+                            for detail in aircraft['aircraft_details']:
+                                rows.append({
+                                    'airline_code': airline['code'],
+                                    'airline_name': airline['name'],
+                                    'sigle': airline['original_sigle'],
+                                    'aircraft_type': aircraft['type'],
+                                    'registration': detail['registration'],
+                                    'detailed_aircraft_type': detail['detailed_type'],
+                                    'serial_number': detail.get('serial_number', 'N/A'),
+                                    'age': detail.get('age', 'N/A'),
+                                    'total_fleet_size': airline['total_aircraft'],
+                                    'status': airline['status']
+                                })
+                        else:
+                            # Fallback pour les anciens formats
+                            rows.append({
+                                'airline_code': airline['code'],
+                                'airline_name': airline['name'],
+                                'sigle': airline['original_sigle'],
+                                'aircraft_type': aircraft['type'],
+                                'registration': 'N/A',
+                                'detailed_aircraft_type': aircraft['type'],
+                                'serial_number': 'N/A',
+                                'age': 'N/A',
+                                'total_fleet_size': airline['total_aircraft'],
+                                'status': airline['status']
+                            })
                 else:
                     # Compagnie sans détails de flotte
                     rows.append({
@@ -224,7 +294,10 @@ class FlightRadar24Scraper:
                         'airline_name': airline['name'],
                         'sigle': airline['original_sigle'],
                         'aircraft_type': 'N/A',
-                        'aircraft_count': 0,
+                        'registration': 'N/A',
+                        'detailed_aircraft_type': 'N/A',
+                        'serial_number': 'N/A',
+                        'age': 'N/A',
                         'total_fleet_size': airline['total_aircraft'],
                         'status': airline['status']
                     })
@@ -244,20 +317,6 @@ class FlightRadar24Scraper:
         
         total_aircraft_scraped = sum(r['total_aircraft'] for r in results if r['status'] == 'success')
         
-        # Types d'aircraft les plus communs
-        aircraft_types = {}
-        for airline in results:
-            if airline['status'] == 'success':
-                for aircraft in airline['fleet_details']:
-                    aircraft_type = aircraft['type']
-                    if aircraft_type in aircraft_types:
-                        aircraft_types[aircraft_type] += aircraft['count']
-                    else:
-                        aircraft_types[aircraft_type] = aircraft['count']
-        
-        # Top 10 des types d'aircraft
-        top_aircraft = sorted(aircraft_types.items(), key=lambda x: x[1], reverse=True)[:10]
-        
         print("\n" + "="*80)
         print("RÉSUMÉ DU SCRAPING FLIGHTRADAR24")
         print("="*80)
@@ -265,12 +324,6 @@ class FlightRadar24Scraper:
         print(f"Scraping réussi: {successful_scrapes}")
         print(f"Scraping échoué: {failed_scrapes}")
         print(f"Total aircraft scrapés: {total_aircraft_scraped}")
-        
-        if top_aircraft:
-            print(f"\nTop 10 des types d'aircraft:")
-            for aircraft_type, count in top_aircraft:
-                print(f"  {aircraft_type}: {count} aircraft")
-        
         print("="*80)
 
 def main():
