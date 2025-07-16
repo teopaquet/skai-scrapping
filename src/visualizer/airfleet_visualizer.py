@@ -4,7 +4,7 @@ import pandas as pd
 st.set_page_config(page_title="Visualisation Flotte Aérienne", layout="wide")
 st.title("Visualisation du CSV - Flotte Aérienne")
 
-csv_path = '../../data/processed/fleet_data_2800.csv'
+csv_path = 'data/processed/fleet_data_2800.csv'
 
 def load_data(path):
     try:
