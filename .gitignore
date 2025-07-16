@@ -25,7 +25,6 @@ env.bak/
 node_modules/
 # Data and export folders
 data/exports/
-data/raw/
 # Notebooks
 *.ipynb_checkpoints/
 *.ipynb

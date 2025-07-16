@@ -1,8 +1,13 @@
+import os
 import pandas as pd
 
 # Charger le CSV
 input_path = 'data/processed/fleet_data_2800.csv'
 output_path = 'data/processed/fleet_data_2800_clean.csv'
+
+if not os.path.exists(input_path):
+    print(f"File not found: {input_path}")
+    exit(1)
 
 df = pd.read_csv(input_path)
 
