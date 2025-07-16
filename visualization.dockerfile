@@ -6,7 +6,8 @@ WORKDIR /app
 
 # Copier le code source
 COPY src/visualizer/airfleet_visualizer.py ./
-COPY data/processed/fleet_data_2800.csv ./data/processed/fleet_data_2800.csv
+RUN mkdir -p data/processed
+COPY data/processed/fleet_data_2800.csv data/processed/fleet_data_2800.csv
 
 # Installer les dépendances
 RUN pip install --no-cache-dir streamlit pandas
