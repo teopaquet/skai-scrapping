@@ -59,7 +59,7 @@ jobs:
             --cpu=1
             --min-instances=0
             --max-instances=2
-            --port=8000
+            --port=8501
           env_vars: |
             ENVIRONMENT=staging
-            PORT=8000
+            PORT=8501
