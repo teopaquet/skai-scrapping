@@ -55,11 +55,6 @@ jobs:
           image: gcr.io/${{ env.GCP_PROJECT_ID }}/${{ env.DOCKER_IMAGE_NAME }}:${{ github.sha }}
           region: ${{ env.REGION }}
           flags: >
-            --memory=512Mi
-            --cpu=1
-            --min-instances=0
-            --max-instances=2
             --port=8501
           env_vars: |
             ENVIRONMENT=staging
-            PORT=8501
