@@ -15,6 +15,9 @@ def load_data(path):
         return None
 
 df = load_data(csv_path)
+if df is not None:
+    # Supprimer les colonnes inutiles
+    df = df.drop(columns=[col for col in ['airline_code', 'status'] if col in df.columns])
 
 if df is not None:
     st.success(f"Données chargées: {len(df)} lignes")
