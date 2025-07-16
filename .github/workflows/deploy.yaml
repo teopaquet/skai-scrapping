@@ -41,8 +41,6 @@ jobs:
       - name: Build and Push Docker image
         run: |
           docker build . \
-            --cache-from=type=gha \
-            --cache-to=type=gha,mode=max \ 
             -f visualization.dockerfile \
             -t gcr.io/${{ env.GCP_PROJECT_ID }}/${{ env.DOCKER_IMAGE_NAME }}:${{ github.sha }} \
             -t gcr.io/${{ env.GCP_PROJECT_ID }}/${{ env.DOCKER_IMAGE_NAME }}:latest
