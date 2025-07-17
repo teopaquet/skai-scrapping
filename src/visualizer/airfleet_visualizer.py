@@ -48,54 +48,72 @@ with tab2:
     if linkedin_df is not None:
         st.success(f"Données LinkedIn chargées: {len(linkedin_df)} lignes")
 
-        # Rendre la colonne linkedin_url cliquable (HTML)
-        def make_clickable(url):
-            if pd.notna(url):
-                return f'<a href="{url}" target="_blank">{url}</a>'
-            else:
-                return ""
-        if 'linkedin_url' in linkedin_df.columns:
-            linkedin_df['linkedin_url'] = linkedin_df['linkedin_url'].apply(make_clickable)
-
         st.markdown("---")
         st.subheader("Filtrer les colonnes LinkedIn")
         columns_options = list(linkedin_df.columns)
         default_columns = [col for col in linkedin_df.columns]
-        linkedin_columns = st.multiselect("Sélectionnez les colonnes à afficher (LinkedIn)", options=columns_options, default=default_columns, key="columns_linkedin")
+        linkedin_columns = st.multiselect(
+            "Sélectionnez les colonnes à afficher (LinkedIn)",
+            options=columns_options,
+            default=default_columns,
+            key="columns_linkedin"
+        )
 
-        # Affichage avec liens cliquables si linkedin_url est sélectionné
-        if 'linkedin_url' in linkedin_columns:
-            # CSS pour aligner à gauche l'en-tête et le contenu des colonnes linkedin_url et description
-            style = """
-                <style>
-                th.col0, td.col0 { text-align: left !important; }
-                th, td { text-align: left !important; }
-                </style>
-            """
-            # Générer le HTML du DataFrame
-            html_table = linkedin_df[linkedin_columns].to_html(escape=False, index=False)
-            # Si description est dans les colonnes, forcer aussi l'alignement à gauche
-            st.markdown(style, unsafe_allow_html=True)
-            st.write(html_table, unsafe_allow_html=True)
-        else:
-            st.dataframe(linkedin_df[linkedin_columns], use_container_width=True)
+        # Filtrage par valeur sur chaque colonne sélectionnée
+        filter_dict = {}
+        for col in linkedin_columns:
+            if pd.api.types.is_numeric_dtype(linkedin_df[col]):
+                min_val, max_val = float(linkedin_df[col].min()), float(linkedin_df[col].max())
+                filter_dict[col] = st.slider(f"Filtrer {col}", min_val, max_val, (min_val, max_val), key=f"slider_{col}")
+            else:
+                unique_vals = linkedin_df[col].dropna().unique()
+                if len(unique_vals) < 50:
+                    selected_vals = st.multiselect(f"Filtrer {col}", options=sorted(unique_vals), default=list(unique_vals), key=f"filter_{col}")
+                    filter_dict[col] = selected_vals
+
+        filtered_df = linkedin_df.copy()
+        for col, filt in filter_dict.items():
+            if pd.api.types.is_numeric_dtype(filtered_df[col]):
+                filtered_df = filtered_df[(filtered_df[col] >= filt[0]) & (filtered_df[col] <= filt[1])]
+            else:
+                filtered_df = filtered_df[filtered_df[col].isin(filt)]
+
+        # Tri des colonnes
+        sort_col = st.selectbox("Trier par colonne", options=linkedin_columns, key="sort_col_linkedin")
+        sort_order = st.radio("Ordre de tri", options=["Croissant", "Décroissant"], horizontal=True, key="sort_order_linkedin")
+        ascending = sort_order == "Croissant"
+        filtered_df = filtered_df.sort_values(by=sort_col, ascending=ascending)
+
+        # Édition du DataFrame (ajout/suppression/édition)
+        st.markdown("#### Modifier ou ajouter des liens LinkedIn")
+        edited_df = st.data_editor(
+            filtered_df[linkedin_columns],
+            num_rows="dynamic",
+            use_container_width=True,
+            key="linkedin_editor"
+        )
+
+        # Sauvegarde si modifié
+        if st.button("Enregistrer les modifications"):
+            try:
+                # On sauvegarde tout le DataFrame édité (tu peux adapter pour ne sauvegarder que la colonne linkedin_url si besoin)
+                edited_df.to_csv(linkedin_csv_path, index=False)
+                st.success("Modifications enregistrées avec succès !")
+            except Exception as e:
+                st.error(f"Erreur lors de la sauvegarde : {e}")
 
         st.markdown("---")
         st.subheader("Recherche par compagnie LinkedIn")
-        linkedin_airline = st.selectbox("Compagnie:", options=["Toutes"] + sorted(linkedin_df['company_name'].dropna().unique()), key="airline_linkedin")
-        if linkedin_airline != "Toutes":
-            filtered = linkedin_df[linkedin_df['company_name'] == linkedin_airline][linkedin_columns]
-            if 'linkedin_url' in linkedin_columns:
-                style = """
-                    <style>
-                    th.col0, td.col0 { text-align: left !important; }
-                    th, td { text-align: left !important; }
-                    </style>
-                """
-                html_table = filtered.to_html(escape=False, index=False)
-                st.markdown(style, unsafe_allow_html=True)
-                st.write(html_table, unsafe_allow_html=True)
-            else:
+        if 'company_name' in edited_df.columns:
+            linkedin_airline = st.selectbox(
+                "Compagnie:",
+                options=["Toutes"] + sorted(edited_df['company_name'].dropna().unique()),
+                key="airline_linkedin"
+            )
+            if linkedin_airline != "Toutes":
+                filtered = edited_df[edited_df['company_name'] == linkedin_airline][linkedin_columns]
                 st.dataframe(filtered, use_container_width=True)
+        else:
+            st.info("Colonne 'company_name' absente des données.")
     else:
         st.error("Impossible de charger le fichier LinkedIn + Fleet.")
