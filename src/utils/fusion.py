@@ -1,44 +1,57 @@
+
+def normalize(s):
+    if pd.isna(s):
+        return ''
+    s = str(s).strip().lower()
+    # Supprimer les accents
+    s = ''.join(c for c in unicodedata.normalize('NFD', s) if unicodedata.category(c) != 'Mn')
+    # Supprimer caractères spéciaux sauf lettres, chiffres et espaces
+    s = re.sub(r'[^a-z0-9 ]', '', s)
+    # Remplacer espaces multiples par un seul
+    s = re.sub(r'\s+', ' ', s)
+    return s.strip()
+
 import pandas as pd
 import os
+import unicodedata
+import re
 
 # Chemins absolus depuis ce script
 base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../data/raw'))
 linkedin_path = os.path.join(base_dir, 'linkedin_list', 'linkedin_list_merged.csv')
-aircraft_path = os.path.join(base_dir, 'individual_aircraft.csv')
+fleet_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../data/processed/fleet_size_by_company.csv'))
 output_path = os.path.join(base_dir, 'linkedin_list', 'linkedin_list_merged_with_fleet.csv')
 
-
-# Vérifier l'existence des fichiers et afficher les chemins
-print(f"Chemin linkedin : {linkedin_path}")
-print(f"Chemin aircraft : {aircraft_path}")
-if not os.path.exists(linkedin_path):
-    raise FileNotFoundError(f"Fichier introuvable : {linkedin_path}")
-if not os.path.exists(aircraft_path):
-    raise FileNotFoundError(f"Fichier introuvable : {aircraft_path}")
-
+# Charger les données
 linkedin_df = pd.read_csv(linkedin_path)
-aircraft_df = pd.read_csv(aircraft_path)
+fleet_df = pd.read_csv(fleet_path)
 
-
-# Normaliser les noms pour le matching
+# Fonction de normalisation
 def normalize(s):
     if pd.isna(s):
         return ''
-    return str(s).strip().lower()
+    s = str(s).strip().lower()
+    s = ''.join(c for c in unicodedata.normalize('NFD', s) if unicodedata.category(c) != 'Mn')
+    s = re.sub(r'[^a-z0-9 ]', '', s)
+    s = re.sub(r'\s+', ' ', s)
+    return s.strip()
 
-aircraft_df['airline_name_norm'] = aircraft_df['airline_name'].apply(normalize)
+# Ajouter la colonne normalisée pour le merge
 linkedin_df['company_name_norm'] = linkedin_df['company_name'].apply(normalize)
 
-# Dictionnaire sur noms normalisés
-fleet_by_company = aircraft_df.groupby('airline_name_norm')['total_fleet_size'].max().to_dict()
-linkedin_df['fleet_size'] = linkedin_df['company_name_norm'].map(fleet_by_company)
 
-# Afficher quelques exemples de compagnies sans fleet_size
-no_fleet = linkedin_df[linkedin_df['fleet_size'].isna()]['company_name'].drop_duplicates().head(10)
-print("Exemples de compagnies sans fleet_size :")
-print(no_fleet.to_list())
+# Fusionner sur le nom normalisé
+merged = pd.merge(linkedin_df, fleet_df, left_on='company_name_norm', right_on='airline_name_norm', how='left')
+
+
+# Nettoyer le résultat (on garde les colonnes linkedin + fleet_size)
+cols = [col for col in linkedin_df.columns if col != 'company_name_norm'] + ['fleet_size']
+merged = merged[cols]
+
+# Convertir fleet_size en int (mettre 0 si NaN)
+merged['fleet_size'] = merged['fleet_size'].fillna(0).astype(int)
 
 # Exporter le résultat
-linkedin_df.to_csv(output_path, index=False)
+merged.to_csv(output_path, index=False)
 print(f"Fichier créé : {output_path}")
-print(f"Nombre de compagnies avec fleet_size renseigné : {linkedin_df['fleet_size'].notna().sum()}")
+print(f"Nombre de compagnies avec fleet_size renseigné : {merged['fleet_size'].notna().sum()}")
