@@ -4,10 +4,16 @@ FROM python:3.11-slim
 # Définir le répertoire de travail
 WORKDIR /app
 
+
 # Copier le code source
 COPY src/visualizer/airfleet_visualizer.py ./
-RUN mkdir -p data/processed
+
+# Créer les dossiers nécessaires
+RUN mkdir -p data/processed && mkdir -p data/raw/linkedin_list
+
+# Copier les CSVs nécessaires
 COPY data/processed/fleet_data_2800.csv data/processed/fleet_data_2800.csv
+COPY data/raw/linkedin_list/linkedin_list_merged_with_fleet.csv data/raw/linkedin_list/linkedin_list_merged_with_fleet.csv
 
 # Installer les dépendances
 RUN pip install --no-cache-dir streamlit pandas
