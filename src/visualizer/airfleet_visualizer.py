@@ -65,7 +65,18 @@ with tab2:
 
         # Affichage avec liens cliquables si linkedin_url est sélectionné
         if 'linkedin_url' in linkedin_columns:
-            st.write(linkedin_df[linkedin_columns].to_html(escape=False, index=False), unsafe_allow_html=True)
+            # CSS pour aligner à gauche l'en-tête et le contenu des colonnes linkedin_url et description
+            style = """
+                <style>
+                th.col0, td.col0 { text-align: left !important; }
+                th, td { text-align: left !important; }
+                </style>
+            """
+            # Générer le HTML du DataFrame
+            html_table = linkedin_df[linkedin_columns].to_html(escape=False, index=False)
+            # Si description est dans les colonnes, forcer aussi l'alignement à gauche
+            st.markdown(style, unsafe_allow_html=True)
+            st.write(html_table, unsafe_allow_html=True)
         else:
             st.dataframe(linkedin_df[linkedin_columns], use_container_width=True)
 
@@ -75,7 +86,15 @@ with tab2:
         if linkedin_airline != "Toutes":
             filtered = linkedin_df[linkedin_df['company_name'] == linkedin_airline][linkedin_columns]
             if 'linkedin_url' in linkedin_columns:
-                st.write(filtered.to_html(escape=False, index=False), unsafe_allow_html=True)
+                style = """
+                    <style>
+                    th.col0, td.col0 { text-align: left !important; }
+                    th, td { text-align: left !important; }
+                    </style>
+                """
+                html_table = filtered.to_html(escape=False, index=False)
+                st.markdown(style, unsafe_allow_html=True)
+                st.write(html_table, unsafe_allow_html=True)
             else:
                 st.dataframe(filtered, use_container_width=True)
     else:
