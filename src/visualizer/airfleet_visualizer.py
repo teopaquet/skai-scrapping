@@ -2,9 +2,13 @@ import streamlit as st
 import pandas as pd
 
 st.set_page_config(page_title="Visualisation Flotte Aérienne", layout="wide")
-st.title("Visualisation du CSV - Flotte Aérienne")
 
+st.title("Visualisation des Données Aériennes")
+
+
+# Chemins des CSVs
 csv_path = 'data/processed/fleet_data_2800.csv'
+linkedin_csv_path = 'data/raw/linkedin_list/linkedin_list_merged_with_fleet.csv'
 
 def load_data(path):
     try:
@@ -14,22 +18,44 @@ def load_data(path):
         st.error(f"Erreur lors du chargement du CSV: {e}")
         return None
 
-df = load_data(csv_path)
-if df is not None:
-    # Supprimer les colonnes inutiles
-    df = df.drop(columns=[col for col in ['airline_code', 'status'] if col in df.columns])
 
-if df is not None:
-    st.success(f"Données chargées: {len(df)} lignes")
-    st.dataframe(df, use_container_width=True)
-    st.markdown("---")
-    st.subheader("Filtrer les colonnes")
-    columns = st.multiselect("Sélectionnez les colonnes à afficher", options=list(df.columns), default=list(df.columns))
-    st.dataframe(df[columns], use_container_width=True)
-    st.markdown("---")
-    st.subheader("Recherche par compagnie")
-    airline = st.selectbox("Compagnie:", options=["Toutes"] + sorted(df['airline_name'].unique()))
-    if airline != "Toutes":
-        st.dataframe(df[df['airline_name'] == airline][columns], use_container_width=True)
-else:
-    st.error("Impossible de charger le fichier CSV.")
+
+# --- Navigation par onglets ---
+tab1, tab2 = st.tabs(["Flotte Aérienne", "LinkedIn + Fleet Size"])
+
+with tab1:
+    df = load_data(csv_path)
+    if df is not None:
+        # Supprimer les colonnes inutiles
+        df = df.drop(columns=[col for col in ['airline_code', 'status'] if col in df.columns])
+
+        st.success(f"Données chargées: {len(df)} lignes")
+        st.dataframe(df, use_container_width=True)
+        st.markdown("---")
+        st.subheader("Filtrer les colonnes")
+        columns = st.multiselect("Sélectionnez les colonnes à afficher", options=list(df.columns), default=list(df.columns), key="columns_fleet")
+        st.dataframe(df[columns], use_container_width=True)
+        st.markdown("---")
+        st.subheader("Recherche par compagnie")
+        airline = st.selectbox("Compagnie:", options=["Toutes"] + sorted(df['airline_name'].unique()), key="airline_fleet")
+        if airline != "Toutes":
+            st.dataframe(df[df['airline_name'] == airline][columns], use_container_width=True)
+    else:
+        st.error("Impossible de charger le fichier CSV flotte aérienne.")
+
+with tab2:
+    linkedin_df = load_data(linkedin_csv_path)
+    if linkedin_df is not None:
+        st.success(f"Données LinkedIn chargées: {len(linkedin_df)} lignes")
+        st.dataframe(linkedin_df, use_container_width=True)
+        st.markdown("---")
+        st.subheader("Filtrer les colonnes LinkedIn")
+        linkedin_columns = st.multiselect("Sélectionnez les colonnes à afficher (LinkedIn)", options=list(linkedin_df.columns), default=list(linkedin_df.columns), key="columns_linkedin")
+        st.dataframe(linkedin_df[linkedin_columns], use_container_width=True)
+        st.markdown("---")
+        st.subheader("Recherche par compagnie LinkedIn")
+        linkedin_airline = st.selectbox("Compagnie:", options=["Toutes"] + sorted(linkedin_df['company_name'].dropna().unique()), key="airline_linkedin")
+        if linkedin_airline != "Toutes":
+            st.dataframe(linkedin_df[linkedin_df['company_name'] == linkedin_airline][linkedin_columns], use_container_width=True)
+    else:
+        st.error("Impossible de charger le fichier LinkedIn + Fleet.")
