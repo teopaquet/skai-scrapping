@@ -62,7 +62,12 @@ with tab2:
         # Filtrage par valeur sur chaque colonne sélectionnée
         filter_dict = {}
         for col in linkedin_columns:
-            if pd.api.types.is_numeric_dtype(linkedin_df[col]):
+            if col == "fleet_size" and pd.api.types.is_numeric_dtype(linkedin_df[col]):
+                min_val, max_val = float(linkedin_df[col].min()), float(linkedin_df[col].max())
+                min_input = st.number_input(f"Valeur minimale pour {col}", min_value=min_val, max_value=max_val, value=min_val, key=f"min_{col}")
+                max_input = st.number_input(f"Valeur maximale pour {col}", min_value=min_val, max_value=max_val, value=max_val, key=f"max_{col}")
+                filter_dict[col] = (min_input, max_input)
+            elif pd.api.types.is_numeric_dtype(linkedin_df[col]):
                 min_val, max_val = float(linkedin_df[col].min()), float(linkedin_df[col].max())
                 filter_dict[col] = st.slider(f"Filtrer {col}", min_val, max_val, (min_val, max_val), key=f"slider_{col}")
             else:
@@ -73,7 +78,9 @@ with tab2:
 
         filtered_df = linkedin_df.copy()
         for col, filt in filter_dict.items():
-            if pd.api.types.is_numeric_dtype(filtered_df[col]):
+            if col == "fleet_size" and pd.api.types.is_numeric_dtype(filtered_df[col]):
+                filtered_df = filtered_df[(filtered_df[col] >= filt[0]) & (filtered_df[col] <= filt[1])]
+            elif pd.api.types.is_numeric_dtype(filtered_df[col]):
                 filtered_df = filtered_df[(filtered_df[col] >= filt[0]) & (filtered_df[col] <= filt[1])]
             else:
                 filtered_df = filtered_df[filtered_df[col].isin(filt)]
