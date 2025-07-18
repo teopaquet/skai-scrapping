@@ -100,11 +100,20 @@ with tab2:
             key="linkedin_editor"
         )
 
-        # Sauvegarde si modifié
+        # Sauvegarde intelligente : on fusionne les modifications dans le DataFrame d'origine
         if st.button("Enregistrer les modifications"):
             try:
-                # On sauvegarde tout le DataFrame édité (tu peux adapter pour ne sauvegarder que la colonne linkedin_url si besoin)
-                edited_df.to_csv(linkedin_csv_path, index=False)
+                # On met à jour linkedin_df avec les valeurs éditées (en se basant sur l'index d'origine)
+                for idx, row in edited_df.iterrows():
+                    # On retrouve l'index d'origine dans linkedin_df (par exemple via company_name + linkedin_url)
+                    mask = (
+                        (linkedin_df['company_name'] == row.get('company_name')) &
+                        (linkedin_df['linkedin_url'] == row.get('linkedin_url'))
+                    )
+                    if mask.any():
+                        for col in linkedin_columns:
+                            linkedin_df.loc[mask, col] = row[col]
+                linkedin_df.to_csv(linkedin_csv_path, index=False)
                 st.success("Modifications enregistrées avec succès !")
             except Exception as e:
                 st.error(f"Erreur lors de la sauvegarde : {e}")
