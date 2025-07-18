@@ -9,6 +9,7 @@ import {
   useNotificationProvider,
 } from "@refinedev/mui";
 
+import { Home } from "./pages/home";
 import CssBaseline from "@mui/material/CssBaseline";
 import GlobalStyles from "@mui/material/GlobalStyles";
 import routerBindings, {
@@ -25,19 +26,22 @@ import { ColorModeContextProvider } from "./contexts/color-mode";
 import { ForgotPassword } from "./pages/forgotPassword";
 import Login  from "./pages/Login";
 import { Register } from "./pages/register";
+import { LinkedinList } from "./pages/linkedin/list";
+// import { LinkedinCreate } from "./pages/linkedin/create";
+// import { LinkedinEdit } from "./pages/linkedin/edit";
+// import { LinkedinShow } from "./pages/linkedin/show";
+// Idem pour Fleet si les composants existent
+// import { FleetList } from "./pages/fleet/list";
+// import { FleetCreate } from "./pages/fleet/create";
+// import { FleetEdit } from "./pages/fleet/edit";
+// import { FleetShow } from "./pages/fleet/show";
 import Typography from "@mui/material/Typography";
 import React, { useState } from "react";
 import { DrawerProvider } from "./contexts/drawer-context";
-import SettingsIcon from "@mui/icons-material/Settings";
 import PeopleIcon from "@mui/icons-material/People";
 import HomeIcon from "@mui/icons-material/Home";
-import FlightTakeoffIcon from "@mui/icons-material/FlightTakeoff";
-import ConnectingAirportsIcon from '@mui/icons-material/ConnectingAirports';
-import AirplanemodeActiveIcon from '@mui/icons-material/AirplanemodeActive';
-import FlightClassIcon from '@mui/icons-material/FlightClass';
 import LocalAirportIcon from "@mui/icons-material/LocalAirport";
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import LeaderboardIcon from '@mui/icons-material/Leaderboard';
+
 
 function App() {
   const [drawerOpen] = useState(true); // État pour la barre latérale
@@ -66,133 +70,28 @@ function App() {
                       },
                     },
                     {
-                      name: "users",
-                      list: "/user",
-                      create: "/user/create",
-                      edit: "/user/edit/:id",
-                      show: "/user/show/:id",
+                      name: "Linkedin",
+                      list: "/linkedin",
+                      create: "/linkedin/create",
+                      edit: "/linkedin/edit/:id",
+                      show: "/linkedin/show/:id",
                       meta: {
                         canDelete: true,
                         icon: <PeopleIcon />
                       },
                     },
                     {
-                      name: "airline",
-                      list: "/airline",
-                      create: "/airline/create",
-                      edit: "/airline/edit/:id",
-                      show: "/airline/show/:id",
+                      name: "Fleet",
+                      list: "/fleet",
+                      create: "/fleet/create",
+                      edit: "/fleet/edit/:id",
+                      show: "/fleet/show/:id",
                       meta: {
-                        label: "Airline",
+                        label: "Fleet",
                         icon: <LocalAirportIcon />,
                       },
                     },
-                    {
-                      name: "configuration",
-                      meta: {
-                        label: "Configuration",
-                        icon: <SettingsIcon />,
-                      },
-                    },
-                    {
-                      name: "activity-type",
-                      list: "/activity-type",
-                      create: "/activity-type/create",
-                      edit: "/activity-type/edit/:id",
-                      show: "/activity-type/show/:id",
-                      meta: {
-                        parent: "configuration",
-                        label: "Activity Types",
-                        icon: <FlightClassIcon />,
-                      },
-                    },
-                    {
-                      name: "aircraft-type",
-                      list: "/aircraft-type",
-                      create: "/aircraft-type/create",
-                      edit: "/aircraft-type/edit/:id",
-                      show: "/aircraft-type/show/:id",
-                      meta: {
-                        parent: "configuration",
-                        label: "Aircraft Types",
-                        icon: <AirplanemodeActiveIcon />,
-                      },
-                    },
-                    {
-                      name: "flight-type",
-                      list: "/flight-type",
-                      create: "/flight-type/create",
-                      edit: "/flight-type/edit/:id",
-                      show: "/flight-type/show/:id",
-                      meta: {
-                        parent: "configuration",
-                        label: "Flight Types",
-                        icon: <FlightTakeoffIcon />,
-                      },
-                    },
-                    {
-                      name: "pairing-type",
-                      list: "/pairing-type",
-                      create: "/pairing-type/create",
-                      edit: "/pairing-type/edit/:id",
-                      show: "/pairing-type/show/:id",
-                      meta: {
-                        parent: "configuration",
-                        label: "Pairing Types",
-                        icon: <ConnectingAirportsIcon />,
-                      },
-                    },
-                    {
-                      name: "roster-activity-type",
-                      list: "/roster-activity-type",
-                      create: "/roster-activity-type/create",
-                      edit: "/roster-activity-type/edit/:id",
-                      show: "/roster-activity-type/show/:id",
-                      meta: {
-                        parent: "configuration",
-                        label: "Roster Activity Types",
-                        icon: <FlightTakeoffIcon />,
-                      },
-                    },
-                    {
-                      name: "schedule",
-                      list: "/schedule",
-                      meta: {
-                        label: "Schedule",
-                        icon: <CalendarMonthIcon />,
-                        canDelete: false,
-                        canEdit: false,
-                        canCreate: false,
-                      },
-                    },
-                    {
-                      name: "data",
-                      meta: {
-                        label: "Data",
-                        icon: <LeaderboardIcon />,
-                      },
-                    },
-                    {
-                      name: "crew",
-                      list: "/crew",
-                      meta: {
-                        parent: "data",
-                        label: "Crew",
-                        icon: <PeopleIcon />,
-                        filterRequired: true,
-                      },
-                    },
-                    {
-                      name: "flight",
-                      list: "/flight",
-                      show: "/flight/show/:id",
-                      meta: {
-                        parent: "data",
-                        label: "Flight",
-                        icon: <FlightTakeoffIcon />,
-                        filterRequired: true,
-                      },
-                    },
+                    
                   ]}
                   options={{
                     syncWithLocation: true,
@@ -222,7 +121,7 @@ function App() {
                                   overflow: "hidden",
                                 }}
                               >
-                                {drawerOpen ? "Skai Admin" : "SA"}
+                                {drawerOpen ? "Skai Visualizer" : "SV"}
                               </Typography>
                             )}
                           >
@@ -231,17 +130,25 @@ function App() {
                         </Authenticated>
                       }
                     >
+                      <Route path="/" element={<Home />} />
 
+                      {/* Linkedin routes */}
+                      <Route path="/linkedin">
+                        <Route index element={<LinkedinList />} />
+                        {/* <Route path="create" element={<LinkedinCreate />} /> */}
+                        {/* <Route path="edit/:id" element={<LinkedinEdit />} /> */}
+                        {/* <Route path="show/:id" element={<LinkedinShow />} /> */}
+                      </Route>
 
-                      {/* Route pour les utilisateurs */}
-                      {/* <Route path="/user">
-                        <Route index element={<UserList />} /> */}
-                        {/* <Route path="create" element={<UserCreate />} />
-                        <Route path="edit/:id" element={<UserEdit />} /> */}
-                        {/* <Route path="show/:id" element={<UserShow />} /> */}
-                      {/* </Route> */}
-
-                      
+                      {/* Fleet routes (décommentez et créez les composants si besoin) */}
+                      {/*
+                      <Route path="/fleet">
+                        <Route index element={<FleetList />} />
+                        <Route path="create" element={<FleetCreate />} />
+                        <Route path="edit/:id" element={<FleetEdit />} />
+                        <Route path="show/:id" element={<FleetShow />} />
+                      </Route>
+                      */}
 
                       <Route path="*" element={<ErrorComponent />} />
                     </Route>

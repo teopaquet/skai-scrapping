@@ -100,7 +100,14 @@ with tab2:
         ascending = sort_order == "Croissant"
         filtered_df = filtered_df.sort_values(by=sort_col, ascending=ascending)
 
-        # Édition du DataFrame (ajout/suppression/édition)
+
+        # Rendre les liens LinkedIn cliquables
+        display_df = filtered_df[linkedin_columns].copy()
+        if "linkedin_url" in display_df.columns:
+            display_df["linkedin_url"] = display_df["linkedin_url"].apply(
+                lambda url: f'<a href="{url}" target="_blank">{url}</a>' if pd.notnull(url) and str(url).startswith("http") else url
+            )
+
         st.markdown("#### Modifier ou ajouter des liens LinkedIn")
         edited_df = st.data_editor(
             filtered_df[linkedin_columns],
@@ -108,6 +115,10 @@ with tab2:
             use_container_width=True,
             key="linkedin_editor"
         )
+
+        # Affichage des liens LinkedIn cliquables
+        st.markdown("#### Aperçu des liens LinkedIn")
+        st.write(display_df.to_html(escape=False, index=False), unsafe_allow_html=True)
 
         # Sauvegarde intelligente : on fusionne les modifications dans le DataFrame d'origine
         if st.button("Enregistrer les modifications"):
