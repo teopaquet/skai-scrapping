@@ -87,7 +87,7 @@ with tab1:
         # Supprimer les colonnes inutiles
         df = df.drop(columns=[col for col in ['airline_code', 'status'] if col in df.columns])
 
-        st.info(f"<span style='color:#1976d2;font-weight:bold;'>📊 Données chargées: {len(df)} lignes</span>", icon="ℹ️", unsafe_allow_html=True)
+        st.markdown(f"<span style='color:#1976d2;font-weight:bold;'>📊 Données chargées: {len(df)} lignes</span>", unsafe_allow_html=True)
         st.dataframe(df, use_container_width=True, hide_index=True)
         st.markdown("---")
         st.markdown('<div class="blue-subheader">🔎 Filtrer les colonnes</div>', unsafe_allow_html=True)
@@ -104,7 +104,7 @@ with tab1:
 with tab2:
     linkedin_df = load_data(linkedin_csv_path)
     if linkedin_df is not None:
-        st.info(f"<span style='color:#1976d2;font-weight:bold;'>🔗 Données LinkedIn chargées: {len(linkedin_df)} lignes</span>", icon="ℹ️", unsafe_allow_html=True)
+        st.markdown(f"<span style='color:#1976d2;font-weight:bold;'>🔗 Données LinkedIn chargées: {len(linkedin_df)} lignes</span>", unsafe_allow_html=True)
 
         st.markdown("---")
         st.markdown('<div class="blue-subheader">🔎 Filtrer les colonnes LinkedIn</div>', unsafe_allow_html=True)
