@@ -15,8 +15,11 @@ RUN mkdir -p data/processed && mkdir -p data/raw/linkedin_list
 COPY data/processed/fleet_data_2800.csv data/processed/fleet_data_2800.csv
 COPY data/raw/linkedin_list/linkedin_list_merged_with_fleet.csv data/raw/linkedin_list/linkedin_list_merged_with_fleet.csv
 
-# Installer les dépendances
-RUN pip install --no-cache-dir streamlit pandas
+# Copier le requirements.txt
+COPY requirements.txt ./
+
+# Installer toutes les dépendances
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Exposer le port Streamlit
 EXPOSE 8501
