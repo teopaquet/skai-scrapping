@@ -1,67 +1,9 @@
-
 import streamlit as st
 import pandas as pd
-from streamlit_extras.badges import badge
 
+st.set_page_config(page_title="Visualisation Flotte Aérienne", layout="wide")
 
-st.set_page_config(page_title="Visualisation Flotte Aérienne", layout="wide", page_icon="✈️")
-
-st.markdown("""
-<style>
-.stApp {
-    background: #fff !important;
-    color: #111 !important;
-}
-.blue-header {
-    color: #111;
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin-bottom: 0.5em;
-    letter-spacing: 1px;
-}
-.blue-subheader {
-    color: #1a237e;
-    font-size: 1.3rem;
-    font-weight: 600;
-    margin-top: 1em;
-    margin-bottom: 0.5em;
-}
-.stButton>button {
-    background-color: #1a237e;
-    color: white;
-    border-radius: 8px;
-    border: none;
-    font-weight: 600;
-    transition: 0.2s;
-}
-.stButton>button:hover {
-    background-color: #3949ab;
-    color: #fff;
-}
-.stDataFrame {
-    border-radius: 10px;
-    border: 1px solid #1a237e;
-}
-/* Onglets Streamlit */
-div[data-testid="stTabs"] > div > div {
-    background: #1a237e !important;
-    border-radius: 8px 8px 0 0;
-}
-div[data-testid="stTabs"] button {
-    color: #fff !important;
-    background: #1a237e !important;
-    border: none !important;
-    font-weight: 600;
-}
-div[data-testid="stTabs"] button[aria-selected="true"] {
-    background: #3949ab !important;
-    color: #fff !important;
-}
-</style>
-""", unsafe_allow_html=True)
-
-st.markdown('<div class="blue-header">✈️ Visualisation des Données Aériennes</div>', unsafe_allow_html=True)
-badge(type="github", name="teopaquet/skai-scrapping")
+st.title("Visualisation des Données Aériennes")
 
 
 # Chemins des CSVs
@@ -87,27 +29,27 @@ with tab1:
         # Supprimer les colonnes inutiles
         df = df.drop(columns=[col for col in ['airline_code', 'status'] if col in df.columns])
 
-        st.markdown(f"<span style='color:#1976d2;font-weight:bold;'>📊 Données chargées: {len(df)} lignes</span>", unsafe_allow_html=True)
-        st.dataframe(df, use_container_width=True, hide_index=True)
+        st.success(f"Données chargées: {len(df)} lignes")
+        st.dataframe(df, use_container_width=True)
         st.markdown("---")
-        st.markdown('<div class="blue-subheader">🔎 Filtrer les colonnes</div>', unsafe_allow_html=True)
+        st.subheader("Filtrer les colonnes")
         columns = st.multiselect("Sélectionnez les colonnes à afficher", options=list(df.columns), default=list(df.columns), key="columns_fleet")
-        st.dataframe(df[columns], use_container_width=True, hide_index=True)
+        st.dataframe(df[columns], use_container_width=True)
         st.markdown("---")
-        st.markdown('<div class="blue-subheader">🏢 Recherche par compagnie</div>', unsafe_allow_html=True)
+        st.subheader("Recherche par compagnie")
         airline = st.selectbox("Compagnie:", options=["Toutes"] + sorted(df['airline_name'].unique()), key="airline_fleet")
         if airline != "Toutes":
-            st.dataframe(df[df['airline_name'] == airline][columns], use_container_width=True, hide_index=True)
+            st.dataframe(df[df['airline_name'] == airline][columns], use_container_width=True)
     else:
         st.error("Impossible de charger le fichier CSV flotte aérienne.")
 
 with tab2:
     linkedin_df = load_data(linkedin_csv_path)
     if linkedin_df is not None:
-        st.markdown(f"<span style='color:#1976d2;font-weight:bold;'>🔗 Données LinkedIn chargées: {len(linkedin_df)} lignes</span>", unsafe_allow_html=True)
+        st.success(f"Données LinkedIn chargées: {len(linkedin_df)} lignes")
 
         st.markdown("---")
-        st.markdown('<div class="blue-subheader">🔎 Filtrer les colonnes LinkedIn</div>', unsafe_allow_html=True)
+        st.subheader("Filtrer les colonnes LinkedIn")
         columns_options = list(linkedin_df.columns)
         default_columns = [col for col in linkedin_df.columns]
         linkedin_columns = st.multiselect(
@@ -144,14 +86,13 @@ with tab2:
                 filtered_df = filtered_df[filtered_df[col].isin(filt)]
 
         # Tri des colonnes
-        st.markdown('<div class="blue-subheader">↕️ Tri des colonnes</div>', unsafe_allow_html=True)
         sort_col = st.selectbox("Trier par colonne", options=linkedin_columns, key="sort_col_linkedin")
         sort_order = st.radio("Ordre de tri", options=["Croissant", "Décroissant"], horizontal=True, key="sort_order_linkedin")
         ascending = sort_order == "Croissant"
         filtered_df = filtered_df.sort_values(by=sort_col, ascending=ascending)
 
         # Édition du DataFrame (ajout/suppression/édition)
-        st.markdown('<div class="blue-subheader">✏️ Modifier ou ajouter des liens LinkedIn</div>', unsafe_allow_html=True)
+        st.markdown("#### Modifier ou ajouter des liens LinkedIn")
         edited_df = st.data_editor(
             filtered_df[linkedin_columns],
             num_rows="dynamic",
@@ -160,16 +101,16 @@ with tab2:
         )
 
         # Sauvegarde si modifié
-        if st.button("💾 Enregistrer les modifications"):
+        if st.button("Enregistrer les modifications"):
             try:
                 # On sauvegarde tout le DataFrame édité (tu peux adapter pour ne sauvegarder que la colonne linkedin_url si besoin)
                 edited_df.to_csv(linkedin_csv_path, index=False)
-                st.success("✅ Modifications enregistrées avec succès !")
+                st.success("Modifications enregistrées avec succès !")
             except Exception as e:
-                st.error(f"❌ Erreur lors de la sauvegarde : {e}")
+                st.error(f"Erreur lors de la sauvegarde : {e}")
 
         st.markdown("---")
-        st.markdown('<div class="blue-subheader">🏢 Recherche par compagnie LinkedIn</div>', unsafe_allow_html=True)
+        st.subheader("Recherche par compagnie LinkedIn")
         if 'company_name' in edited_df.columns:
             linkedin_airline = st.selectbox(
                 "Compagnie:",
@@ -178,8 +119,8 @@ with tab2:
             )
             if linkedin_airline != "Toutes":
                 filtered = edited_df[edited_df['company_name'] == linkedin_airline][linkedin_columns]
-                st.dataframe(filtered, use_container_width=True, hide_index=True)
+                st.dataframe(filtered, use_container_width=True)
         else:
-            st.info("ℹ️ Colonne 'company_name' absente des données.")
+            st.info("Colonne 'company_name' absente des données.")
     else:
         st.error("Impossible de charger le fichier LinkedIn + Fleet.")
