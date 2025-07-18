@@ -2,7 +2,6 @@
 import streamlit as st
 import pandas as pd
 from streamlit_extras.badges import badge
-from streamlit_extras.let_it_rain import rain
 
 
 st.set_page_config(page_title="Visualisation Flotte Aérienne", layout="wide", page_icon="✈️")
@@ -10,24 +9,25 @@ st.set_page_config(page_title="Visualisation Flotte Aérienne", layout="wide", p
 st.markdown("""
 <style>
 .stApp {
-    background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
+    background: #fff !important;
+    color: #111 !important;
 }
 .blue-header {
-    color: #1565c0;
+    color: #111;
     font-size: 2.5rem;
     font-weight: bold;
     margin-bottom: 0.5em;
     letter-spacing: 1px;
 }
 .blue-subheader {
-    color: #1976d2;
+    color: #1a237e;
     font-size: 1.3rem;
     font-weight: 600;
     margin-top: 1em;
     margin-bottom: 0.5em;
 }
 .stButton>button {
-    background-color: #1976d2;
+    background-color: #1a237e;
     color: white;
     border-radius: 8px;
     border: none;
@@ -35,19 +35,33 @@ st.markdown("""
     transition: 0.2s;
 }
 .stButton>button:hover {
-    background-color: #1565c0;
+    background-color: #3949ab;
     color: #fff;
 }
 .stDataFrame {
     border-radius: 10px;
-    border: 1px solid #1976d2;
+    border: 1px solid #1a237e;
+}
+/* Onglets Streamlit */
+div[data-testid="stTabs"] > div > div {
+    background: #1a237e !important;
+    border-radius: 8px 8px 0 0;
+}
+div[data-testid="stTabs"] button {
+    color: #fff !important;
+    background: #1a237e !important;
+    border: none !important;
+    font-weight: 600;
+}
+div[data-testid="stTabs"] button[aria-selected="true"] {
+    background: #3949ab !important;
+    color: #fff !important;
 }
 </style>
 """, unsafe_allow_html=True)
 
 st.markdown('<div class="blue-header">✈️ Visualisation des Données Aériennes</div>', unsafe_allow_html=True)
 badge(type="github", name="teopaquet/skai-scrapping")
-rain(emoji="🟦", font_size=24, falling_speed=5, animation_length="infinite")
 
 
 # Chemins des CSVs
