@@ -49,23 +49,35 @@ with tab2:
         st.success(f"Données LinkedIn chargées: {len(linkedin_df)} lignes")
 
         st.markdown("---")
-        st.subheader("Filtrer les colonnes LinkedIn")
+        st.subheader("Filtres et tri LinkedIn")
         columns_options = list(linkedin_df.columns)
         default_columns = [col for col in linkedin_df.columns]
-        linkedin_columns = st.multiselect(
-            "Sélectionnez les colonnes à afficher (LinkedIn)",
-            options=columns_options,
-            default=default_columns,
-            key="columns_linkedin"
-        )
+        with st.container():
+            col1, col2, col3, col4 = st.columns([2,2,2,2])
+            with col1:
+                linkedin_columns = st.multiselect(
+                    "Colonnes à afficher",
+                    options=columns_options,
+                    default=default_columns,
+                    key="columns_linkedin"
+                )
+            with col2:
+                # Min/max fleet_size
+                if "fleet_size" in linkedin_columns and pd.api.types.is_numeric_dtype(linkedin_df["fleet_size"]):
+                    min_val, max_val = int(linkedin_df["fleet_size"].min()), int(linkedin_df["fleet_size"].max())
+                    min_input = st.number_input("Min fleet_size", min_value=min_val, max_value=max_val, value=min_val, key="min_fleet_size", step=1, format="%d")
+                    max_input = st.number_input("Max fleet_size", min_value=min_val, max_value=max_val, value=max_val, key="max_fleet_size", step=1, format="%d")
+                else:
+                    min_input, max_input = None, None
+            with col3:
+                sort_col = st.selectbox("Trier par colonne", options=linkedin_columns, key="sort_col_linkedin")
+            with col4:
+                sort_order = st.radio("Ordre de tri", options=["Croissant", "Décroissant"], horizontal=True, key="sort_order_linkedin")
 
         # Filtrage par valeur sur chaque colonne sélectionnée
         filter_dict = {}
         for col in linkedin_columns:
-            if col == "fleet_size" and pd.api.types.is_numeric_dtype(linkedin_df[col]):
-                min_val, max_val = int(linkedin_df[col].min()), int(linkedin_df[col].max())
-                min_input = st.number_input(f"Valeur minimale pour {col}", min_value=min_val, max_value=max_val, value=min_val, key=f"min_{col}", step=1, format="%d")
-                max_input = st.number_input(f"Valeur maximale pour {col}", min_value=min_val, max_value=max_val, value=max_val, key=f"max_{col}", step=1, format="%d")
+            if col == "fleet_size" and pd.api.types.is_numeric_dtype(linkedin_df[col]) and min_input is not None and max_input is not None:
                 filter_dict[col] = (int(min_input), int(max_input))
             elif pd.api.types.is_numeric_dtype(linkedin_df[col]):
                 min_val, max_val = float(linkedin_df[col].min()), float(linkedin_df[col].max())
@@ -78,16 +90,13 @@ with tab2:
 
         filtered_df = linkedin_df.copy()
         for col, filt in filter_dict.items():
-            if col == "fleet_size" and pd.api.types.is_numeric_dtype(filtered_df[col]):
+            if col == "fleet_size" and pd.api.types.is_numeric_dtype(filtered_df[col]) and min_input is not None and max_input is not None:
                 filtered_df = filtered_df[(filtered_df[col] >= filt[0]) & (filtered_df[col] <= filt[1])]
             elif pd.api.types.is_numeric_dtype(filtered_df[col]):
                 filtered_df = filtered_df[(filtered_df[col] >= filt[0]) & (filtered_df[col] <= filt[1])]
             else:
                 filtered_df = filtered_df[filtered_df[col].isin(filt)]
 
-        # Tri des colonnes
-        sort_col = st.selectbox("Trier par colonne", options=linkedin_columns, key="sort_col_linkedin")
-        sort_order = st.radio("Ordre de tri", options=["Croissant", "Décroissant"], horizontal=True, key="sort_order_linkedin")
         ascending = sort_order == "Croissant"
         filtered_df = filtered_df.sort_values(by=sort_col, ascending=ascending)
 
