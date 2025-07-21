@@ -1,11 +1,12 @@
 import csv
 import os
 import pandas as pd
+import random
 from googleapiclient.discovery import build
 
 # Vos identifiants API
-API_KEY = "AIzaSyBhdixYmhA1dSlQY5m5kazn9dSYdGxx-6I"
-SEARCH_ENGINE_ID = "150b558eb72454e0d"
+API_KEY = "AIzaSyC67OSprApccC8KS-Sn-alqmbfIpxKvSok"
+SEARCH_ENGINE_ID = "32ce3b3aca106418a"
 
 # Rôle à rechercher
 role = "operation director"  # À ajuster selon besoin
@@ -18,7 +19,7 @@ service = build("customsearch", "v1", developerKey=API_KEY)
 
 # Choix du nombre de requêtes à lancer :
 print("Combien de requêtes voulez-vous lancer ?")
-print("1: Une seule\n5: Cinq\n10: Dix\n0: Toutes")
+print("1: Une seule\n5: Cinq\n10: Dix\n100: Cent\n0: Toutes")
 try:
     choix = int(input("Votre choix (1/5/10/0): ").strip())
 except Exception:
@@ -34,8 +35,8 @@ with open(csv_path, newline='', encoding='utf-8') as csvfile:
         if row and row[0].strip():
             companies.append(row[0].strip())
 
-if choix in [1, 5, 10]:
-    companies = companies[:choix]
+if choix in [1, 5, 10, 100]:
+    companies = random.sample(companies, k=choix)
 # 0 ou autre = toutes
 
 # Stockage des résultats
