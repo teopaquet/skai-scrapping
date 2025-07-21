@@ -15,12 +15,18 @@ service = build("customsearch", "v1", developerKey=API_KEY)
 
 
 # Lire la liste des entreprises depuis le CSV (colonne 'companies_name', ignorer l'en-tête)
+
 # Choix du nombre de requêtes à lancer :
-RUN_ALL = True  # True pour toutes, False pour 10 premières
+print("Combien de requêtes voulez-vous lancer ?")
+print("1: Une seule\n5: Cinq\n10: Dix\n0: Toutes")
+try:
+    choix = int(input("Votre choix (1/5/10/0): ").strip())
+except Exception:
+    choix = 0
 
 companies = []
 base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-csv_path = os.path.join(base_dir, 'data', 'raw', 'airlines_name_clean.csv')
+csv_path = os.path.join(base_dir, 'data', 'raw', 'airlines_name_clean_filtered.csv')
 with open(csv_path, newline='', encoding='utf-8') as csvfile:
     reader = csv.reader(csvfile)
     next(reader, None)  # skip header
@@ -28,8 +34,9 @@ with open(csv_path, newline='', encoding='utf-8') as csvfile:
         if row and row[0].strip():
             companies.append(row[0].strip())
 
-if not RUN_ALL:
-    companies = companies[:10]
+if choix in [1, 5, 10]:
+    companies = companies[:choix]
+# 0 ou autre = toutes
 
 # Stockage des résultats
 results_data = []
