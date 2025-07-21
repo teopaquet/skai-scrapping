@@ -7,14 +7,15 @@ import { Link } from "react-router-dom";
 
 const pages = [
   {
-    label: "Users",
+    label: "Linkedin",
     icon: <PeopleIcon fontSize="large" color="primary" />,
-    link: "/user",
+    link: "/linkedin",
+    
   },
   {
-    label: "Airlines",
+    label: "Fleets",
     icon: <LocalAirportIcon fontSize="large" color="primary" />,
-    link: "/airline",
+    link: "/fleet",
   },
 
 ];
@@ -36,29 +37,30 @@ const Home: React.FC = () => {
       <Typography variant="body1" mb={4}>
         Check airline's fleet, Linkedin, and more with ease.
       </Typography>
-      <Grid container spacing={3} justifyContent="center" mb={4} columns={12}>
+      <Grid container spacing={1} justifyContent="center" mb={4} columns={12}>
         {pages.map((page) => (
           <Grid
             key={page.label}
-            sx={{
-              gridColumn: {
-                xs: "span 12",
-                sm: "span 6",
-                md: "span 3",
-              },
-              display: "flex",
-            }}
+            item
+            xs={12}
+            sm={6}
+            md={3}
+            sx={{ display: "flex", justifyContent: "center" }}
           >
             <Paper
               elevation={3}
               sx={{
-                p: 3,
+                width: 180,
+                height: 120,
+                p: 2,
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
+                justifyContent: "center",
                 textAlign: "center",
                 textDecoration: "none",
                 transition: "0.2s",
+                gap: 1,
                 "&:hover": {
                   boxShadow: 6,
                   bgcolor: "action.hover",
