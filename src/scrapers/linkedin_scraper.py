@@ -29,7 +29,7 @@ except Exception:
 
 companies = []
 base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-csv_path = os.path.join(base_dir, 'data', 'raw', 'airlines_name_clean_filtered.csv')
+csv_path = os.path.join(base_dir, 'data', 'raw', 'airlines_fleet_leq_25.csv')
 with open(csv_path, newline='', encoding='utf-8') as csvfile:
     reader = csv.reader(csvfile)
     next(reader, None)  # skip header
@@ -46,7 +46,7 @@ results_data = []
 
 
 for idx, company in enumerate(companies, 1):
-    query = f"{company} {role} LinkedIn"
+    query = f' "{company}" {role} LinkedIn'
     try:
         res = service.cse().list(q=query, cx=SEARCH_ENGINE_ID, num=3).execute()
         title, link = '', ''
