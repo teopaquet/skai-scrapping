@@ -7,6 +7,6 @@ RUN npm install --legacy-peer-deps && npm run build
 FROM nginx:alpine
 COPY --from=builder /app/dist /usr/share/nginx/html
 COPY src/interface/auth-material-ui/nginx.conf /etc/nginx/conf.d/default.conf
-EXPOSE $PORT
+EXPOSE 8501
 # Remplace le port dans la config Nginx au démarrage
 CMD ["/bin/sh", "-c", "sed -i 's/listen 80;/listen ${PORT};/' /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"]
