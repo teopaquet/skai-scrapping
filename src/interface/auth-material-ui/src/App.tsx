@@ -30,8 +30,7 @@ import { LinkedinList } from "./pages/linkedin/list";
 // import { LinkedinCreate } from "./pages/linkedin/create";
 // import { LinkedinEdit } from "./pages/linkedin/edit";
 // import { LinkedinShow } from "./pages/linkedin/show";
-// Idem pour Fleet si les composants existent
-// import { FleetList } from "./pages/fleet/list";
+import { FleetList } from "./pages/fleet/list";
 // import { FleetCreate } from "./pages/fleet/create";
 // import { FleetEdit } from "./pages/fleet/edit";
 // import { FleetShow } from "./pages/fleet/show";
@@ -87,7 +86,7 @@ function App() {
                       edit: "/fleet/edit/:id",
                       show: "/fleet/show/:id",
                       meta: {
-                        label: "Fleet",
+                        label: "Fleets",
                         icon: <LocalAirportIcon />,
                       },
                     },
@@ -141,14 +140,14 @@ function App() {
                       </Route>
 
                       {/* Fleet routes (décommentez et créez les composants si besoin) */}
-                      {/*
+                      {
                       <Route path="/fleet">
                         <Route index element={<FleetList />} />
-                        <Route path="create" element={<FleetCreate />} />
+                        {/* <Route path="create" element={<FleetCreate />} />
                         <Route path="edit/:id" element={<FleetEdit />} />
-                        <Route path="show/:id" element={<FleetShow />} />
+                        <Route path="show/:id" element={<FleetShow />} /> */}
                       </Route>
-                      */}
+                      }
 
                       <Route path="*" element={<ErrorComponent />} />
                     </Route>
