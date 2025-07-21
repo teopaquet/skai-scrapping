@@ -37,8 +37,11 @@ with open(csv_path, newline='', encoding='utf-8') as csvfile:
         if row and row[0].strip():
             companies.append(row[0].strip())
 
-if choix in [1, 5, 10, 100]:
+
+if choix in [1, 5, 10]:
     companies = random.sample(companies, k=choix)
+elif choix == 100:
+    companies = companies[-100:]
 # 0 ou autre = toutes
 
 # Stockage des résultats

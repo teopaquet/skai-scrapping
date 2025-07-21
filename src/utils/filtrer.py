@@ -14,7 +14,6 @@ FILTER_WORDS = [
     'police',
     'academy',
     'hospital',
-    'federal',
     'state',
 ]
 
