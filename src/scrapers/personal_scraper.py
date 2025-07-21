@@ -3,10 +3,12 @@ import os
 import pandas as pd
 import random
 from googleapiclient.discovery import build
+from dotenv import load_dotenv
 
-# Vos identifiants API
-API_KEY = "AIzaSyC67OSprApccC8KS-Sn-alqmbfIpxKvSok"
-SEARCH_ENGINE_ID = "32ce3b3aca106418a"
+load_dotenv()
+API_KEY = os.getenv("GOOGLE_API_KEY")
+SEARCH_ENGINE_ID = os.getenv("GOOGLE_SEARCH_ENGINE_ID")
+
 
 # Rôle à rechercher
 role = "operation director"  # À ajuster selon besoin
@@ -44,7 +46,7 @@ results_data = []
 
 
 for idx, company in enumerate(companies, 1):
-    query = f"{role} {company} LinkedIn"
+    query = f"{company} {role} LinkedIn"
     try:
         res = service.cse().list(q=query, cx=SEARCH_ENGINE_ID, num=3).execute()
         title, link = '', ''
