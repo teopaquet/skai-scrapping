@@ -41,7 +41,7 @@ jobs:
       - name: Build and Push Docker image
         run: |
           docker build . \
-            -f visualization.dockerfile \
+            -f auth-material-ui.dockerfile \
             -t gcr.io/${{ env.GCP_PROJECT_ID }}/${{ env.DOCKER_IMAGE_NAME }}:${{ github.sha }} \
             -t gcr.io/${{ env.GCP_PROJECT_ID }}/${{ env.DOCKER_IMAGE_NAME }}:latest
           
