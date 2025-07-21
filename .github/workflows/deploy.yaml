@@ -56,4 +56,4 @@ jobs:
           region: ${{ env.REGION }}
           env_vars: |
             ENVIRONMENT=staging
-            PORT=8051
+            PORT=8501
