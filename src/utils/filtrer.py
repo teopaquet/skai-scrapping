@@ -10,7 +10,12 @@ FILTER_WORDS = [
     'college',
     'navy',
     'guard',
-    'airbus'
+    'airbus',
+    'police',
+    'academy',
+    'hospital',
+    'federal',
+    'state',
 ]
 
 # Fichier source et destination

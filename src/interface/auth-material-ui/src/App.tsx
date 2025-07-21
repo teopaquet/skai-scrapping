@@ -20,12 +20,8 @@ import routerBindings, {
 } from "@refinedev/react-router";
 import dataProvider from "./services/dataProvider";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
-import { authProvider } from "./authProvider";
 import { Header } from "./components/header";
 import { ColorModeContextProvider } from "./contexts/color-mode";
-import { ForgotPassword } from "./pages/forgotPassword";
-import Login  from "./pages/Login";
-import { Register } from "./pages/register";
 import { LinkedinList } from "./pages/linkedin/list";
 // import { LinkedinCreate } from "./pages/linkedin/create";
 // import { LinkedinEdit } from "./pages/linkedin/edit";
@@ -58,7 +54,6 @@ function App() {
                   dataProvider={dataProvider()}
                   notificationProvider={useNotificationProvider}
                   routerProvider={routerBindings}
-                  authProvider={authProvider}
                   resources={[
                     {
                       name: "home",
@@ -99,35 +94,9 @@ function App() {
                     projectId: "7zfUrY-9Qa6Va-R43BVg",
                   }}
                 >
-                  <Routes>
+                  
                     <Route
-                      element={
-                        <Authenticated
-                          key="authenticated-inner"
-                          fallback={<CatchAllNavigate to="/login" />}
-                        >
-                          <ThemedLayoutV2
-                            Header={Header}
-                            Title={() => (
-                              <Typography
-                                variant="h6"
-                                sx={{
-                                  color: "primary.main",
-                                  fontWeight: "bold",
-                                  fontSize: drawerOpen ? "1.5rem" : "1rem",
-                                  fontFamily: "Roboto, sans-serif",
-                                  whiteSpace: "nowrap",
-                                  overflow: "hidden",
-                                }}
-                              >
-                                {drawerOpen ? "Skai Visualizer" : "SV"}
-                              </Typography>
-                            )}
-                          >
-                            <Outlet />
-                          </ThemedLayoutV2>
-                        </Authenticated>
-                      }
+                      
                     >
                       <Route path="/" element={<Home />} />
 
@@ -151,24 +120,7 @@ function App() {
 
                       <Route path="*" element={<ErrorComponent />} />
                     </Route>
-                    <Route
-                      element={
-                        <Authenticated
-                          key="authenticated-outer"
-                          fallback={<Outlet />}
-                        >
-                          <NavigateToResource />
-                        </Authenticated>
-                      }
-                    >
-                      <Route path="/login" element={<Login />} />
-                      <Route path="/register" element={<Register />} />
-                      <Route
-                        path="/forgot-password"
-                        element={<ForgotPassword />}
-                      />
-                    </Route>
-                  </Routes>
+                    
 
                   <RefineKbar />
                   <UnsavedChangesNotifier />
