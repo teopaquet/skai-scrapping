@@ -55,6 +55,6 @@ jobs:
           image: gcr.io/${{ env.GCP_PROJECT_ID }}/${{ env.DOCKER_IMAGE_NAME }}:${{ github.sha }}
           region: ${{ env.REGION }}
           flags: >
-            --port=8501
+            --port=80
           env_vars: |
             ENVIRONMENT=staging
