@@ -85,7 +85,6 @@ function App() {
                         icon: <LocalAirportIcon />,
                       },
                     },
-                    
                   ]}
                   options={{
                     syncWithLocation: true,
@@ -94,34 +93,47 @@ function App() {
                     projectId: "7zfUrY-9Qa6Va-R43BVg",
                   }}
                 >
-                  
+                  <Routes>
                     <Route
-                      
+                      element={
+                        <ThemedLayoutV2
+                          Header={Header}
+                          Title={() => (
+                            <Typography
+                              variant="h6"
+                              sx={{
+                                color: "primary.main",
+                                fontWeight: "bold",
+                                fontSize: drawerOpen ? "1.5rem" : "1rem",
+                                fontFamily: "Roboto, sans-serif",
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                              }}
+                            >
+                              {drawerOpen ? "Skai Visualizer" : "SV"}
+                            </Typography>
+                          )}
+                        >
+                          <Outlet />
+                        </ThemedLayoutV2>
+                      }
                     >
                       <Route path="/" element={<Home />} />
-
-                      {/* Linkedin routes */}
                       <Route path="/linkedin">
                         <Route index element={<LinkedinList />} />
                         {/* <Route path="create" element={<LinkedinCreate />} /> */}
                         {/* <Route path="edit/:id" element={<LinkedinEdit />} /> */}
                         {/* <Route path="show/:id" element={<LinkedinShow />} /> */}
                       </Route>
-
-                      {/* Fleet routes (décommentez et créez les composants si besoin) */}
-                      {
                       <Route path="/fleet">
                         <Route index element={<FleetList />} />
-                        {/* <Route path="create" element={<FleetCreate />} />
-                        <Route path="edit/:id" element={<FleetEdit />} />
-                        <Route path="show/:id" element={<FleetShow />} /> */}
+                        {/* <Route path="create" element={<FleetCreate />} /> */}
+                        {/* <Route path="edit/:id" element={<FleetEdit />} /> */}
+                        {/* <Route path="show/:id" element={<FleetShow />} /> */}
                       </Route>
-                      }
-
                       <Route path="*" element={<ErrorComponent />} />
                     </Route>
-                    
-
+                  </Routes>
                   <RefineKbar />
                   <UnsavedChangesNotifier />
                   <DocumentTitleHandler
