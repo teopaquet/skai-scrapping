@@ -74,6 +74,8 @@ export const LinkedinList: React.FC = () => {
         headerName: "Fleet Size",
         minWidth: 100,
         flex: 0.3,
+        type: "number",
+        sortComparator: (v1, v2) => Number(v1) - Number(v2),
       },
     ],
     []
