@@ -121,7 +121,7 @@ export const LinkedinList: React.FC = () => {
       <List canCreate={false}>
         <div style={{ marginBottom: 16, display: 'flex', alignItems: 'center', gap: 16 }}>
           <TextField
-            label="Rechercher une compagnie"
+            label="Search Airline"
             size="small"
             value={search}
             onChange={e => setSearch(e.target.value)}

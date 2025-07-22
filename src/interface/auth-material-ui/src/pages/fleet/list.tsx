@@ -2,6 +2,9 @@
 import React from "react";
 import { List } from "@refinedev/mui";
 import { DataGrid, type GridColDef } from "@mui/x-data-grid";
+import TextField from "@mui/material/TextField";
+import InputAdornment from "@mui/material/InputAdornment";
+import SearchIcon from "@mui/icons-material/Search";
 import Papa, { ParseResult } from "papaparse";
 
 type FleetRow = {
@@ -15,6 +18,8 @@ type FleetRow = {
 
 export const FleetList: React.FC = () => {
   const [rows, setRows] = React.useState<FleetRow[]>([]);
+  // Barre de recherche
+  const [search, setSearch] = React.useState("");
 
   React.useEffect(() => {
     fetch("/fleet_data_2800.csv")
@@ -37,13 +42,70 @@ export const FleetList: React.FC = () => {
       { field: "aircraft_type", headerName: "Aircraft Type", minWidth: 120, flex: 1 },
       { field: "registration", headerName: "Registration", minWidth: 120, flex: 1 },
       { field: "detailed_aircraft_type", headerName: "Detailed Type", minWidth: 180, flex: 1 },
-      { field: "total_fleet_size", headerName: "Total Fleet Size", minWidth: 80, flex: 0.5 },
+      {
+        field: "total_fleet_size",
+        headerName: "Total Fleet Size",
+        minWidth: 80,
+        flex: 0.5,
+        type: "number",
+        sortComparator: (v1, v2) => Number(v1) - Number(v2),
+      },
     ],
     []
   );
 
+  // Filtre min/max total_fleet_size
+  const fleetSizes = rows.map(r => Number(r.total_fleet_size)).filter(n => !isNaN(n));
+  const minFleet = fleetSizes.length ? Math.min(...fleetSizes) : 0;
+  const maxFleet = fleetSizes.length ? Math.max(...fleetSizes) : 100;
+  const [minFleetSize, setMinFleetSize] = React.useState(minFleet);
+  const [maxFleetSize, setMaxFleetSize] = React.useState(maxFleet);
+
+  // Filtrer les rows selon total_fleet_size et recherche
+  const filteredRows = rows.filter(row => {
+    const val = Number(row.total_fleet_size);
+    if (isNaN(val)) return false;
+    const matchesSearch = row.airline_name.toLowerCase().includes(search.toLowerCase());
+    return val >= minFleetSize && val <= maxFleetSize && matchesSearch;
+  });
+
+  // Pagination state
+  const [paginationModel, setPaginationModel] = React.useState({ pageSize: 25, page: 0 });
+
   return (
     <List canCreate={false}>
+      <div style={{ marginBottom: 16, display: 'flex', alignItems: 'center', gap: 16 }}>
+        <TextField
+          label="Search Airline"
+          size="small"
+          value={search}
+          onChange={e => setSearch(e.target.value)}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchIcon />
+              </InputAdornment>
+            ),
+            style: { width: 260 }
+          }}
+          style={{ marginRight: 16 }}
+        />
+        <TextField
+          label="Fleet Size min"
+          type="number"
+          size="small"
+          value={minFleetSize}
+          onChange={e => setMinFleetSize(Number(e.target.value))}
+          style={{ marginRight: 16 }}
+        />
+        <TextField
+          label="max"
+          type="number"
+          size="small"
+          value={maxFleetSize}
+          onChange={e => setMaxFleetSize(Number(e.target.value))}
+        />
+      </div>
 
       <div
         style={{
@@ -53,9 +115,12 @@ export const FleetList: React.FC = () => {
         }}
       >
         <DataGrid
-          rows={rows.map((row, i) => ({ id: i, ...row }))}
+          rows={filteredRows.map((row, i) => ({ id: i, ...row }))}
           columns={columns}
           pagination
+          paginationMode="client"
+          paginationModel={paginationModel}
+          onPaginationModelChange={setPaginationModel}
           pageSizeOptions={[25, 50, 100]}
           autoHeight={false}
           sx={{ minHeight: 400 }}
