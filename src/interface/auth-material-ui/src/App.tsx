@@ -22,6 +22,7 @@ import { ColorModeContextProvider } from "./contexts/color-mode";
 import { LinkedinList } from "./pages/linkedin/list";
 import { FleetList } from "./pages/fleet/list";
 import { DrawerProvider } from "./contexts/drawer-context";
+import { Header } from "./components/header";
 import PeopleIcon from "@mui/icons-material/People";
 import HomeIcon from "@mui/icons-material/Home";
 import LocalAirportIcon from "@mui/icons-material/LocalAirport";
@@ -84,6 +85,7 @@ function App() {
                     <Route
                       element={
                         <ThemedLayoutV2
+                          Header={Header}
                           Sider={(props) => (
                             <ThemedSiderV2
                               {...props}
