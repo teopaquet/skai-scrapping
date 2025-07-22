@@ -49,7 +49,7 @@ results_data = []
 
 
 for idx, company in enumerate(companies, 1):
-    query = f' {company} {role} LinkedIn'
+    query = f' {company} ({role} OR "operations director" OR "director of operations") site:linkedin.com/in'
     try:
         res = service.cse().list(q=query, cx=SEARCH_ENGINE_ID, num=3).execute()
         title, link = '', ''
