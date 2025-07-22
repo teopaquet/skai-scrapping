@@ -127,9 +127,9 @@ function App() {
                   <DocumentTitleHandler
                     handler={({ resource }) => {
                       if (resource?.meta?.label) {
-                        return `${resource.meta.label} | Skai Admin`;
+                        return `${resource.meta.label} | Skai Visualizer`;
                       }
-                      return "Skai Admin";
+                      return "Skai Visualizer";
                     }}
                   />
                 </Refine>
