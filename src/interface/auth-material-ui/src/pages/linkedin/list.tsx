@@ -48,7 +48,19 @@ export const LinkedinList: React.FC = () => {
         minWidth: 200,
         flex: 1,
         renderCell: ({ value }) => (
-          <a href={value} target="_blank" rel="noopener noreferrer">{value}</a>
+          <a
+            href={value}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              color: 'var(--mui-link-color, #1976d2)',
+              textDecoration: 'underline',
+              transition: 'color 0.2s',
+            }}
+            className="linkedin-link"
+          >
+            {value}
+          </a>
         ),
       },
       {
@@ -89,58 +101,74 @@ export const LinkedinList: React.FC = () => {
 
 
   return (
-    <List canCreate={false}>
-      <div style={{ marginBottom: 16, display: 'flex', alignItems: 'center', gap: 16 }}>
-        <TextField
-          label="Rechercher une compagnie"
-          size="small"
-          value={search}
-          onChange={e => setSearch(e.target.value)}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon />
-              </InputAdornment>
-            ),
-            style: { width: 260 }
-          }}
-          style={{ marginRight: 16 }}
-        />
-        <TextField
-          label="Fleet Size min"
-          type="number"
-          size="small"
-          value={minFleetSize}
-          onChange={e => setMinFleetSize(Number(e.target.value))}
-          style={{ marginRight: 16 }}
-        />
-        <TextField
-          label="max"
-          type="number"
-          size="small"
-          value={maxFleetSize}
-          onChange={e => setMaxFleetSize(Number(e.target.value))}
-        />
-      </div>
+    <>
+      <style>{`
+        .linkedin-link {
+          color: var(--mui-link-color, #1976d2);
+        }
+        body[data-mui-color-scheme='dark'] .linkedin-link {
+          color: #90caf9 !important;
+        }
+        .linkedin-link:hover {
+          color: #1565c0;
+        }
+        body[data-mui-color-scheme='dark'] .linkedin-link:hover {
+          color: #42a5f5 !important;
+        }
+      `}</style>
+      <List canCreate={false}>
+        <div style={{ marginBottom: 16, display: 'flex', alignItems: 'center', gap: 16 }}>
+          <TextField
+            label="Rechercher une compagnie"
+            size="small"
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon />
+                </InputAdornment>
+              ),
+              style: { width: 260 }
+            }}
+            style={{ marginRight: 16 }}
+          />
+          <TextField
+            label="Fleet Size min"
+            type="number"
+            size="small"
+            value={minFleetSize}
+            onChange={e => setMinFleetSize(Number(e.target.value))}
+            style={{ marginRight: 16 }}
+          />
+          <TextField
+            label="max"
+            type="number"
+            size="small"
+            value={maxFleetSize}
+            onChange={e => setMaxFleetSize(Number(e.target.value))}
+          />
+        </div>
 
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          maxHeight: "calc(100vh - 320px)",
-        }}
-      >
-        <DataGrid
-          rows={filteredRows.map((row, i) => ({ id: i, ...row }))}
-          columns={columns}
-          pagination
-          paginationMode="client"
-          paginationModel={paginationModel}
-          onPaginationModelChange={setPaginationModel}
-          pageSizeOptions={[25, 50, 100]}
-          sx={{ minHeight: 400 }}
-        />
-      </div>
-    </List>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            maxHeight: "calc(100vh - 320px)",
+          }}
+        >
+          <DataGrid
+            rows={filteredRows.map((row, i) => ({ id: i, ...row }))}
+            columns={columns}
+            pagination
+            paginationMode="client"
+            paginationModel={paginationModel}
+            onPaginationModelChange={setPaginationModel}
+            pageSizeOptions={[25, 50, 100]}
+            sx={{ minHeight: 400 }}
+          />
+        </div>
+      </List>
+    </>
   );
 }
