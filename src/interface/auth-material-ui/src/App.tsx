@@ -13,9 +13,7 @@ import { Home } from "./pages/home";
 import CssBaseline from "@mui/material/CssBaseline";
 import GlobalStyles from "@mui/material/GlobalStyles";
 import routerBindings, {
-  CatchAllNavigate,
   DocumentTitleHandler,
-  NavigateToResource,
   UnsavedChangesNotifier,
 } from "@refinedev/react-router";
 import dataProvider from "./services/dataProvider";
@@ -23,13 +21,7 @@ import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import { Header } from "./components/header";
 import { ColorModeContextProvider } from "./contexts/color-mode";
 import { LinkedinList } from "./pages/linkedin/list";
-// import { LinkedinCreate } from "./pages/linkedin/create";
-// import { LinkedinEdit } from "./pages/linkedin/edit";
-// import { LinkedinShow } from "./pages/linkedin/show";
 import { FleetList } from "./pages/fleet/list";
-// import { FleetCreate } from "./pages/fleet/create";
-// import { FleetEdit } from "./pages/fleet/edit";
-// import { FleetShow } from "./pages/fleet/show";
 import Typography from "@mui/material/Typography";
 import React, { useState } from "react";
 import { DrawerProvider } from "./contexts/drawer-context";
@@ -120,15 +112,11 @@ function App() {
                     >
                       <Route path="/" element={<Home />} />
                       <Route path="/linkedin">
-                        <Route index element={<LinkedinList />} />
-                        {/* <Route path="create" element={<LinkedinCreate />} /> */}
-                        {/* <Route path="edit/:id" element={<LinkedinEdit />} /> */}
+                        <Route index element={<LinkedinList />} />               
                         {/* <Route path="show/:id" element={<LinkedinShow />} /> */}
                       </Route>
                       <Route path="/fleet">
                         <Route index element={<FleetList />} />
-                        {/* <Route path="create" element={<FleetCreate />} /> */}
-                        {/* <Route path="edit/:id" element={<FleetEdit />} /> */}
                         {/* <Route path="show/:id" element={<FleetShow />} /> */}
                       </Route>
                       <Route path="*" element={<ErrorComponent />} />
