@@ -1,4 +1,4 @@
-import { Authenticated, Refine } from "@refinedev/core";
+import { Refine } from "@refinedev/core";
 import { DevtoolsProvider } from "@refinedev/devtools";
 import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
 
@@ -6,9 +6,9 @@ import {
   ErrorComponent,
   RefineSnackbarProvider,
   ThemedLayoutV2,
+  ThemedSiderV2,
   useNotificationProvider,
 } from "@refinedev/mui";
-
 import { Home } from "./pages/home";
 import CssBaseline from "@mui/material/CssBaseline";
 import GlobalStyles from "@mui/material/GlobalStyles";
@@ -18,12 +18,9 @@ import routerBindings, {
 } from "@refinedev/react-router";
 import dataProvider from "./services/dataProvider";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
-import { Header } from "./components/header";
 import { ColorModeContextProvider } from "./contexts/color-mode";
 import { LinkedinList } from "./pages/linkedin/list";
 import { FleetList } from "./pages/fleet/list";
-import Typography from "@mui/material/Typography";
-import React, { useState } from "react";
 import { DrawerProvider } from "./contexts/drawer-context";
 import PeopleIcon from "@mui/icons-material/People";
 import HomeIcon from "@mui/icons-material/Home";
@@ -31,8 +28,6 @@ import LocalAirportIcon from "@mui/icons-material/LocalAirport";
 
 
 function App() {
-  const [drawerOpen] = useState(true); // État pour la barre latérale
-
   return (
     <BrowserRouter>
       <RefineKbarProvider>
@@ -89,21 +84,20 @@ function App() {
                     <Route
                       element={
                         <ThemedLayoutV2
-                          Header={Header}
-                          Title={() => (
-                            <Typography
-                              variant="h6"
-                              sx={{
-                                color: "primary.main",
-                                fontWeight: "bold",
-                                fontSize: drawerOpen ? "1.5rem" : "1rem",
-                                fontFamily: "Roboto, sans-serif",
-                                whiteSpace: "nowrap",
-                                overflow: "hidden",
-                              }}
-                            >
-                              {drawerOpen ? "Skai Visualizer" : "SV"}
-                            </Typography>
+                          Sider={(props) => (
+                            <ThemedSiderV2
+                              {...props}
+                              Title={({ collapsed }) => (
+                                <div style={{ display: "flex", alignItems: "center", gap: 8, padding: 16 }}>
+                                  <img src="/logo_skai.svg" alt="Skai Visualizer" style={{ height: 32, width: 32 }} />
+                                  {!collapsed && (
+                                    <span style={{ fontWeight: "bold", fontSize: 18, color: "#1976d2", fontFamily: "Roboto, sans-serif" }}>
+                                      Skai Visualizer
+                                    </span>
+                                  )}
+                                </div>
+                              )}
+                            />
                           )}
                         >
                           <Outlet />
@@ -143,3 +137,5 @@ function App() {
 }
 
 export default App;
+
+
