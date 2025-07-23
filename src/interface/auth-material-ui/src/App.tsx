@@ -23,9 +23,9 @@ import { LinkedinList } from "./pages/linkedin/list";
 import { FleetList } from "./pages/fleet/list";
 import { DrawerProvider } from "./contexts/drawer-context";
 import { Header } from "./components/header";
-import PeopleIcon from "@mui/icons-material/People";
 import HomeIcon from "@mui/icons-material/Home";
 import LocalAirportIcon from "@mui/icons-material/LocalAirport";
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
 
 function App() {
@@ -53,13 +53,35 @@ function App() {
                     },
                     {
                       name: "Linkedin",
+                      meta: {
+                        label: "Linkedin",
+                        icon: <LinkedInIcon />,
+                      },
+                    },
+                    {
+                      name: "Airline's Linkedin",
                       list: "/linkedin",
                       create: "/linkedin/create",
                       edit: "/linkedin/edit/:id",
                       show: "/linkedin/show/:id",
                       meta: {
+                        label: "Airline's Linkedin",
+                        parent: "Linkedin",
                         canDelete: true,
-                        icon: <PeopleIcon />
+                        icon: <LinkedInIcon />
+                      },
+                    },
+                        {
+                      name: "Employee's Linkedin",
+                      list: "/employee",
+                      create: "/employee/create",
+                      edit: "/employee/edit/:id",
+                      show: "/employee/show/:id",
+                      meta: {
+                        label: "Employee's Linkedin",
+                        parent: "Linkedin",
+                        canDelete: true,
+                        icon: <LinkedInIcon />
                       },
                     },
                     {

@@ -21,25 +21,41 @@ service = build("customsearch", "v1", developerKey=API_KEY)
 
 # Choix du nombre de requêtes à lancer :
 print("Combien de requêtes voulez-vous lancer ?")
-print("1: Une seule\n5: Cinq\n10: Dix\n100: Cent\n0: Toutes")
+print("1: Une seule\n5: Cinq\n10: Dix\n50: Cinquante (lignes 800 à 850)\n100: Cent\n0: Toutes")
 try:
     choix = int(input("Votre choix (1/5/10/0): ").strip())
 except Exception:
     choix = 0
 
+
+
+# Index de début et de fin pour la tranche de lignes à traiter
+start_line = 749
+end_line = 799
+
 companies = []
 base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 csv_path = os.path.join(base_dir, 'data', 'raw', 'airlines_fleet_leq_25.csv')
 with open(csv_path, newline='', encoding='utf-8') as csvfile:
-    reader = csv.reader(csvfile)
-    next(reader, None)  # skip header
-    for row in reader:
+    reader = list(csv.reader(csvfile))
+    # Sauter l'en-tête
+    reader = reader[1:]
+    # Prendre la tranche paramétrable
+    for row in reader[start_line:end_line]:
         if row and row[0].strip():
             companies.append(row[0].strip())
 
 
 if choix in [1, 5, 10]:
     companies = random.sample(companies, k=choix)
+elif choix == 50:
+    # Recharger la tranche paramétrable
+    companies = []
+    with open(csv_path, newline='', encoding='utf-8') as csvfile:
+        reader = list(csv.reader(csvfile))[1:]
+        for row in reader[start_line:end_line]:
+            if row and row[0].strip():
+                companies.append(row[0].strip())
 elif choix == 100:
     companies = companies[-100:]
 # 0 ou autre = toutes
