@@ -21,6 +21,7 @@ import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import { ColorModeContextProvider } from "./contexts/color-mode";
 import { LinkedinList } from "./pages/linkedin/list";
 import { FleetList } from "./pages/fleet/list";
+import EmployeeList from "./pages/employee/list";
 import { DrawerProvider } from "./contexts/drawer-context";
 import { Header } from "./components/header";
 import HomeIcon from "@mui/icons-material/Home";
@@ -132,6 +133,9 @@ function App() {
                       <Route path="/linkedin">
                         <Route index element={<LinkedinList />} />               
                         {/* <Route path="show/:id" element={<LinkedinShow />} /> */}
+                      </Route>
+                      <Route path="/employee">
+                        <Route index element={<EmployeeList />} />
                       </Route>
                       <Route path="/fleet">
                         <Route index element={<FleetList />} />

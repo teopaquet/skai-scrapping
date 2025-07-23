@@ -11,28 +11,43 @@ type Row = {
   linkedin_url: string;
   description: string;
   fleet_size: string;
-}
+};
 
-export const LinkedinList: React.FC = () => {
+type ApiRow = {
+  truncate: string;
+  'invisible href': string;
+  'font-qanelas': string;
+  'font-qanelas 4': string;
+  'inline-flex': string;
+  'invisible href 2': string;
+  'invisible href 3': string;
+  'font-qanelas 5': string;
+  'font-qanelas 6': string;
+  'font-qanelas 7': string;
+  'font-qanelas 8': string;
+  'font-qanelas 9': string;
+  'font-qanelas 10': string | number;
+  'font-qanelas 11': string | number;
+  'font-qanelas 12': string;
+  'font-qanelas 13': string;
+  'font-qanelas 14': string;
+  'font-qanelas 15': string;
+};
+
+const EmployeeList: React.FC = () => {
   const [rows, setRows] = React.useState<Row[]>([]);
+  const [apiRows, setApiRows] = React.useState<ApiRow[]>([]);
   // Barre de recherche
   const [search, setSearch] = React.useState("");
 
   React.useEffect(() => {
-    fetch("/linkedin_list_merged_with_fleet.csv")
-      .then((res) => res.text())
-      .then((csv) => {
-        Papa.parse<Row>(csv, {
-          header: true,
-          skipEmptyLines: true,
-          complete: (result: ParseResult<Row>) => {
-            setRows(result.data);
-          },
-        });
+    // Fetch API data uniquement
+    fetch("https://script.google.com/macros/s/AKfycbxrytqltihDzfDiluOdl8-5XAEIjJOb0KrmNqm2e_FcfIdftl0GNzh-WAqIbALyMdWWJQ/exec")
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data)) setApiRows(data);
       });
   }, []);
-
-
 
   const columns = React.useMemo<GridColDef<Row>[]>(
     () => [
@@ -81,26 +96,32 @@ export const LinkedinList: React.FC = () => {
     []
   );
 
-
+  // Colonnes dynamiques pour les données brutes
+  const apiColumns = React.useMemo<GridColDef<ApiRow>[]>(() => {
+    if (apiRows.length === 0) return [];
+    const keys = Object.keys(apiRows[0]);
+    return keys.map((key) => ({
+      field: key,
+      headerName: key,
+      minWidth: 120,
+      flex: 1,
+      renderCell: ({ value }) => {
+        if (typeof value === 'string' && value.startsWith('http')) {
+          return <a href={value} target="_blank" rel="noopener noreferrer" className="linkedin-link">{value}</a>;
+        }
+        return value;
+      }
+    }));
+  }, [apiRows]);
 
   // Pagination state
   const [paginationModel, setPaginationModel] = React.useState({ pageSize: 25, page: 0 });
 
-  // Filtre min/max fleet_size
-  const fleetSizes = rows.map(r => Number(r.fleet_size)).filter(n => !isNaN(n));
-  const minFleet = fleetSizes.length ? Math.min(...fleetSizes) : 0;
-  const maxFleet = fleetSizes.length ? Math.max(...fleetSizes) : 100;
-  const [minFleetSize, setMinFleetSize] = React.useState(minFleet);
-  const [maxFleetSize, setMaxFleetSize] = React.useState(maxFleet);
-
-  // Filtrer les rows selon fleet_size et recherche
-  const filteredRows = rows.filter(row => {
-    const val = Number(row.fleet_size);
-    if (isNaN(val)) return false;
-    const matchesSearch = row.company_name.toLowerCase().includes(search.toLowerCase());
-    return val >= minFleetSize && val <= maxFleetSize && matchesSearch;
+  // Filtre sur le nom (search) pour les données API
+  const filteredApiRows = apiRows.filter(row => {
+    const name = row.truncate?.toLowerCase() || "";
+    return name.includes(search.toLowerCase());
   });
-
 
   return (
     <>
@@ -121,37 +142,12 @@ export const LinkedinList: React.FC = () => {
       <List canCreate={false}>
         <div style={{ marginBottom: 16, display: 'flex', alignItems: 'center', gap: 16 }}>
           <TextField
-            label="Search Airline"
+            label="Search Name"
             size="small"
             value={search}
             onChange={e => setSearch(e.target.value)}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon />
-                </InputAdornment>
-              ),
-              style: { width: 260 }
-            }}
-            style={{ marginRight: 16 }}
-          />
-          <TextField
-            label="Fleet Size min"
-            type="number"
-            size="small"
-            value={minFleetSize}
-            onChange={e => setMinFleetSize(Number(e.target.value))}
-            style={{ marginRight: 16 }}
-          />
-          <TextField
-            label="max"
-            type="number"
-            size="small"
-            value={maxFleetSize}
-            onChange={e => setMaxFleetSize(Number(e.target.value))}
           />
         </div>
-
         <div
           style={{
             display: "flex",
@@ -160,12 +156,9 @@ export const LinkedinList: React.FC = () => {
           }}
         >
           <DataGrid
-            rows={filteredRows.map((row, i) => ({ id: i, ...row }))}
-            columns={columns}
+            rows={filteredApiRows.map((row, i) => ({ id: i, ...row }))}
+            columns={apiColumns}
             pagination
-            paginationMode="client"
-            paginationModel={paginationModel}
-            onPaginationModelChange={setPaginationModel}
             pageSizeOptions={[25, 50, 100]}
             sx={{ minHeight: 400 }}
           />
@@ -173,4 +166,6 @@ export const LinkedinList: React.FC = () => {
       </List>
     </>
   );
-}
+};
+
+export default EmployeeList;
