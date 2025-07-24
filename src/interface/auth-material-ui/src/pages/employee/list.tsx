@@ -105,6 +105,7 @@ const EmployeeList: React.FC = () => {
       headerName: key,
       minWidth: 120,
       flex: 1,
+      editable: true,
       renderCell: ({ value }) => {
         if (typeof value === 'string' && value.startsWith('http')) {
           return <a href={value} target="_blank" rel="noopener noreferrer" className="linkedin-link">{value}</a>;
@@ -113,6 +114,38 @@ const EmployeeList: React.FC = () => {
       }
     }));
   }, [apiRows]);
+  // Fonction pour mettre à jour une ligne dans l'API
+  const handleProcessRowUpdate = async (newRow: any, oldRow: any) => {
+    // L'index dans la feuille commence à 1 pour la première donnée (hors en-tête)
+    // newRow.id correspond à l'index dans filteredApiRows, donc il faut retrouver l'index réel dans apiRows
+    const realIndex = apiRows.findIndex(row => {
+      // On compare toutes les colonnes clés pour trouver la ligne exacte
+      return Object.keys(row).every(key => row[key as keyof ApiRow] === oldRow[key as keyof ApiRow]);
+    });
+    if (realIndex === -1) {
+      alert("Impossible de trouver la ligne à modifier dans la feuille.");
+      return oldRow;
+    }
+    const apiUrl = "https://script.google.com/macros/s/AKfycbxrytqltihDzfDiluOdl8-5XAEIjJOb0KrmNqm2e_FcfIdftl0GNzh-WAqIbALyMdWWJQ/exec?action=put";
+    try {
+      const { id, ...rowToSend } = newRow;
+      // L'index attendu côté Apps Script commence à 1 pour la première donnée (hors en-tête)
+      const body = { ...rowToSend, index: realIndex + 1 };
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      const result = await response.json();
+      if (!response.ok || result.status !== "success") throw new Error(result.message || "Erreur lors de la mise à jour");
+      // Met à jour localement la ligne modifiée
+      setApiRows((prev) => prev.map((row, i) => (i === realIndex ? { ...newRow } : row)));
+      return newRow;
+    } catch (error) {
+      alert("Erreur lors de la mise à jour: " + error);
+      return oldRow;
+    }
+  };
 
   // Pagination state
   const [paginationModel, setPaginationModel] = React.useState({ pageSize: 25, page: 0 });
@@ -161,6 +194,7 @@ const EmployeeList: React.FC = () => {
             pagination
             pageSizeOptions={[25, 50, 100]}
             sx={{ minHeight: 400 }}
+            processRowUpdate={handleProcessRowUpdate}
           />
         </div>
       </List>

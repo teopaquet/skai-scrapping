@@ -30,8 +30,8 @@ except Exception:
 
 
 # Index de début et de fin pour la tranche de lignes à traiter
-start_line = 749
-end_line = 799
+start_line = 699
+end_line = 749
 
 companies = []
 base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -65,26 +65,34 @@ results_data = []
 
 
 for idx, company in enumerate(companies, 1):
-    query = f' {company} ({role} OR "operations director" OR "director of operations") site:linkedin.com/in'
+    query = f' {company} ("operation director" OR "operations director" OR "director of operations") site:linkedin.com/in'
     try:
         res = service.cse().list(q=query, cx=SEARCH_ENGINE_ID, num=3).execute()
-        title, link = '', ''
+        name, linkedin_pero = '', ''
         if 'items' in res:
             for item in res['items']:
                 lnk = item.get('link', '')
                 if 'linkedin.com/in/' in lnk:
-                    title = item.get('title', '')
-                    link = lnk
+                    name = item.get('title', '')
+                    linkedin_pero = lnk
                     break
-        # Si aucun résultat LinkedIn trouvé, laisser vide
     except Exception as e:
         print(f"Erreur pour {company}: {e}")
-        title, link = '', ''
+        name, linkedin_pero = '', ''
     results_data.append({
+        'Name': name,
         'Company': company,
+        'LinkedIn Pero': linkedin_pero,
+        'Desc': '',
+        'Location': '',
+        'LinkedIn Airline': '',
+        'WebSite': '',
+        'Mail Pro': '',
         'Role': role,
-        'Name': title,
-        'LinkedIn': link
+        'Activity': '',
+        'Hiring': '',
+        'Latest LinkedIn Update': '',
+        'More': ''
     })
     if idx % 10 == 0 or idx == len(companies):
         print(f"Progression: {idx}/{len(companies)} compagnies traitées.")
@@ -93,7 +101,11 @@ for idx, company in enumerate(companies, 1):
 export_dir = os.path.join(base_dir, 'data', 'exports')
 os.makedirs(export_dir, exist_ok=True)
 export_path = os.path.join(export_dir, 'results.csv')
-df = pd.DataFrame(results_data)
+columns = [
+    'Name', 'LinkedIn Pero', 'Desc', 'Location', 'LinkedIn Airline', 'WebSite', 'Mail Pro',
+    'Role', 'Activity', 'Hiring', 'Latest LinkedIn Update', 'More'
+]
+df = pd.DataFrame(results_data, columns=columns)
 df.to_csv(export_path, index=False, encoding='utf-8')
 
 print(f"Extraction terminée. Résultats dans '{export_path}'")

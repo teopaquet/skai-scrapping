@@ -57,7 +57,7 @@ export const FleetList: React.FC = () => {
   // Filtre min/max total_fleet_size
   const fleetSizes = rows.map(r => Number(r.total_fleet_size)).filter(n => !isNaN(n));
   const minFleet = fleetSizes.length ? Math.min(...fleetSizes) : 0;
-  const maxFleet = fleetSizes.length ? Math.max(...fleetSizes) : 100;
+  const maxFleet = fleetSizes.length ? Math.max(...fleetSizes) : 1000;
   const [minFleetSize, setMinFleetSize] = React.useState(minFleet);
   const [maxFleetSize, setMaxFleetSize] = React.useState(maxFleet);
 
@@ -122,7 +122,6 @@ export const FleetList: React.FC = () => {
           paginationModel={paginationModel}
           onPaginationModelChange={setPaginationModel}
           pageSizeOptions={[25, 50, 100]}
-          autoHeight={false}
           sx={{ minHeight: 400 }}
         />
       </div>
