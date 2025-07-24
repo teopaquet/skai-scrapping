@@ -95,8 +95,8 @@ export const LinkedinList: React.FC = () => {
 
   // Filtre min/max fleet_size
   const fleetSizes = rows.map(r => Number(r.fleet_size)).filter(n => !isNaN(n));
-  const minFleet = fleetSizes.length ? Math.min(...fleetSizes) : 0;
-  const maxFleet = fleetSizes.length ? Math.max(...fleetSizes) : 100;
+  const minFleet = fleetSizes.length ? Math.min(...fleetSizes) : 1;
+  const maxFleet = fleetSizes.length ? Math.max(...fleetSizes) : 1000;
   const [minFleetSize, setMinFleetSize] = React.useState(minFleet);
   const [maxFleetSize, setMaxFleetSize] = React.useState(maxFleet);
 
