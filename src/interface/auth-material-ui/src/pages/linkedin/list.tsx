@@ -11,6 +11,7 @@ type Row = {
   linkedin_url: string;
   description: string;
   fleet_size: string;
+  country?: string;
 }
 
 export const LinkedinList: React.FC = () => {
@@ -19,7 +20,7 @@ export const LinkedinList: React.FC = () => {
   const [search, setSearch] = React.useState("");
 
   React.useEffect(() => {
-    fetch("/linkedin_list_merged_with_fleet.csv")
+    fetch("/linkedin_list_with_country.csv")
       .then((res) => res.text())
       .then((csv) => {
         Papa.parse<Row>(csv, {
@@ -68,6 +69,12 @@ export const LinkedinList: React.FC = () => {
         headerName: "Description",
         minWidth: 400,
         flex: 2,
+      },
+      {
+        field: "country",
+        headerName: "Country",
+        minWidth: 120,
+        flex: 0.5,
       },
       {
         field: "fleet_size",
