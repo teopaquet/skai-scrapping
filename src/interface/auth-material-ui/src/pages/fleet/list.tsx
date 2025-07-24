@@ -14,6 +14,7 @@ type FleetRow = {
   registration: string;
   detailed_aircraft_type: string;
   total_fleet_size: string;
+  country?: string;
 };
 
 export const FleetList: React.FC = () => {
@@ -22,7 +23,7 @@ export const FleetList: React.FC = () => {
   const [search, setSearch] = React.useState("");
 
   React.useEffect(() => {
-    fetch("/fleet_data_2800.csv")
+    fetch("/fleet_data_2800_with_country.csv")
       .then((res) => res.text())
       .then((csv) => {
         Papa.parse<FleetRow>(csv, {
@@ -42,6 +43,7 @@ export const FleetList: React.FC = () => {
       { field: "aircraft_type", headerName: "Aircraft Type", minWidth: 120, flex: 1 },
       { field: "registration", headerName: "Registration", minWidth: 120, flex: 1 },
       { field: "detailed_aircraft_type", headerName: "Detailed Type", minWidth: 180, flex: 1 },
+      { field: "country", headerName: "Country", minWidth: 120, flex: 1 },
       {
         field: "total_fleet_size",
         headerName: "Total Fleet Size",
