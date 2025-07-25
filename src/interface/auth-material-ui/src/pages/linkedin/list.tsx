@@ -4,7 +4,8 @@ import { DataGrid, type GridColDef } from "@mui/x-data-grid";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
-import Papa, { ParseResult } from "papaparse";
+import { getDatabase, ref, get } from "firebase/database";
+import { firebaseApp } from "../../firebase";
 
 type Row = {
   company_name: string;
@@ -19,18 +20,17 @@ export const LinkedinList: React.FC = () => {
   // Barre de recherche
   const [search, setSearch] = React.useState("");
 
+  // ...existing code...
   React.useEffect(() => {
-    fetch("/linkedin_list_with_country.csv")
-      .then((res) => res.text())
-      .then((csv) => {
-        Papa.parse<Row>(csv, {
-          header: true,
-          skipEmptyLines: true,
-          complete: (result: ParseResult<Row>) => {
-            setRows(result.data);
-          },
-        });
-      });
+    const db = getDatabase(firebaseApp);
+    async function fetchRows() {
+      const snapshot = await get(ref(db, "/"));
+      const data = snapshot.val();
+      // Si data est un tableau ou un objet, on le transforme en tableau
+      const list: Row[] = Array.isArray(data) ? data : (data ? Object.values(data) : []);
+      setRows(list);
+    }
+    fetchRows();
   }, []);
 
 
@@ -126,6 +126,7 @@ export const LinkedinList: React.FC = () => {
         }
       `}</style>
       <List canCreate={false}>
+        {/* ...existing code... */}
         <div style={{ marginBottom: 16, display: 'flex', alignItems: 'center', gap: 16 }}>
           <TextField
             label="Search Airline"
