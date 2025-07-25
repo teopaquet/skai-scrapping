@@ -26,6 +26,7 @@ export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({
         borderRadius: "20px",
         margin: "16px auto",
         boxShadow: "0 8px 24px rgba(25, 118, 210, 0.15)",
+        backgroundColor: "#1976d2",
         maxWidth: "1800px",
         width: "calc(100% - 32px)",
       }}
