@@ -19,8 +19,7 @@ def csv_to_json(csv_path, json_path=None):
 
 
 
-# Définir ici le chemin relatif vers ton CSV (depuis ce script)
-RELATIVE_CSV_PATH = os.path.join("..", "..", "data", "raw", "linkedin_list", "linkedin_list_with_country.csv")
+RELATIVE_CSV_PATH = os.path.join("..", "..", "data", "processed", "fleet_data_2800_with_country.csv")
 CSV_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), RELATIVE_CSV_PATH))
 JSON_PATH = None  # ou un chemin absolu/relatif pour le JSON
 

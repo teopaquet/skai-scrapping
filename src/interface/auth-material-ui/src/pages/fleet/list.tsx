@@ -5,7 +5,8 @@ import { DataGrid, type GridColDef } from "@mui/x-data-grid";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
-import Papa, { ParseResult } from "papaparse";
+import { getDatabase, ref, get } from "firebase/database";
+import { firebaseApp } from "../../firebase";
 
 type FleetRow = {
   airline_name: string;
@@ -22,18 +23,22 @@ export const FleetList: React.FC = () => {
   // Barre de recherche
   const [search, setSearch] = React.useState("");
 
+  const [error, setError] = React.useState<string>("");
   React.useEffect(() => {
-    fetch("/fleet_data_2800_with_country.csv")
-      .then((res) => res.text())
-      .then((csv) => {
-        Papa.parse<FleetRow>(csv, {
-          header: true,
-          skipEmptyLines: true,
-          complete: (result: ParseResult<FleetRow>) => {
-            setRows(result.data);
-          },
-        });
-      });
+    const db = getDatabase(firebaseApp);
+    async function fetchRows() {
+      try {
+        const snapshot = await get(ref(db, "/fleet_data_2800"));
+        const data = snapshot.val();
+        // Si data est un tableau ou un objet, on le transforme en tableau
+        const list: FleetRow[] = Array.isArray(data) ? data : (data ? Object.values(data) : []);
+        setRows(list);
+      } catch (err) {
+        setError("Erreur lors de la récupération des données Firebase : " + String(err));
+        setRows([]);
+      }
+    }
+    fetchRows();
   }, []);
 
   const columns = React.useMemo<GridColDef<FleetRow>[]>(
@@ -75,58 +80,65 @@ export const FleetList: React.FC = () => {
   const [paginationModel, setPaginationModel] = React.useState({ pageSize: 25, page: 0 });
 
   return (
-    <List canCreate={false}>
-      <div style={{ marginBottom: 16, display: 'flex', alignItems: 'center', gap: 16 }}>
-        <TextField
-          label="Search Airline"
-          size="small"
-          value={search}
-          onChange={e => setSearch(e.target.value)}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon />
-              </InputAdornment>
-            ),
-            style: { width: 260 }
-          }}
-          style={{ marginRight: 16 }}
-        />
-        <TextField
-          label="Fleet Size min"
-          type="number"
-          size="small"
-          value={minFleetSize}
-          onChange={e => setMinFleetSize(Number(e.target.value))}
-          style={{ marginRight: 16 }}
-        />
-        <TextField
-          label="max"
-          type="number"
-          size="small"
-          value={maxFleetSize}
-          onChange={e => setMaxFleetSize(Number(e.target.value))}
-        />
-      </div>
+    <>
+      {error && (
+        <div style={{ color: 'red', marginBottom: 16 }}>
+          {error}
+        </div>
+      )}
+      <List canCreate={false}>
+        <div style={{ marginBottom: 16, display: 'flex', alignItems: 'center', gap: 16 }}>
+          <TextField
+            label="Search Airline"
+            size="small"
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon />
+                </InputAdornment>
+              ),
+              style: { width: 260 }
+            }}
+            style={{ marginRight: 16 }}
+          />
+          <TextField
+            label="Fleet Size min"
+            type="number"
+            size="small"
+            value={minFleetSize}
+            onChange={e => setMinFleetSize(Number(e.target.value))}
+            style={{ marginRight: 16 }}
+          />
+          <TextField
+            label="max"
+            type="number"
+            size="small"
+            value={maxFleetSize}
+            onChange={e => setMaxFleetSize(Number(e.target.value))}
+          />
+        </div>
 
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          maxHeight: "calc(100vh - 320px)",
-        }}
-      >
-        <DataGrid
-          rows={filteredRows.map((row, i) => ({ id: i, ...row }))}
-          columns={columns}
-          pagination
-          paginationMode="client"
-          paginationModel={paginationModel}
-          onPaginationModelChange={setPaginationModel}
-          pageSizeOptions={[25, 50, 100]}
-          sx={{ minHeight: 400 }}
-        />
-      </div>
-    </List>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            maxHeight: "calc(100vh - 320px)",
+          }}
+        >
+          <DataGrid
+            rows={filteredRows.map((row, i) => ({ id: i, ...row }))}
+            columns={columns}
+            pagination
+            paginationMode="client"
+            paginationModel={paginationModel}
+            onPaginationModelChange={setPaginationModel}
+            pageSizeOptions={[25, 50, 100]}
+            sx={{ minHeight: 400 }}
+          />
+        </div>
+      </List>
+    </>
   );
 };
