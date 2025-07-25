@@ -9,6 +9,7 @@ import {
   ThemedSiderV2,
   useNotificationProvider,
 } from "@refinedev/mui";
+import { CustomSider } from "./components/sider";
 import { Home } from "./pages/home";
 import CssBaseline from "@mui/material/CssBaseline";
 import GlobalStyles from "@mui/material/GlobalStyles";
@@ -109,21 +110,7 @@ function App() {
                       element={
                         <ThemedLayoutV2
                           Header={Header}
-                          Sider={(props) => (
-                            <ThemedSiderV2
-                              {...props}
-                              Title={({ collapsed }) => (
-                                <div style={{ display: "flex", alignItems: "center", gap: 8, padding: 16 }}>
-                                  <img src="/logo_skai.svg" alt="Skai Visualizer" style={{ height: 32, width: 32 }} />
-                                  {!collapsed && (
-                                    <span style={{ fontWeight: "bold", fontSize: 18, color: "#1976d2", fontFamily: "Roboto, sans-serif" }}>
-                                      Skai Visualizer
-                                    </span>
-                                  )}
-                                </div>
-                              )}
-                            />
-                          )}
+                          Sider={CustomSider}
                         >
                           <Outlet />
                         </ThemedLayoutV2>

@@ -20,7 +20,16 @@ export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({
   const user = JSON.parse(localStorage.getItem("user") || "{}");
 
   return (
-    <AppBar position={sticky ? "sticky" : "relative"}>
+    <AppBar
+      position={sticky ? "sticky" : "relative"}
+      sx={{
+        borderRadius: "20px",
+        margin: "16px auto",
+        boxShadow: "0 8px 24px rgba(25, 118, 210, 0.15)",
+        maxWidth: "1800px",
+        width: "calc(100% - 32px)",
+      }}
+    >
       <Toolbar>
         <Stack direction="row" width="100%" alignItems="center">
           {/* Bouton Hamburger pour ouvrir le menu latéral */}
