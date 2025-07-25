@@ -42,12 +42,14 @@ export const LinkedinList: React.FC = () => {
         headerName: "Company Name",
         minWidth: 200,
         flex: 1,
+        editable: true,
       },
       {
         field: "linkedin_url",
         headerName: "LinkedIn",
         minWidth: 200,
         flex: 1,
+        editable: true,
         renderCell: ({ value }) => (
           <a
             href={value}
@@ -69,12 +71,14 @@ export const LinkedinList: React.FC = () => {
         headerName: "Description",
         minWidth: 400,
         flex: 2,
+        editable: true,
       },
       {
         field: "country",
         headerName: "Country",
         minWidth: 120,
         flex: 0.5,
+        editable: true,
       },
       {
         field: "fleet_size",
@@ -82,6 +86,7 @@ export const LinkedinList: React.FC = () => {
         minWidth: 100,
         flex: 0.3,
         type: "number",
+        editable: true,
         sortComparator: (v1, v2) => Number(v1) - Number(v2),
       },
     ],
@@ -176,6 +181,22 @@ export const LinkedinList: React.FC = () => {
             onPaginationModelChange={setPaginationModel}
             pageSizeOptions={[25, 50, 100]}
             sx={{ minHeight: 400 }}
+            processRowUpdate={async (newRow, oldRow) => {
+              // Met à jour localement
+              setRows(prev => prev.map(r => r === oldRow ? newRow : r));
+              // Met à jour dans Firebase
+              const db = getDatabase(firebaseApp);
+              // Utilise l'index du row dans filteredRows
+              const index = filteredRows.findIndex(r => r.company_name === oldRow.company_name && r.linkedin_url === oldRow.linkedin_url);
+              await import("firebase/database").then(({ ref, set }) =>
+                set(ref(db, `/${index}`), { ...newRow })
+              );
+              return newRow;
+            }}
+            onProcessRowUpdateError={error => {
+              // Affiche l'erreur dans la console
+              console.error('Erreur lors de la sauvegarde Firebase:', error);
+            }}
           />
         </div>
       </List>
