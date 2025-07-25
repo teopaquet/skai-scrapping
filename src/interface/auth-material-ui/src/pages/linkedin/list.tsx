@@ -24,7 +24,7 @@ export const LinkedinList: React.FC = () => {
   React.useEffect(() => {
     const db = getDatabase(firebaseApp);
     async function fetchRows() {
-      const snapshot = await get(ref(db, "/"));
+      const snapshot = await get(ref(db, "/Linkedin_list_with_country"));
       const data = snapshot.val();
       // Si data est un tableau ou un objet, on le transforme en tableau
       const list: Row[] = Array.isArray(data) ? data : (data ? Object.values(data) : []);
@@ -189,7 +189,7 @@ export const LinkedinList: React.FC = () => {
               // Utilise l'index du row dans filteredRows
               const index = filteredRows.findIndex(r => r.company_name === oldRow.company_name && r.linkedin_url === oldRow.linkedin_url);
               await import("firebase/database").then(({ ref, set }) =>
-                set(ref(db, `/${index}`), { ...newRow })
+                set(ref(db, `/Linkedin_list_with_country/${index}`), { ...newRow })
               );
               return newRow;
             }}
