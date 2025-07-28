@@ -107,12 +107,15 @@ export const LinkedinList: React.FC = () => {
   const [maxFleetSize, setMaxFleetSize] = React.useState(maxFleet);
 
   // Filtrer les rows selon fleet_size et recherche
-  const filteredRows = rows.filter(row => {
-    const val = Number(row.fleet_size);
-    if (isNaN(val)) return false;
-    const matchesSearch = row.company_name.toLowerCase().includes(search.toLowerCase());
-    return val >= minFleetSize && val <= maxFleetSize && matchesSearch;
-  });
+  // Ajoute l'index réel à chaque row pour DataGrid
+  const filteredRows = rows
+    .map((row, i) => ({ ...row, id: i }))
+    .filter(row => {
+      const val = Number(row.fleet_size);
+      if (isNaN(val)) return false;
+      const matchesSearch = row.company_name.toLowerCase().includes(search.toLowerCase());
+      return val >= minFleetSize && val <= maxFleetSize && matchesSearch;
+    });
 
 
   return (
@@ -174,7 +177,7 @@ export const LinkedinList: React.FC = () => {
           }}
         >
           <DataGrid
-            rows={filteredRows.map((row, i) => ({ id: i, ...row }))}
+            rows={filteredRows}
             columns={columns}
             pagination
             paginationMode="client"
@@ -184,15 +187,12 @@ export const LinkedinList: React.FC = () => {
             sx={{ minHeight: 400 }}
             processRowUpdate={async (newRow, oldRow) => {
               // Met à jour localement
-              setRows(prev => prev.map(r => r === oldRow ? newRow : r));
+              setRows(prev => prev.map((r, i) => i === newRow.id ? { ...newRow } : r));
               // Met à jour dans Firebase
               const db = getDatabase(firebaseApp);
-              // Utilise l'id généré (index) pour la correspondance exacte
-              const index = newRow.id !== undefined ? newRow.id : filteredRows.findIndex(r => r.company_name === oldRow.company_name && r.linkedin_url === oldRow.linkedin_url);
-              // On retire l'id avant d'enregistrer dans Firebase
               const { id, ...rowToSave } = newRow;
               await import("firebase/database").then(({ ref, set }) =>
-                set(ref(db, `/Linkedin_list_with_country/${index}`), { ...rowToSave })
+                set(ref(db, `/Linkedin_list_with_country/${newRow.id}`), { ...rowToSave })
               );
               return newRow;
             }}
