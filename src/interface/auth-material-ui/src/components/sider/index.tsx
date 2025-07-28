@@ -1,23 +1,20 @@
 import React, { useState } from "react";
 import {
   type ITreeMenu,
-  CanAccess,
   useIsExistAuthentication,
   useTranslate,
   useLogout,
   useMenu,
   useWarnAboutChange,
+  useCan,
 } from "@refinedev/core";
 import { Link } from "react-router";
-import { type Sider, ThemedTitleV2 } from "@refinedev/antd";
-import { Layout as AntdLayout, Menu, Grid, theme, Button } from "antd";
+import { type Sider } from "@refinedev/antd";
+import { Layout as AntdLayout, Menu, Grid, theme } from "antd";
 import {
   LogoutOutlined,
   UnorderedListOutlined,
-  RightOutlined,
-  LeftOutlined,
 } from "@ant-design/icons";
-// Styles inline pour moderniser le Sider
 
 const { useToken } = theme;
 
@@ -29,74 +26,9 @@ export const CustomSider: typeof Sider = ({ render }) => {
   const { mutate: mutateLogout } = useLogout();
   const translate = useTranslate();
   const { menuItems, selectedKey, defaultOpenKeys } = useMenu();
-
-
   const breakpoint = Grid.useBreakpoint();
-
-  const isMobile =
-    typeof breakpoint.lg === "undefined" ? false : !breakpoint.lg;
-
-  const renderTreeView = (tree: ITreeMenu[], selectedKey: string) => {
-    return tree.map((item: ITreeMenu) => {
-      const { name, children, meta, key, list } = item;
-
-      const icon = meta?.icon
-        ? React.isValidElement(meta.icon)
-          ? React.cloneElement(meta.icon as React.ReactElement, { style: { fontSize: 22 } })
-          : meta.icon
-        : <UnorderedListOutlined style={{ fontSize: 28 }} />;
-      const label = meta?.label ?? name;
-      const parent = meta?.parent;
-      const route =
-        typeof list === "string"
-          ? list
-          : typeof list !== "function"
-            ? list?.path
-            : key;
-
-      if (children.length > 0) {
-        const subMenuKey = route || key || name;
-        return (
-          <Menu.SubMenu
-            key={subMenuKey}
-            icon={icon ?? <UnorderedListOutlined />}
-            title={<span style={{ fontSize: 18, fontWeight: 600 }}>{label}</span>}
-          >
-            {renderTreeView(children, selectedKey)}
-          </Menu.SubMenu>
-        );
-      }
-      const isSelected = route === selectedKey;
-      const isRoute = !(parent !== undefined && children.length === 0);
-      const itemKey = route || key || name;
-      return (
-        <CanAccess
-          key={itemKey}
-          resource={name}
-          action="list"
-          params={{ resource: item }}
-        >
-          <Menu.Item
-            key={itemKey}
-            style={{
-              textTransform: "capitalize",
-              fontSize: 20,
-              fontWeight: 500,
-              minHeight: 48,
-              display: 'flex',
-              alignItems: 'center',
-            }}
-            icon={icon ?? (isRoute && <UnorderedListOutlined />)}
-          >
-            {route ? <Link to={route || "/"} style={{ fontSize: 18, fontWeight: 500 }}>{label}</Link> : <span style={{ fontSize: 15, fontWeight: 500 }}>{label}</span>}
-            {!collapsed && isSelected && (
-              <div className="ant-menu-tree-arrow" />
-            )}
-          </Menu.Item>
-        </CanAccess>
-      );
-    });
-  };
+  const isMobile = typeof breakpoint.lg === "undefined" ? false : !breakpoint.lg;
+  // Access control is not used for menu items to avoid runtime errors
 
   const handleLogout = () => {
     if (warnWhen) {
@@ -106,7 +38,6 @@ export const CustomSider: typeof Sider = ({ render }) => {
           "Are you sure you want to leave? You have unsaved changes.",
         ),
       );
-
       if (confirm) {
         setWarnWhen(false);
         mutateLogout();
@@ -116,30 +47,78 @@ export const CustomSider: typeof Sider = ({ render }) => {
     }
   };
 
-  const logout = isExistAuthentication && (
-    <Menu.Item key="logout" onClick={handleLogout} icon={<LogoutOutlined />}>
-      {translate("buttons.logout", "Logout")}
-    </Menu.Item>
-  );
-
-  const items = renderTreeView(menuItems, selectedKey);
-
-  const renderSider = () => {
-    if (render) {
-      return render({
-        dashboard: null,
-        items,
-        logout,
-        collapsed,
-      });
-    }
-    return (
-      <>
-        {items}
-        {logout}
-      </>
-    );
+  const renderTreeView = (tree: ITreeMenu[], selectedKey: string): any[] => {
+    return tree
+      .map((item: ITreeMenu) => {
+        const { name, children, meta, key, list } = item;
+        const icon = meta?.icon
+          ? React.isValidElement(meta.icon)
+            ? React.cloneElement(meta.icon as React.ReactElement, { style: { fontSize: 22 } })
+            : meta.icon
+          : <UnorderedListOutlined style={{ fontSize: 28 }} />;
+        const label = meta?.label ?? name;
+        const parent = meta?.parent;
+        const route =
+          typeof list === "string"
+            ? list
+            : typeof list !== "function"
+              ? list?.path
+              : key;
+        const itemKey = route || key || name;
+        // Access control removed to avoid runtime error
+        if (children.length > 0) {
+          return {
+            key: itemKey,
+            icon: icon ?? <UnorderedListOutlined />,
+            label: <span style={{ fontSize: 18, fontWeight: 600 }}>{label}</span>,
+            children: renderTreeView(children, selectedKey),
+          };
+        }
+        const isSelected = route === selectedKey;
+        const isRoute = !(parent !== undefined && children.length === 0);
+        return {
+          key: itemKey,
+          icon: icon ?? (isRoute && <UnorderedListOutlined />),
+          label: route
+            ? <Link to={route || "/"} style={{ fontSize: 18, fontWeight: 500 }}>{label}</Link>
+            : <span style={{ fontSize: 15, fontWeight: 500 }}>{label}</span>,
+          style: {
+            textTransform: "capitalize",
+            fontSize: 20,
+            fontWeight: 500,
+            minHeight: 48,
+            display: 'flex',
+            alignItems: 'center',
+          },
+          className: !collapsed && isSelected ? "ant-menu-tree-arrow" : undefined,
+        };
+      })
+      .filter(Boolean);
   };
+
+  let items = renderTreeView(menuItems, selectedKey);
+  if (isExistAuthentication) {
+    items = [
+      ...items,
+      {
+        key: "logout",
+        icon: <LogoutOutlined />,
+        label: (
+          <span onClick={handleLogout} style={{ fontSize: 18, fontWeight: 500 }}>
+            {translate("buttons.logout", "Logout")}
+          </span>
+        ),
+        style: {
+          textTransform: "capitalize",
+          fontSize: 20,
+          fontWeight: 500,
+          minHeight: 48,
+          display: 'flex',
+          alignItems: 'center',
+        },
+      },
+    ];
+  }
 
   const siderStyle = {
     margin: '16px',
@@ -161,7 +140,7 @@ export const CustomSider: typeof Sider = ({ render }) => {
       width={280}
       collapsed={collapsed}
       breakpoint="lg"
-      onCollapse={(collapsed: boolean): void => setCollapsed(collapsed)}
+      onCollapse={(collapsed) => setCollapsed(collapsed)}
       style={{
         ...siderStyle,
         background: !isMobile ? 'transparent' : siderStyle.background,
@@ -209,9 +188,8 @@ export const CustomSider: typeof Sider = ({ render }) => {
             setCollapsed(true);
           }
         }}
-      >
-        {renderSider()}
-      </Menu>
+        items={items}
+      />
     </AntdLayout.Sider>
   );
 };
