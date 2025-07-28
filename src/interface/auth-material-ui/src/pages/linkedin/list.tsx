@@ -223,7 +223,7 @@ export const LinkedinList: React.FC = () => {
       `}</style>
       <List canCreate={false}>
         <Dialog open={openTagDialog} onClose={() => setOpenTagDialog(false)}>
-          <DialogTitle>Gérer les tags pour {selectedRow?.company_name}</DialogTitle>
+          <DialogTitle>Manage tags for {selectedRow?.company_name}</DialogTitle>
           <DialogContent>
             <div style={{ marginBottom: 12 }}>
               <Autocomplete
@@ -237,13 +237,13 @@ export const LinkedinList: React.FC = () => {
                   ))
                 }
                 renderInput={paramsInput => (
-                  <TextField {...paramsInput} variant="standard" label="Tags à assigner" />
+                  <TextField {...paramsInput} variant="standard" label="Tags to assign" />
                 )}
               />
             </div>
             <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
               <TextField
-                label="Nouveau tag"
+                label="New tag"
                 size="small"
                 value={newTagName}
                 onChange={e => setNewTagName(e.target.value)}
@@ -253,7 +253,7 @@ export const LinkedinList: React.FC = () => {
                       const newTags = [...allTags, newTagName.trim()];
                       setAllTags(newTags);
                       setDialogTags(prev => [...prev, newTagName.trim()]);
-                      // Sauvegarde dans Firebase
+                      // Save to Firebase
                       const db = getDatabase(firebaseApp);
                       import("firebase/database").then(({ ref, set }) =>
                         set(ref(db, "/tags"), newTags)
@@ -271,7 +271,7 @@ export const LinkedinList: React.FC = () => {
                     const newTags = [...allTags, newTagName.trim()];
                     setAllTags(newTags);
                     setDialogTags(prev => [...prev, newTagName.trim()]);
-                    // Sauvegarde dans Firebase
+                    // Save to Firebase
                     const db = getDatabase(firebaseApp);
                     import("firebase/database").then(({ ref, set }) =>
                       set(ref(db, "/tags"), newTags)
@@ -281,14 +281,14 @@ export const LinkedinList: React.FC = () => {
                   }
                   setNewTagName("");
                 }
-              }} variant="contained" size="small">Ajouter</Button>
+              }} variant="contained" size="small">Add</Button>
             </div>
             <div style={{ marginTop: 16, fontSize: 13, color: '#888' }}>
-              <b>Tags existants :</b> {allTags.join(', ')}
+              <b>Existing tags:</b> {allTags.join(', ')}
             </div>
           </DialogContent>
           <DialogActions>
-            <Button onClick={() => setOpenTagDialog(false)}>Annuler</Button>
+            <Button onClick={() => setOpenTagDialog(false)}>Cancel</Button>
             <Button variant="contained" onClick={async () => {
               if (!selectedRow) return;
               // Met à jour localement
@@ -301,12 +301,12 @@ export const LinkedinList: React.FC = () => {
               );
               setOpenTagDialog(false);
               window.location.reload();
-            }}>Enregistrer</Button>
+            }}>Save</Button>
           </DialogActions>
         </Dialog>
         <div style={{ marginBottom: 16, display: 'flex', alignItems: 'center', gap: 16 }}>
           <TextField
-            label="Search Airline"
+            label="Search airline"
             size="small"
             value={search}
             onChange={e => setSearch(e.target.value)}
@@ -321,7 +321,7 @@ export const LinkedinList: React.FC = () => {
             style={{ marginRight: 16 }}
           />
           <TextField
-            label="Fleet Size min"
+            label="Min fleet size"
             type="number"
             size="small"
             value={minFleetSize}
@@ -329,7 +329,7 @@ export const LinkedinList: React.FC = () => {
             style={{ marginRight: 16 }}
           />
           <TextField
-            label="max"
+            label="Max fleet size"
             type="number"
             size="small"
             value={maxFleetSize}
