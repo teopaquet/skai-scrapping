@@ -84,14 +84,15 @@ export const LinkedinList: React.FC = () => {
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: tags.length > 0 ? 'flex-start' : 'center',
+                justifyContent: 'center',
                 width: '100%',
+                height: '100%',
                 gap: tags.length > 0 ? 8 : 0,
               }}
             >
               {tags.length > 0 && (
                 <span
-                  style={{ cursor: 'pointer', textDecoration: 'underline', color: '#1976d2', userSelect: 'none' }}
+                  style={{ display: 'flex', gap: 6, flexWrap: 'wrap', cursor: 'pointer', userSelect: 'none' }}
                   onClick={e => {
                     e.stopPropagation();
                     setSelectedRow(params.row);
@@ -100,7 +101,15 @@ export const LinkedinList: React.FC = () => {
                   }}
                   title="Gérer les tags"
                 >
-                  {tags.join(", ")}
+                  {tags.map((tag, idx) => (
+                    <Chip
+                      key={tag + idx}
+                      label={tag}
+                      color="primary"
+                      size="small"
+                      style={{ borderRadius: 16, fontWeight: 500, background: '#1976d2', color: '#fff' }}
+                    />
+                  ))}
                 </span>
               )}
               <span style={{ display: 'flex', alignItems: 'center' }}>
