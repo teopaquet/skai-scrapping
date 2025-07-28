@@ -353,10 +353,11 @@ export const LinkedinList: React.FC = () => {
             onPaginationModelChange={setPaginationModel}
             pageSizeOptions={[25, 50, 100]}
             sx={{ minHeight: 400 }}
+            getRowHeight={() => 'auto'}
             processRowUpdate={async (newRow, oldRow) => {
-              // Met à jour localement
+              // Update locally
               setRows(prev => prev.map((r, i) => i === newRow.id ? { ...newRow } : r));
-              // Met à jour dans Firebase
+              // Update in Firebase
               const db = getDatabase(firebaseApp);
               const { id, ...rowToSave } = newRow;
               await import("firebase/database").then(({ ref, set }) =>
@@ -365,8 +366,8 @@ export const LinkedinList: React.FC = () => {
               return newRow;
             }}
             onProcessRowUpdateError={error => {
-              // Affiche l'erreur dans la console
-              console.error('Erreur lors de la sauvegarde Firebase:', error);
+              // Log error in console
+              console.error('Error while saving to Firebase:', error);
             }}
           />
         </div>
