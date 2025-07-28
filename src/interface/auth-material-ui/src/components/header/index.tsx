@@ -38,6 +38,7 @@ export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({
           <div style={{ flexGrow: 1 }} />
           {/* Section droite */}
           <Stack direction="row" alignItems="center" gap="16px">
+            {/*
             <IconButton
               color="inherit"
               onClick={setMode}
@@ -49,6 +50,7 @@ export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({
             >
               {mode === "dark" ? <LightModeOutlined /> : <DarkModeOutlined />}
             </IconButton>
+            */}
             {/* Display username */}
             <Stack direction="row" gap="8px" alignItems="center">
               <Typography variant="subtitle2" fontWeight="bold">
