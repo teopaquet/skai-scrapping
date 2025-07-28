@@ -29,7 +29,7 @@ export const CustomSider: typeof Sider = ({ render }) => {
   const { mutate: mutateLogout } = useLogout();
   const translate = useTranslate();
   const { menuItems, selectedKey, defaultOpenKeys } = useMenu();
-  const { SubMenu } = Menu;
+
 
   const breakpoint = Grid.useBreakpoint();
 
@@ -55,27 +55,29 @@ export const CustomSider: typeof Sider = ({ render }) => {
             : key;
 
       if (children.length > 0) {
+        const subMenuKey = route || key || name;
         return (
-          <SubMenu
-            key={route}
+          <Menu.SubMenu
+            key={subMenuKey}
             icon={icon ?? <UnorderedListOutlined />}
             title={<span style={{ fontSize: 18, fontWeight: 600 }}>{label}</span>}
           >
             {renderTreeView(children, selectedKey)}
-          </SubMenu>
+          </Menu.SubMenu>
         );
       }
       const isSelected = route === selectedKey;
       const isRoute = !(parent !== undefined && children.length === 0);
+      const itemKey = route || key || name;
       return (
         <CanAccess
-          key={route}
+          key={itemKey}
           resource={name}
           action="list"
           params={{ resource: item }}
         >
           <Menu.Item
-            key={route}
+            key={itemKey}
             style={{
               textTransform: "capitalize",
               fontSize: 20,
