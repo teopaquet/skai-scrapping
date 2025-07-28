@@ -8,6 +8,7 @@ import { getDatabase, ref, get } from "firebase/database";
 import { firebaseApp } from "../../firebase";
 
 type Row = {
+  id?: number;
   company_name: string;
   linkedin_url: string;
   description: string;
@@ -186,10 +187,12 @@ export const LinkedinList: React.FC = () => {
               setRows(prev => prev.map(r => r === oldRow ? newRow : r));
               // Met à jour dans Firebase
               const db = getDatabase(firebaseApp);
-              // Utilise l'index du row dans filteredRows
-              const index = filteredRows.findIndex(r => r.company_name === oldRow.company_name && r.linkedin_url === oldRow.linkedin_url);
+              // Utilise l'id généré (index) pour la correspondance exacte
+              const index = newRow.id !== undefined ? newRow.id : filteredRows.findIndex(r => r.company_name === oldRow.company_name && r.linkedin_url === oldRow.linkedin_url);
+              // On retire l'id avant d'enregistrer dans Firebase
+              const { id, ...rowToSave } = newRow;
               await import("firebase/database").then(({ ref, set }) =>
-                set(ref(db, `/Linkedin_list_with_country/${index}`), { ...newRow })
+                set(ref(db, `/Linkedin_list_with_country/${index}`), { ...rowToSave })
               );
               return newRow;
             }}
