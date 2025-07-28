@@ -1,3 +1,4 @@
+import AddIcon from "@mui/icons-material/Add";
 import React from "react";
 import { List } from "@refinedev/mui";
 import { DataGrid, type GridColDef } from "@mui/x-data-grid";
@@ -8,6 +9,11 @@ import { getDatabase, ref, get } from "firebase/database";
 import { firebaseApp } from "../../firebase";
 import Autocomplete from "@mui/material/Autocomplete";
 import Chip from "@mui/material/Chip";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogActions from "@mui/material/DialogActions";
+import Button from "@mui/material/Button";
 
 type Row = {
   id?: number;
@@ -27,6 +33,11 @@ export const LinkedinList: React.FC = () => {
   const [allTags, setAllTags] = React.useState<string[]>([]);
   // Pour création de tag en cours
   const [tagInput, setTagInput] = React.useState("");
+  // Dialog pour gestion des tags
+  const [openTagDialog, setOpenTagDialog] = React.useState(false);
+  const [selectedRow, setSelectedRow] = React.useState<Row | null>(null);
+  const [dialogTags, setDialogTags] = React.useState<string[]>([]);
+  const [newTagName, setNewTagName] = React.useState("");
 
   // ...existing code...
   React.useEffect(() => {
@@ -65,45 +76,50 @@ export const LinkedinList: React.FC = () => {
         headerName: "Tags",
         minWidth: 200,
         flex: 1,
-        editable: true,
-        renderCell: (params) => (
-          <span>{Array.isArray(params.value) ? params.value.join(", ") : ""}</span>
-        ),
-        renderEditCell: (params) => {
-          // Utilise Autocomplete de MUI pour édition multi-tags
-          // On évite d'importer ici, on suppose import { Autocomplete, Chip } from "@mui/material";
-          // Si pas importé, à ajouter en haut :
-          // import Autocomplete from "@mui/material/Autocomplete";
-          // import Chip from "@mui/material/Chip";
-          const { id, value, api } = params;
+        editable: false,
+        renderCell: (params) => {
+          const tags = Array.isArray(params.value) ? params.value : [];
           return (
-            <Autocomplete
-              multiple
-              freeSolo
-              options={allTags}
-              value={Array.isArray(value) ? value : []}
-              onChange={(_, newValue) => {
-                // Ajoute les nouveaux tags à la liste globale si besoin
-                const newTags = newValue.filter(tag => !allTags.includes(tag));
-                if (newTags.length) {
-                  setAllTags(prev => [...prev, ...newTags]);
-                  // Sauvegarde dans Firebase
-                  const db = getDatabase(firebaseApp);
-                  import("firebase/database").then(({ ref, set }) =>
-                    set(ref(db, "/tags"), [...allTags, ...newTags])
-                  );
-                }
-                api.setEditCellValue({ id, field: "tags", value: newValue }, event);
+            <span
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: tags.length > 0 ? 'flex-start' : 'center',
+                width: '100%',
+                gap: tags.length > 0 ? 8 : 0,
               }}
-              renderTags={(tagValue, getTagProps) =>
-                tagValue.map((option, index) => (
-                  <Chip variant="outlined" label={option} {...getTagProps({ index })} key={option} />
-                ))
-              }
-              renderInput={paramsInput => (
-                <TextField {...paramsInput} variant="standard" label="Tags" />
+            >
+              {tags.length > 0 && (
+                <span
+                  style={{ cursor: 'pointer', textDecoration: 'underline', color: '#1976d2', userSelect: 'none' }}
+                  onClick={e => {
+                    e.stopPropagation();
+                    setSelectedRow(params.row);
+                    setDialogTags(tags);
+                    setOpenTagDialog(true);
+                  }}
+                  title="Gérer les tags"
+                >
+                  {tags.join(", ")}
+                </span>
               )}
-            />
+              <span style={{ display: 'flex', alignItems: 'center' }}>
+                <Button
+                  size="small"
+                  variant="text"
+                  style={{ lineHeight: 1, fontSize: 18, alignSelf: 'center', margin: 0, padding: 0, minWidth: 0 }}
+                  onClick={e => {
+                    e.stopPropagation();
+                    setSelectedRow(params.row);
+                    setDialogTags(tags);
+                    setOpenTagDialog(true);
+                  }}
+                  title="Ajouter ou modifier les tags"
+                >
+                  <AddIcon fontSize="small" style={{ color: '#555', position: 'relative' }} />
+                </Button>
+              </span>
+            </span>
           );
         },
       },
@@ -197,7 +213,88 @@ export const LinkedinList: React.FC = () => {
         }
       `}</style>
       <List canCreate={false}>
-        {/* ...existing code... */}
+        <Dialog open={openTagDialog} onClose={() => setOpenTagDialog(false)}>
+          <DialogTitle>Gérer les tags pour {selectedRow?.company_name}</DialogTitle>
+          <DialogContent>
+            <div style={{ marginBottom: 12 }}>
+              <Autocomplete
+                multiple
+                options={allTags}
+                value={dialogTags}
+                onChange={(_, newValue) => setDialogTags(newValue)}
+                renderTags={(tagValue, getTagProps) =>
+                  tagValue.map((option, index) => (
+                    <Chip variant="outlined" label={option} {...getTagProps({ index })} key={option} />
+                  ))
+                }
+                renderInput={paramsInput => (
+                  <TextField {...paramsInput} variant="standard" label="Tags à assigner" />
+                )}
+              />
+            </div>
+            <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+              <TextField
+                label="Nouveau tag"
+                size="small"
+                value={newTagName}
+                onChange={e => setNewTagName(e.target.value)}
+                onKeyDown={e => {
+                  if (e.key === 'Enter' && newTagName.trim()) {
+                    if (!allTags.includes(newTagName.trim())) {
+                      const newTags = [...allTags, newTagName.trim()];
+                      setAllTags(newTags);
+                      setDialogTags(prev => [...prev, newTagName.trim()]);
+                      // Sauvegarde dans Firebase
+                      const db = getDatabase(firebaseApp);
+                      import("firebase/database").then(({ ref, set }) =>
+                        set(ref(db, "/tags"), newTags)
+                      );
+                    } else if (!dialogTags.includes(newTagName.trim())) {
+                      setDialogTags(prev => [...prev, newTagName.trim()]);
+                    }
+                    setNewTagName("");
+                  }
+                }}
+              />
+              <Button onClick={() => {
+                if (newTagName.trim()) {
+                  if (!allTags.includes(newTagName.trim())) {
+                    const newTags = [...allTags, newTagName.trim()];
+                    setAllTags(newTags);
+                    setDialogTags(prev => [...prev, newTagName.trim()]);
+                    // Sauvegarde dans Firebase
+                    const db = getDatabase(firebaseApp);
+                    import("firebase/database").then(({ ref, set }) =>
+                      set(ref(db, "/tags"), newTags)
+                    );
+                  } else if (!dialogTags.includes(newTagName.trim())) {
+                    setDialogTags(prev => [...prev, newTagName.trim()]);
+                  }
+                  setNewTagName("");
+                }
+              }} variant="contained" size="small">Ajouter</Button>
+            </div>
+            <div style={{ marginTop: 16, fontSize: 13, color: '#888' }}>
+              <b>Tags existants :</b> {allTags.join(', ')}
+            </div>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => setOpenTagDialog(false)}>Annuler</Button>
+            <Button variant="contained" onClick={async () => {
+              if (!selectedRow) return;
+              // Met à jour localement
+              setRows(prev => prev.map(r => r === selectedRow ? { ...r, tags: dialogTags } : r));
+              // Met à jour dans Firebase
+              const db = getDatabase(firebaseApp);
+              const { id, ...rowToSave } = { ...selectedRow, tags: dialogTags };
+              await import("firebase/database").then(({ ref, set }) =>
+                set(ref(db, `/Linkedin_list_with_country/${selectedRow.id}`), { ...rowToSave })
+              );
+              setOpenTagDialog(false);
+              window.location.reload();
+            }}>Enregistrer</Button>
+          </DialogActions>
+        </Dialog>
         <div style={{ marginBottom: 16, display: 'flex', alignItems: 'center', gap: 16 }}>
           <TextField
             label="Search Airline"
