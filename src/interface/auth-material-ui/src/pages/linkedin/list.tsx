@@ -6,6 +6,8 @@ import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
 import { getDatabase, ref, get } from "firebase/database";
 import { firebaseApp } from "../../firebase";
+import Autocomplete from "@mui/material/Autocomplete";
+import Chip from "@mui/material/Chip";
 
 type Row = {
   id?: number;
@@ -14,12 +16,17 @@ type Row = {
   description: string;
   fleet_size: string;
   country?: string;
+  tags?: string[];
 }
 
 export const LinkedinList: React.FC = () => {
   const [rows, setRows] = React.useState<Row[]>([]);
   // Barre de recherche
   const [search, setSearch] = React.useState("");
+  // Liste des tags globaux
+  const [allTags, setAllTags] = React.useState<string[]>([]);
+  // Pour création de tag en cours
+  const [tagInput, setTagInput] = React.useState("");
 
   // ...existing code...
   React.useEffect(() => {
@@ -31,7 +38,15 @@ export const LinkedinList: React.FC = () => {
       const list: Row[] = Array.isArray(data) ? data : (data ? Object.values(data) : []);
       setRows(list);
     }
+    async function fetchTags() {
+      const snapshot = await get(ref(db, "/tags"));
+      const data = snapshot.val();
+      if (Array.isArray(data)) setAllTags(data.filter(Boolean));
+      else if (data && typeof data === 'object') setAllTags((Object.values(data).filter(Boolean) as string[]));
+      else setAllTags([]);
+    }
     fetchRows();
+    fetchTags();
   }, []);
 
 
@@ -44,6 +59,53 @@ export const LinkedinList: React.FC = () => {
         minWidth: 200,
         flex: 1,
         editable: true,
+      },
+      {
+        field: "tags",
+        headerName: "Tags",
+        minWidth: 200,
+        flex: 1,
+        editable: true,
+        renderCell: (params) => (
+          <span>{Array.isArray(params.value) ? params.value.join(", ") : ""}</span>
+        ),
+        renderEditCell: (params) => {
+          // Utilise Autocomplete de MUI pour édition multi-tags
+          // On évite d'importer ici, on suppose import { Autocomplete, Chip } from "@mui/material";
+          // Si pas importé, à ajouter en haut :
+          // import Autocomplete from "@mui/material/Autocomplete";
+          // import Chip from "@mui/material/Chip";
+          const { id, value, api } = params;
+          return (
+            <Autocomplete
+              multiple
+              freeSolo
+              options={allTags}
+              value={Array.isArray(value) ? value : []}
+              onChange={(_, newValue) => {
+                // Ajoute les nouveaux tags à la liste globale si besoin
+                const newTags = newValue.filter(tag => !allTags.includes(tag));
+                if (newTags.length) {
+                  setAllTags(prev => [...prev, ...newTags]);
+                  // Sauvegarde dans Firebase
+                  const db = getDatabase(firebaseApp);
+                  import("firebase/database").then(({ ref, set }) =>
+                    set(ref(db, "/tags"), [...allTags, ...newTags])
+                  );
+                }
+                api.setEditCellValue({ id, field: "tags", value: newValue }, event);
+              }}
+              renderTags={(tagValue, getTagProps) =>
+                tagValue.map((option, index) => (
+                  <Chip variant="outlined" label={option} {...getTagProps({ index })} key={option} />
+                ))
+              }
+              renderInput={paramsInput => (
+                <TextField {...paramsInput} variant="standard" label="Tags" />
+              )}
+            />
+          );
+        },
       },
       {
         field: "linkedin_url",
