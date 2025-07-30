@@ -154,9 +154,15 @@ const EmployeeList: React.FC = () => {
     async function fetchRoles() {
       try {
         const snapshot = await get(ref(db, "/employee_roles"));
-        const data = snapshot.val();
-        if (Array.isArray(data)) setAllRoles(data.filter(Boolean));
-        else if (data && typeof data === 'object') setAllRoles((Object.values(data).filter(Boolean) as string[]));
+        let data = snapshot.val();
+        if (!data) {
+          // If roles section missing, create it as empty array
+          await import("firebase/database").then(({ ref, set }) =>
+            set(ref(db, "/employee_roles"), [])
+          );
+          setAllRoles([]);
+        } else if (Array.isArray(data)) setAllRoles(data.filter(Boolean));
+        else if (typeof data === 'object') setAllRoles((Object.values(data).filter(Boolean) as string[]));
         else setAllRoles([]);
       } catch (e) {
         setSnackbar({open: true, message: 'Error loading roles', severity: 'error'});
@@ -547,11 +553,27 @@ const EmployeeList: React.FC = () => {
             <Button variant="contained" onClick={handleCreateEmployee} color="primary">Create</Button>
           </DialogActions>
         </Dialog>
-        {/* Global Manage Roles dialog */}
-        <Dialog open={openManageRolesDialog} onClose={() => setOpenManageRolesDialog(false)} TransitionProps={{ appear: true }}>
-          <DialogTitle>Manage all roles</DialogTitle>
+        {/* Per-employee Manage Roles dialog */}
+        <Dialog open={openRoleDialog} onClose={() => setOpenRoleDialog(false)} TransitionProps={{ appear: true }}>
+          <DialogTitle>Manage roles for {selectedRow?.employee_name}</DialogTitle>
           <DialogContent>
-            <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 12 }}>
+            <div style={{ marginBottom: 12 }}>
+              <Autocomplete
+                multiple
+                options={allRoles}
+                value={dialogRoles}
+                onChange={(_, newValue) => setDialogRoles(newValue)}
+                renderTags={(roleValue, getTagProps) =>
+                  roleValue.map((option, index) => (
+                    <Chip variant="outlined" label={option} {...getTagProps({ index })} key={option} />
+                  ))
+                }
+                renderInput={paramsInput => (
+                  <TextField {...paramsInput} variant="standard" label="Roles to assign" />
+                )}
+              />
+            </div>
+            <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 4 }}>
               <TextField
                 label="New role"
                 size="small"
@@ -559,78 +581,55 @@ const EmployeeList: React.FC = () => {
                 onChange={e => setNewRoleName(e.target.value)}
                 onKeyDown={async e => {
                   if (e.key === 'Enter' && newRoleName.trim()) {
-                    const role = newRoleName.trim();
-                    if (!allRoles.includes(role)) {
-                      const updatedRoles = [...allRoles, role];
-                      setAllRoles(updatedRoles);
-                      setNewRoleName("");
-                      // Update Firebase
+                    if (!allRoles.includes(newRoleName.trim())) {
+                      const newRoles = [...allRoles, newRoleName.trim()];
+                      setAllRoles(newRoles);
+                      setDialogRoles(prev => [...prev, newRoleName.trim()]);
                       const db = getDatabase(firebaseApp);
                       await import("firebase/database").then(({ ref, set }) =>
-                        set(ref(db, "/employee_roles"), updatedRoles)
+                        set(ref(db, "/employee_roles"), newRoles)
                       );
-                      setSnackbar({open: true, message: `Role added`, severity: 'success'});
+                    } else if (!dialogRoles.includes(newRoleName.trim())) {
+                      setDialogRoles(prev => [...prev, newRoleName.trim()]);
                     }
+                    setNewRoleName("");
                   }
                 }}
                 placeholder="Add a role..."
               />
               <Button onClick={async () => {
-                const role = newRoleName.trim();
-                if (role && !allRoles.includes(role)) {
-                  const updatedRoles = [...allRoles, role];
-                  setAllRoles(updatedRoles);
+                if (newRoleName.trim()) {
+                  if (!allRoles.includes(newRoleName.trim())) {
+                    const newRoles = [...allRoles, newRoleName.trim()];
+                    setAllRoles(newRoles);
+                    setDialogRoles(prev => [...prev, newRoleName.trim()]);
+                    const db = getDatabase(firebaseApp);
+                    await import("firebase/database").then(({ ref, set }) =>
+                      set(ref(db, "/employee_roles"), newRoles)
+                    );
+                  } else if (!dialogRoles.includes(newRoleName.trim())) {
+                    setDialogRoles(prev => [...prev, newRoleName.trim()]);
+                  }
                   setNewRoleName("");
-                  // Update Firebase
-                  const db = getDatabase(firebaseApp);
-                  await import("firebase/database").then(({ ref, set }) =>
-                    set(ref(db, "/employee_roles"), updatedRoles)
-                  );
-                  setSnackbar({open: true, message: `Role added`, severity: 'success'});
                 }
               }} variant="contained" size="small">Add</Button>
             </div>
-            <div style={{ marginTop: 8, fontSize: 13, color: '#888' }}>
-              <b>Existing roles:</b>
-              <span style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 6 }}>
-                {allRoles.map((role, idx) => (
-                  <Chip
-                    key={role + idx}
-                    label={role}
-                    size="small"
-                    style={{ borderRadius: 16, fontWeight: 500, background: getTagColor(role), color: '#fff', fontSize: 13 }}
-                    onDelete={async () => {
-                      // Remove role from allRoles and from all employees
-                      const updatedRoles = allRoles.filter(r => r !== role);
-                      setAllRoles(updatedRoles);
-                      setRows(prevRows => prevRows.map(r => ({ ...r, roles: Array.isArray(r.roles) ? r.roles.filter(t => t !== role) : [] })));
-                      // Update Firebase
-                      const db = getDatabase(firebaseApp);
-                      await import("firebase/database").then(async ({ ref, set, get }) => {
-                        await set(ref(db, "/employee_roles"), updatedRoles);
-                        // Remove from all employees
-                        const empSnap = await get(ref(db, "/Employee_list_with_country"));
-                        const empData = empSnap.val();
-                        if (empData) {
-                          const empList = Array.isArray(empData) ? empData : Object.values(empData);
-                          await Promise.all(empList.map((emp: any, i: number) => {
-                            if (Array.isArray(emp.roles) && emp.roles.includes(role)) {
-                              const newEmp = { ...emp, roles: emp.roles.filter((t: string) => t !== role) };
-                              return set(ref(db, `/Employee_list_with_country/${i}`), newEmp);
-                            }
-                            return Promise.resolve();
-                          }));
-                        }
-                      });
-                      setSnackbar({open: true, message: `Role deleted`, severity: 'success'});
-                    }}
-                  />
-                ))}
-              </span>
-            </div>
           </DialogContent>
           <DialogActions>
-            <Button onClick={() => setOpenManageRolesDialog(false)}>Close</Button>
+            <Button onClick={() => setOpenRoleDialog(false)}>Cancel</Button>
+            <Button variant="contained" onClick={async () => {
+              if (!selectedRow) return;
+              setRows(prev => prev.map(r => r === selectedRow ? { ...r, roles: dialogRoles } : r));
+              const db = getDatabase(firebaseApp);
+              const { id, ...rowToSave } = { ...selectedRow, roles: dialogRoles };
+              await import("firebase/database").then(({ ref, set }) =>
+                set(ref(db, `/Employee_list_with_country/${selectedRow.id}`), { ...rowToSave })
+              );
+              setOpenRoleDialog(false);
+              setSnackbar({open: true, message: 'Roles updated', severity: 'success'});
+              setTimeout(() => window.scrollTo({top: 0, behavior: 'smooth'}), 200);
+              setTimeout(() => window.location.reload(), 800);
+            }}>Save</Button>
           </DialogActions>
         </Dialog>
         {loading ? (
