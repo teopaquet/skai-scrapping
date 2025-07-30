@@ -47,11 +47,13 @@ export const LinkedinList: React.FC = () => {
   const [allTags, setAllTags] = React.useState<string[]>([]);
   // For tag creation in progress
   const [tagInput, setTagInput] = React.useState("");
-  // Dialog for tag management
+  // Dialog for tag management (per row)
   const [openTagDialog, setOpenTagDialog] = React.useState(false);
   const [selectedRow, setSelectedRow] = React.useState<Row | null>(null);
   const [dialogTags, setDialogTags] = React.useState<string[]>([]);
   const [newTagName, setNewTagName] = React.useState("");
+  // Dialog for global tag management
+  const [openManageTagsDialog, setOpenManageTagsDialog] = React.useState(false);
 
   // For delete confirmation
   const [deleteDialogOpen, setDeleteDialogOpen] = React.useState(false);
@@ -507,6 +509,14 @@ export const LinkedinList: React.FC = () => {
           />
           <div style={{ flex: 1 }} />
           <Button
+            variant="outlined"
+            color="primary"
+            onClick={() => setOpenManageTagsDialog(true)}
+            style={{ fontWeight: 500, fontSize: 14 }}
+          >
+            Manage Tags
+          </Button>
+          <Button
             variant="contained"
             color="primary"
             startIcon={<AddIcon />}
@@ -535,7 +545,7 @@ export const LinkedinList: React.FC = () => {
                 )}
               />
             </div>
-            <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+            <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 4 }}>
               <TextField
                 label="New tag"
                 size="small"
@@ -576,23 +586,6 @@ export const LinkedinList: React.FC = () => {
                 }
               }} variant="contained" size="small">Add</Button>
             </div>
-            <div style={{ marginTop: 16, fontSize: 13, color: '#888' }}>
-              <b>Existing tags:</b>
-              <span style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 6 }}>
-                {allTags.map((tag, idx) => (
-                  <Chip
-                    key={tag + idx}
-                    label={tag}
-                    size="small"
-                    style={{ borderRadius: 16, fontWeight: 500, background: '#e3e3e3', color: '#333' }}
-                    onDelete={() => {
-                      setTagToDelete(tag);
-                      setOpenDeleteTagDialog(true);
-                    }}
-                  />
-                ))}
-              </span>
-            </div>
           </DialogContent>
           <DialogActions>
             <Button onClick={() => setOpenTagDialog(false)}>Cancel</Button>
@@ -609,6 +602,76 @@ export const LinkedinList: React.FC = () => {
               setTimeout(() => window.scrollTo({top: 0, behavior: 'smooth'}), 200);
               setTimeout(() => window.location.reload(), 800);
             }}>Save</Button>
+          </DialogActions>
+        </Dialog>
+
+        {/* Global Manage Tags dialog */}
+        <Dialog open={openManageTagsDialog} onClose={() => setOpenManageTagsDialog(false)} TransitionProps={{ appear: true }}>
+          <DialogTitle>Manage all tags</DialogTitle>
+          <DialogContent>
+            <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 12 }}>
+              <TextField
+                label="New tag"
+                size="small"
+                value={newTagName}
+                onChange={e => setNewTagName(e.target.value)}
+                onKeyDown={e => {
+                  if (e.key === 'Enter' && newTagName.trim()) {
+                    if (!allTags.includes(newTagName.trim())) {
+                      const newTags = [...allTags, newTagName.trim()];
+                      setAllTags(newTags);
+                      const db = getDatabase(firebaseApp);
+                      import("firebase/database").then(({ ref, set }) =>
+                        set(ref(db, "/tags"), newTags)
+                      );
+                    }
+                    setNewTagName("");
+                  }
+                }}
+                placeholder="Add a tag..."
+              />
+              <Button onClick={() => {
+                if (newTagName.trim()) {
+                  if (!allTags.includes(newTagName.trim())) {
+                    const newTags = [...allTags, newTagName.trim()];
+                    setAllTags(newTags);
+                    const db = getDatabase(firebaseApp);
+                    import("firebase/database").then(({ ref, set }) =>
+                      set(ref(db, "/tags"), newTags)
+                    );
+                  }
+                  setNewTagName("");
+                }
+              }} variant="contained" size="small">Add</Button>
+            </div>
+            <div style={{ marginTop: 8, fontSize: 13, color: '#888' }}>
+              <b>Existing tags:</b>
+              <span style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 6 }}>
+                {allTags.map((tag, idx) => (
+                  <Chip
+                    key={tag + idx}
+                    label={tag}
+                    size="small"
+                    style={{
+                      borderRadius: 16,
+                      fontWeight: 500,
+                      background: getTagColor(tag),
+                      color: '#fff',
+                      letterSpacing: 0.2,
+                      boxShadow: '0 1px 4px #0001',
+                      fontSize: 13
+                    }}
+                    onDelete={() => {
+                      setTagToDelete(tag);
+                      setOpenDeleteTagDialog(true);
+                    }}
+                  />
+                ))}
+              </span>
+            </div>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => setOpenManageTagsDialog(false)}>Close</Button>
           </DialogActions>
         </Dialog>
         {/* Delete confirmation dialog */}
