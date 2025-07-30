@@ -151,13 +151,6 @@ Les fichiers de données sont organisés comme suit :
 - **Exports** : data/exports/ - Analyses et rapports CSV
 - **Visualisations** : data/visualizations/ - Graphiques et charts
 
-## 📚 Documentation
-
-- [Guide d&#39;installation détaillé](docs/installation.md)
-- [Guide d&#39;utilisation](docs/usage.md)
-- [API Reference](docs/api.md)
-- [Exemples avancés](examples/)
-
 ## 📄 Licence
 
-Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de détails.
+Ce projet est sous licence MIT.
