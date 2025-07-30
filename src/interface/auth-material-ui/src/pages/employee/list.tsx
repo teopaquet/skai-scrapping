@@ -696,6 +696,59 @@ const EmployeeList: React.FC = () => {
             <Button variant="contained" onClick={handleCreateEmployee} color="primary">Create</Button>
           </DialogActions>
         </Dialog>
+        {/* Tag delete confirmation dialog */}
+                <Dialog open={openDeleteRoleDialog} onClose={() => setOpenDeleteRoleDialog(false)}>
+                  <DialogTitle>Confirm Role deletion</DialogTitle>
+                  <DialogContent>
+                    <div style={{ fontSize: 16, marginBottom: 8 }}>
+                      Are you sure you want to delete the Role&nbsp;
+                      <b>{RoleToDelete}</b>?<br/>
+                      This Role will be removed from all companies.
+                    </div>
+                  </DialogContent>
+                  <DialogActions>
+                    <Button onClick={() => setOpenDeleteRoleDialog(false)}>
+                      Cancel
+                    </Button>
+                    <Button
+                      variant="contained"
+                      color="error"
+                      onClick={async () => {
+                        if (!RoleToDelete) return;
+                        const Role = RoleToDelete;
+                        const newRoles = allRoles.filter(t => t !== Role);
+                        setAllRoles(newRoles);
+                        setDialogRoles(prev => prev.filter(t => t !== Role));
+                        setNewRoleName("");
+                        setRows(prevRows => prevRows.map(r => ({ ...r, Roles: Array.isArray(r.roles) ? r.roles.filter(t => t !== Role) : [] })));
+                        const db = getDatabase(firebaseApp);
+                        await import("firebase/database").then(({ ref, set, get }) => {
+                          set(ref(db, "/Roles"), newRoles);
+                          get(ref(db, "/Linkedin_list_with_country")).then(snapshot => {
+                            const data = snapshot.val();
+                            if (data) {
+                              const updates: Record<string, any> = {};
+                              Object.entries(data).forEach(([key, row]) => {
+                                const typedRow = row as Row;
+                                if (typedRow.roles && Array.isArray(typedRow.roles) && typedRow.roles.includes(Role)) {
+                                  updates[key] = { ...typedRow, Roles: typedRow.roles.filter((t: string) => t !== Role) };
+                                }
+                              });
+                              Object.entries(updates).forEach(([key, row]) => {
+                                set(ref(db, `/Linkedin_list_with_country/${key}`), row);
+                              });
+                            }
+                          });
+                        });
+                        setOpenDeleteRoleDialog(false);
+                        setRoleToDelete(null);
+                        setSnackbar({open: true, message: `Tag deleted`, severity: 'success'});
+                      }}
+                    >
+                      Delete
+                    </Button>
+                  </DialogActions>
+                </Dialog>
         {/* Per-employee Manage Roles dialog */}
         <Dialog open={openRoleDialog} onClose={() => setOpenRoleDialog(false)} TransitionProps={{ appear: true }}>
           <DialogTitle>Manage roles for {selectedRow?.employee_name}</DialogTitle>
