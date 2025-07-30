@@ -1,16 +1,30 @@
+import AddIcon from "@mui/icons-material/Add";
+import DeleteIcon from "@mui/icons-material/Delete";
 import React from "react";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+import Skeleton from "@mui/material/Skeleton";
 import { List } from "@refinedev/mui";
 import { DataGrid, type GridColDef } from "@mui/x-data-grid";
 import TextField from "@mui/material/TextField";
-import InputAdornment from "@mui/material/InputAdornment";
-import SearchIcon from "@mui/icons-material/Search";
-import Papa, { ParseResult } from "papaparse";
+import { getDatabase, ref, get } from "firebase/database";
+import { firebaseApp } from "../../firebase";
+import Autocomplete from "@mui/material/Autocomplete";
+import Chip from "@mui/material/Chip";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogActions from "@mui/material/DialogActions";
+import Button from "@mui/material/Button";
 
 type Row = {
-  company_name: string;
+  id?: number;
+  employee_name: string;
   linkedin_url: string;
   description: string;
-  fleet_size: string;
+  company: string;
+  country?: string;
+  roles?: string[];
 };
 
 type ApiRow = {
@@ -37,31 +51,212 @@ type ApiRow = {
 const EmployeeList: React.FC = () => {
   const [rows, setRows] = React.useState<Row[]>([]);
   const [apiRows, setApiRows] = React.useState<ApiRow[]>([]);
-  // Barre de recherche
-  const [search, setSearch] = React.useState("");
+  const [loading, setLoading] = React.useState(true);
+  const [snackbar, setSnackbar] = React.useState<{open: boolean, message: string, severity: 'success'|'error'|'info'|'warning'}>({open: false, message: '', severity: 'success'});
+  // Persistent filters
+  const getInitialFilter = (key: string, fallback: any) => {
+    if (typeof window === 'undefined') return fallback;
+    const val = localStorage.getItem(key);
+    if (val === null) return fallback;
+    if (typeof fallback === 'number') return Number(val);
+    return val;
+  };
+  // Company selector (autocomplete)
+  // State for creation
+  const [openCreateDialog, setOpenCreateDialog] = React.useState(false);
+  const [newEmployee, setNewEmployee] = React.useState<Row>({
+    employee_name: '',
+    linkedin_url: '',
+    description: '',
+    company: '',
+    country: '',
+    roles: [],
+  });
+  const firstInputRef = React.useRef<HTMLInputElement>(null);
+  React.useEffect(() => {
+    if (openCreateDialog && firstInputRef.current) {
+      setTimeout(() => firstInputRef.current?.focus(), 200);
+    }
+  }, [openCreateDialog]);
+
+  // Function to create a new employee
+  const handleCreateEmployee = async () => {
+    if (!newEmployee.employee_name.trim() || !newEmployee.company.trim()) {
+      setSnackbar({open: true, message: 'Name and company required', severity: 'warning'});
+      return;
+    }
+    try {
+      setRows(prev => [...prev, { ...newEmployee }]);
+      const db = getDatabase(firebaseApp);
+      const newId = rows.length;
+      await import("firebase/database").then(({ ref, set }) =>
+        set(ref(db, `/Employee_list_with_country/${newId}`), { ...newEmployee })
+      );
+      setOpenCreateDialog(false);
+      setNewEmployee({ employee_name: '', linkedin_url: '', description: '', company: '', country: '', roles: [] });
+      setSnackbar({open: true, message: 'Employee created', severity: 'success'});
+      setTimeout(() => window.scrollTo({top: 0, behavior: 'smooth'}), 200);
+      setTimeout(() => window.location.reload(), 800);
+    } catch (e) {
+      setSnackbar({open: true, message: 'Error while creating', severity: 'error'});
+    }
+  };
+  const [selectedCompany, setSelectedCompany] = React.useState<string>("");
+  const [companyOptions, setCompanyOptions] = React.useState<string[]>([]);
+  // List of global tags
+  const [allRoles, setAllRoles] = React.useState<string[]>([]);
+  // For role creation in progress
+  const [roleInput, setRoleInput] = React.useState("");
+  // Dialog for role management (per row)
+  const [openRoleDialog, setOpenRoleDialog] = React.useState(false);
+  const [selectedRow, setSelectedRow] = React.useState<Row | null>(null);
+  const [dialogRoles, setDialogRoles] = React.useState<string[]>([]);
+  const [newRoleName, setNewRoleName] = React.useState("");
+  // Dialog for global role management
+  const [openManageRolesDialog, setOpenManageRolesDialog] = React.useState(false);
+
+  // For delete confirmation
+  const [deleteDialogOpen, setDeleteDialogOpen] = React.useState(false);
+  const [rowToDelete, setRowToDelete] = React.useState<Row | null>(null);
+
+  // Add state for tag delete confirmation
+  const [openDeleteTagDialog, setOpenDeleteTagDialog] = React.useState(false);
+  const [tagToDelete, setTagToDelete] = React.useState<string | null>(null);
 
   React.useEffect(() => {
-    // Fetch API data uniquement
-    fetch("https://script.google.com/macros/s/AKfycbxrytqltihDzfDiluOdl8-5XAEIjJOb0KrmNqm2e_FcfIdftl0GNzh-WAqIbALyMdWWJQ/exec")
-      .then(res => res.json())
-      .then(data => {
-        if (Array.isArray(data)) setApiRows(data);
-      });
+    const db = getDatabase(firebaseApp);
+    async function fetchRows() {
+      try {
+        const snapshot = await get(ref(db, "/Employee_list_with_country"));
+        const data = snapshot.val();
+        const list: Row[] = Array.isArray(data) ? data : (data ? Object.values(data) : []);
+        setRows(list);
+      } catch (e) {
+        setSnackbar({open: true, message: 'Error loading employees', severity: 'error'});
+      } finally {
+        setLoading(false);
+      }
+    }
+    async function fetchCompanies() {
+      try {
+        const snapshot = await get(ref(db, "/Linkedin_list_with_country"));
+        const data = snapshot.val();
+        const setCompanies = new Set<string>();
+        const list = Array.isArray(data) ? data : (data ? Object.values(data) : []);
+        list.forEach((row: any) => {
+          if (row && row.company_name) setCompanies.add(row.company_name);
+        });
+        setCompanyOptions(Array.from(setCompanies).sort());
+      } catch (e) {
+        setSnackbar({open: true, message: 'Error loading companies', severity: 'error'});
+      }
+    }
+    async function fetchRoles() {
+      try {
+        const snapshot = await get(ref(db, "/employee_roles"));
+        const data = snapshot.val();
+        if (Array.isArray(data)) setAllRoles(data.filter(Boolean));
+        else if (data && typeof data === 'object') setAllRoles((Object.values(data).filter(Boolean) as string[]));
+        else setAllRoles([]);
+      } catch (e) {
+        setSnackbar({open: true, message: 'Error loading roles', severity: 'error'});
+      }
+    }
+    fetchRows();
+    fetchCompanies();
+    fetchRoles();
   }, []);
 
   const columns = React.useMemo<GridColDef<Row>[]>(
     () => [
       {
-        field: "company_name",
-        headerName: "Company Name",
+        field: "employee_name",
+        headerName: "Employee Name",
         minWidth: 200,
         flex: 1,
+        editable: true,
+      },
+      {
+        field: "roles",
+        headerName: "Roles",
+        minWidth: 200,
+        flex: 1,
+        editable: false,
+        renderCell: (params) => {
+          const roles = Array.isArray(params.value) ? params.value : [];
+          return (
+            <span
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'flex-start',
+                width: '100%',
+                height: '100%',
+                gap: roles.length > 0 ? 8 : 0,
+              }}
+            >
+              {roles.length > 0 ? (
+                <span
+                  style={{ display: 'flex', gap: 6, flexWrap: 'wrap', cursor: 'pointer', userSelect: 'none', alignItems: 'center' }}
+                  onClick={e => {
+                    e.stopPropagation();
+                    setSelectedRow(params.row);
+                    setDialogRoles(roles);
+                    setOpenRoleDialog(true);
+                  }}
+                  title="Manage roles"
+                >
+                  {roles.map((role, idx) => (
+                    <Chip
+                      key={role + idx}
+                      label={role}
+                      size="small"
+                      style={{
+                        borderRadius: 16,
+                        fontWeight: 500,
+                        background: getTagColor(role),
+                        color: '#fff',
+                        letterSpacing: 0.2,
+                        boxShadow: '0 1px 4px #0001',
+                        fontSize: 13,
+                        marginRight: idx === roles.length - 1 ? 0 : 0,
+                      }}
+                    />
+                  ))}
+                </span>
+              ) : (
+                <Button
+                  size="small"
+                  variant="text"
+                  style={{ lineHeight: 1, fontSize: 18, alignSelf: 'center', margin: 0, padding: 0, minWidth: 0 }}
+                  onClick={e => {
+                    e.stopPropagation();
+                    setSelectedRow(params.row);
+                    setDialogRoles(roles);
+                    setOpenRoleDialog(true);
+                  }}
+                  title="Add or edit roles"
+                >
+                  <AddIcon fontSize="small" style={{ color: '#555', position: 'relative' }} />
+                </Button>
+              )}
+            </span>
+          );
+        },
+      },
+      {
+        field: "company",
+        headerName: "Company",
+        minWidth: 200,
+        flex: 1,
+        editable: true,
       },
       {
         field: "linkedin_url",
         headerName: "LinkedIn",
         minWidth: 200,
         flex: 1,
+        editable: true,
         renderCell: ({ value }) => (
           <a
             href={value}
@@ -79,21 +274,46 @@ const EmployeeList: React.FC = () => {
         ),
       },
       {
+        field: "country",
+        headerName: "Country",
+        minWidth: 120,
+        flex: 0.5,
+        editable: true,
+      },
+      {
         field: "description",
         headerName: "Description",
         minWidth: 400,
         flex: 2,
+        editable: true,
       },
       {
-        field: "fleet_size",
-        headerName: "Fleet Size",
-        minWidth: 100,
-        flex: 0.3,
-        type: "number",
-        sortComparator: (v1, v2) => Number(v1) - Number(v2),
+        field: "actions",
+        headerName: "",
+        minWidth: 40,
+        width: 40,
+        flex: 0,
+        sortable: false,
+        filterable: false,
+        disableColumnMenu: true,
+        renderCell: (params) => (
+          <Button
+            color="error"
+            size="small"
+            onClick={e => {
+              e.stopPropagation();
+              setRowToDelete(params.row);
+              setDeleteDialogOpen(true);
+            }}
+            title="Delete employee"
+            style={{ minWidth: 0, padding: 4 }}
+          >
+            <DeleteIcon fontSize="small" />
+          </Button>
+        ),
       },
     ],
-    []
+    [allRoles]
   );
 
   // Colonnes dynamiques pour les données brutes
@@ -147,14 +367,38 @@ const EmployeeList: React.FC = () => {
     }
   };
 
-  // Pagination state
-  const [paginationModel, setPaginationModel] = React.useState({ pageSize: 25, page: 0 });
+  // Pagination state with persistence
+  const getInitialPagination = () => {
+    if (typeof window === 'undefined') return { pageSize: 25, page: 0 };
+    const saved = localStorage.getItem('employee_pagination');
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (
+          typeof parsed === 'object' &&
+          typeof parsed.page === 'number' &&
+          typeof parsed.pageSize === 'number'
+        ) {
+          return parsed;
+        }
+      } catch {}
+    }
+    return { pageSize: 25, page: 0 };
+  };
+  const [paginationModel, setPaginationModel] = React.useState(getInitialPagination);
+  React.useEffect(() => {
+    if (typeof window === 'undefined') return;
+    localStorage.setItem('employee_pagination', JSON.stringify(paginationModel));
+  }, [paginationModel]);
 
-  // Filtre sur le nom (search) pour les données API
-  const filteredApiRows = apiRows.filter(row => {
-    const name = row.truncate?.toLowerCase() || "";
-    return name.includes(search.toLowerCase());
-  });
+
+  // Filter rows by selected company
+  const filteredRows = rows
+    .map((row, i) => ({ ...row, id: i }))
+    .filter(row => {
+      if (!selectedCompany) return true;
+      return row.company === selectedCompany;
+    });
 
   return (
     <>
@@ -162,44 +406,291 @@ const EmployeeList: React.FC = () => {
         .linkedin-link {
           color: var(--mui-link-color, #1976d2);
         }
-        body[data-mui-color-scheme='dark'] .linkedin-link {
-          color: #90caf9 !important;
+        .MuiDataGrid-row:hover {
+          background: #f5faff !important;
         }
-        .linkedin-link:hover {
-          color: #1565c0;
+        .MuiButton-containedPrimary {
+          transition: background 0.2s;
         }
-        body[data-mui-color-scheme='dark'] .linkedin-link:hover {
-          color: #42a5f5 !important;
+        .MuiButton-containedPrimary:active {
+          background: #115293;
+        }
+        .MuiDialog-root .MuiPaper-root {
+          transition: box-shadow 0.3s cubic-bezier(.4,0,.2,1);
         }
       `}</style>
       <List canCreate={false}>
-        <div style={{ marginBottom: 16, display: 'flex', alignItems: 'center', gap: 16 }}>
-          <TextField
-            label="Search Name"
-            size="small"
-            value={search}
-            onChange={e => setSearch(e.target.value)}
-          />
-        </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            maxHeight: "calc(100vh - 320px)",
-          }}
+        {/* Snackbar for user feedback */}
+        <Snackbar
+          open={snackbar.open}
+          autoHideDuration={2500}
+          onClose={() => setSnackbar(s => ({...s, open: false}))}
+          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
         >
-          <DataGrid
-            rows={filteredApiRows.map((row, i) => ({ id: i, ...row }))}
-            columns={apiColumns}
-            pagination
-            pageSizeOptions={[25, 50, 100]}
-            sx={{ minHeight: 400 }}
-            processRowUpdate={handleProcessRowUpdate}
+          <MuiAlert elevation={6} variant="filled" severity={snackbar.severity} sx={{ minWidth: 220 }}>
+            {snackbar.message}
+          </MuiAlert>
+        </Snackbar>
+        <div style={{ marginBottom: 16, display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
+          <Autocomplete
+            options={["All companies", ...companyOptions]}
+            value={selectedCompany || "All companies"}
+            onChange={(_, newValue) => setSelectedCompany(newValue === "All companies" ? "" : (newValue || ""))}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Select company"
+                placeholder="Type to search..."
+                style={{ minWidth: 220 }}
+              />
+            )}
+            clearOnEscape
+            isOptionEqualToValue={(option, value) => option === value}
+            autoHighlight
+            disableClearable
           />
+          <div style={{ flex: 1 }} />
+          <Button
+            variant="outlined"
+            color="primary"
+            onClick={() => setOpenManageRolesDialog(true)}
+            style={{ fontWeight: 500, fontSize: 14 }}
+          >
+            Manage Roles
+          </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            startIcon={<AddIcon />}
+            onClick={() => setOpenCreateDialog(true)}
+            style={{ whiteSpace: 'nowrap', fontWeight: 600, fontSize: 15, boxShadow: '0 2px 8px #1976d220' }}
+          >
+            Add an employee
+          </Button>
         </div>
+
+        {/* Dialog to create a new employee with transition and focus */}
+        <Dialog open={openCreateDialog} onClose={() => setOpenCreateDialog(false)} TransitionProps={{ appear: true }}>
+          <DialogTitle>Create a new employee</DialogTitle>
+          <DialogContent>
+            <TextField
+              label="Employee name"
+              value={newEmployee.employee_name}
+              onChange={e => setNewEmployee(c => ({ ...c, employee_name: e.target.value }))}
+              fullWidth
+              margin="dense"
+              inputRef={firstInputRef}
+              required
+              autoFocus
+            />
+            <TextField
+              label="LinkedIn URL"
+              value={newEmployee.linkedin_url}
+              onChange={e => setNewEmployee(c => ({ ...c, linkedin_url: e.target.value }))}
+              fullWidth
+              margin="dense"
+              placeholder="https://linkedin.com/in/..."
+            />
+            <TextField
+              label="Description"
+              value={newEmployee.description}
+              onChange={e => setNewEmployee(c => ({ ...c, description: e.target.value }))}
+              fullWidth
+              margin="dense"
+              multiline
+              minRows={2}
+            />
+            <Autocomplete
+              multiple
+              options={companyOptions}
+              value={newEmployee.company ? [newEmployee.company] : []}
+              onChange={(_, newValue) => setNewEmployee(c => ({ ...c, company: newValue[0] || '' }))}
+              renderTags={(tagValue, getTagProps) =>
+                tagValue.map((option, index) => (
+                  <Chip variant="outlined" label={option} {...getTagProps({ index })} key={option} />
+                ))
+              }
+              renderInput={params => (
+                <TextField {...params} label="Company" margin="dense" fullWidth required variant="standard" />
+              )}
+              style={{ marginBottom: 8 }}
+              freeSolo
+              filterSelectedOptions
+              autoHighlight
+              autoSelect
+              openOnFocus
+            />
+            <TextField
+              label="Country"
+              value={newEmployee.country}
+              onChange={e => setNewEmployee(c => ({ ...c, country: e.target.value }))}
+              fullWidth
+              margin="dense"
+            />
+            <Autocomplete
+              multiple
+              options={allRoles}
+              value={newEmployee.roles || []}
+              onChange={(_, newValue) => setNewEmployee(c => ({ ...c, roles: newValue }))}
+              renderTags={(roleValue, getTagProps) =>
+                roleValue.map((option, index) => (
+                  <Chip variant="outlined" label={option} {...getTagProps({ index })} key={option} />
+                ))
+              }
+              renderInput={paramsInput => (
+                <TextField {...paramsInput} variant="standard" label="Roles" />
+              )}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => setOpenCreateDialog(false)}>Cancel</Button>
+            <Button variant="contained" onClick={handleCreateEmployee} color="primary">Create</Button>
+          </DialogActions>
+        </Dialog>
+        {/* Global Manage Roles dialog */}
+        <Dialog open={openManageRolesDialog} onClose={() => setOpenManageRolesDialog(false)} TransitionProps={{ appear: true }}>
+          <DialogTitle>Manage all roles</DialogTitle>
+          <DialogContent>
+            <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 12 }}>
+              <TextField
+                label="New role"
+                size="small"
+                value={newRoleName}
+                onChange={e => setNewRoleName(e.target.value)}
+                onKeyDown={async e => {
+                  if (e.key === 'Enter' && newRoleName.trim()) {
+                    const role = newRoleName.trim();
+                    if (!allRoles.includes(role)) {
+                      const updatedRoles = [...allRoles, role];
+                      setAllRoles(updatedRoles);
+                      setNewRoleName("");
+                      // Update Firebase
+                      const db = getDatabase(firebaseApp);
+                      await import("firebase/database").then(({ ref, set }) =>
+                        set(ref(db, "/employee_roles"), updatedRoles)
+                      );
+                      setSnackbar({open: true, message: `Role added`, severity: 'success'});
+                    }
+                  }
+                }}
+                placeholder="Add a role..."
+              />
+              <Button onClick={async () => {
+                const role = newRoleName.trim();
+                if (role && !allRoles.includes(role)) {
+                  const updatedRoles = [...allRoles, role];
+                  setAllRoles(updatedRoles);
+                  setNewRoleName("");
+                  // Update Firebase
+                  const db = getDatabase(firebaseApp);
+                  await import("firebase/database").then(({ ref, set }) =>
+                    set(ref(db, "/employee_roles"), updatedRoles)
+                  );
+                  setSnackbar({open: true, message: `Role added`, severity: 'success'});
+                }
+              }} variant="contained" size="small">Add</Button>
+            </div>
+            <div style={{ marginTop: 8, fontSize: 13, color: '#888' }}>
+              <b>Existing roles:</b>
+              <span style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 6 }}>
+                {allRoles.map((role, idx) => (
+                  <Chip
+                    key={role + idx}
+                    label={role}
+                    size="small"
+                    style={{ borderRadius: 16, fontWeight: 500, background: getTagColor(role), color: '#fff', fontSize: 13 }}
+                    onDelete={async () => {
+                      // Remove role from allRoles and from all employees
+                      const updatedRoles = allRoles.filter(r => r !== role);
+                      setAllRoles(updatedRoles);
+                      setRows(prevRows => prevRows.map(r => ({ ...r, roles: Array.isArray(r.roles) ? r.roles.filter(t => t !== role) : [] })));
+                      // Update Firebase
+                      const db = getDatabase(firebaseApp);
+                      await import("firebase/database").then(async ({ ref, set, get }) => {
+                        await set(ref(db, "/employee_roles"), updatedRoles);
+                        // Remove from all employees
+                        const empSnap = await get(ref(db, "/Employee_list_with_country"));
+                        const empData = empSnap.val();
+                        if (empData) {
+                          const empList = Array.isArray(empData) ? empData : Object.values(empData);
+                          await Promise.all(empList.map((emp: any, i: number) => {
+                            if (Array.isArray(emp.roles) && emp.roles.includes(role)) {
+                              const newEmp = { ...emp, roles: emp.roles.filter((t: string) => t !== role) };
+                              return set(ref(db, `/Employee_list_with_country/${i}`), newEmp);
+                            }
+                            return Promise.resolve();
+                          }));
+                        }
+                      });
+                      setSnackbar({open: true, message: `Role deleted`, severity: 'success'});
+                    }}
+                  />
+                ))}
+              </span>
+            </div>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => setOpenManageRolesDialog(false)}>Close</Button>
+          </DialogActions>
+        </Dialog>
+        {loading ? (
+          <div style={{ padding: 32 }}>
+            <Skeleton variant="rectangular" width="100%" height={48} style={{ marginBottom: 16 }} />
+            <Skeleton variant="rectangular" width="100%" height={48} style={{ marginBottom: 16 }} />
+            <Skeleton variant="rectangular" width="100%" height={48} />
+          </div>
+        ) : (
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              maxHeight: "calc(100vh - 320px)",
+              background: '#fff',
+              borderRadius: 12,
+              boxShadow: '0 2px 12px #1976d210',
+              overflow: 'hidden',
+            }}
+          >
+            <DataGrid
+              rows={filteredRows}
+              columns={columns}
+              pagination
+              paginationMode="client"
+              paginationModel={paginationModel}
+              onPaginationModelChange={setPaginationModel}
+              pageSizeOptions={[25, 50, 100]}
+              sx={{ minHeight: 400, fontSize: 15, border: 0, background: '#fff' }}
+              getRowHeight={() => 'auto'}
+            />
+          </div>
+        )}
       </List>
     </>
   );
 };
 
+// Utility function to generate a color from a tag
 export default EmployeeList;
+function getTagColor(tag: string) {
+  // Normalize to ignore accents and case
+  const norm = (str: string) => str.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase().trim();
+  const tagNorm = norm(tag);
+  if (tagNorm === 'amerique') {
+    return 'hsl(0, 75%, 48%)'; // bright red
+  }
+  if (tagNorm === 'afrique subsaharienne') {
+    return 'hsl(45, 90%, 52%)'; // golden yellow
+  }
+  if (tagNorm === 'amerique latine et caraibes') {
+    return 'hsl(330, 80%, 70%)'; // pink
+  }
+  // Otherwise, varied color
+  let hash = 0;
+  for (let i = 0; i < tag.length; i++) {
+    hash = tag.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  const hue = Math.abs(hash * 47) % 360;
+  const sat = 55 + (Math.abs(hash * 31) % 35);
+  const light = 42 + (Math.abs(hash * 61) % 16);
+  return `hsl(${hue}, ${sat}%, ${light}%)`;
+}
