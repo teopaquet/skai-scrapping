@@ -1,14 +1,14 @@
 import React from "react";
 import { Box, Typography, Paper } from "@mui/material";
 import Grid from "@mui/material/Grid";
-import PeopleIcon from "@mui/icons-material/People";
 import LocalAirportIcon from "@mui/icons-material/LocalAirport";
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import { Link } from "react-router-dom";
 
 const pages = [
   {
     label: "Linkedin",
-    icon: <PeopleIcon fontSize="large" color="primary" />,
+    icon: <LinkedInIcon fontSize="large" color="primary" />,
     link: "/linkedin",
     
   },
@@ -60,6 +60,9 @@ const Home: React.FC = () => {
                 textAlign: "center",
                 textDecoration: "none",
                 transition: "0.2s",
+                borderRadius: 50,
+                bgcolor: "background.paper",
+                boxShadow: 8,
                 gap: 1,
                 "&:hover": {
                   boxShadow: 6,

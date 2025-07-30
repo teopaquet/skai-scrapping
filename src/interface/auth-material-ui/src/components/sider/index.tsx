@@ -163,12 +163,27 @@ export const CustomSider: typeof Sider = ({ render }) => {
         }}
         onClick={() => setCollapsed(!collapsed)}
       >
-        <img src="/logo_skai.svg" alt="Skai Visualizer" style={{ height: 32, width: 32, marginRight: collapsed ? 0 : 8 }} />
-        {!collapsed && <span style={{ fontFamily: "Roboto, sans-serif" }}>Skai Visualizer</span>}
+        <img src="/logo_skai.svg" alt="Skai Visualizer" style={{ height: 32, width: 62, marginRight: collapsed ? 0 : 8 }} />
+        {!collapsed && (
+          <span
+            style={{
+              fontFamily: 'Montserrat, Roboto, sans-serif',
+              fontWeight: 600,
+              fontSize: 20,
+              letterSpacing: 1,
+              color: '#1976d2',
+              textShadow: '0 6px 8px rgba(25,118,210,0.08)',
+              lineHeight: 1.1,
+              marginLeft: 4,
+            }}
+          >
+            Skai Visualizer
+          </span>
+        )}
       </div>
       <div
         style={{
-          width: "60%",
+          width: "70%",
           height: 0,
           borderBottom: "2.5px solid #1976d2",
           margin: "0 auto"

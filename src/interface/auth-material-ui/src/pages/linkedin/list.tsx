@@ -133,6 +133,15 @@ export const LinkedinList: React.FC = () => {
         },
       },
       {
+        field: "fleet_size",
+        headerName: "Fleet Size",
+        minWidth: 100,
+        flex: 0.3,
+        type: "number",
+        editable: true,
+        sortComparator: (v1, v2) => Number(v1) - Number(v2),
+      },
+      {
         field: "linkedin_url",
         headerName: "LinkedIn",
         minWidth: 200,
@@ -155,13 +164,6 @@ export const LinkedinList: React.FC = () => {
         ),
       },
       {
-        field: "description",
-        headerName: "Description",
-        minWidth: 400,
-        flex: 2,
-        editable: true,
-      },
-      {
         field: "country",
         headerName: "Country",
         minWidth: 120,
@@ -169,13 +171,11 @@ export const LinkedinList: React.FC = () => {
         editable: true,
       },
       {
-        field: "fleet_size",
-        headerName: "Fleet Size",
-        minWidth: 100,
-        flex: 0.3,
-        type: "number",
+        field: "description",
+        headerName: "Description",
+        minWidth: 400,
+        flex: 2,
         editable: true,
-        sortComparator: (v1, v2) => Number(v1) - Number(v2),
       },
     ],
     []
@@ -204,6 +204,12 @@ export const LinkedinList: React.FC = () => {
       return val >= minFleetSize && val <= maxFleetSize && matchesSearch;
     });
 
+  // Calcul de la somme des fleet_size filtrés
+  const totalFleetSize = filteredRows.reduce((sum, row) => {
+    const val = Number(row.fleet_size);
+    return !isNaN(val) ? sum + val : sum;
+  }, 0);
+
 
   return (
     <>
@@ -222,6 +228,9 @@ export const LinkedinList: React.FC = () => {
         }
       `}</style>
       <List canCreate={false}>
+        <div style={{ marginBottom: 12, fontWeight: 500, fontSize: 16, color: '#1976d2' }}>
+          Total fleet size: {totalFleetSize}
+        </div>
         <Dialog open={openTagDialog} onClose={() => setOpenTagDialog(false)}>
           <DialogTitle>Manage tags for {selectedRow?.company_name}</DialogTitle>
           <DialogContent>
