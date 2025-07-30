@@ -105,6 +105,21 @@ const EmployeeList: React.FC = () => {
       setSnackbar({open: true, message: 'Error while creating', severity: 'error'});
     }
   };
+  // Function to handle delete employee
+  const handleDeleteRow = async (rowId: number) => {
+      try {
+        setRows(prev => prev.filter((_, i) => i !== rowId));
+        const db = getDatabase(firebaseApp);
+        await import("firebase/database").then(({ ref, remove }) =>
+          remove(ref(db, `/Employee_list_with_country/${rowId}`))
+        );
+        setSnackbar({open: true, message: 'Company deleted', severity: 'success'});
+        setTimeout(() => window.scrollTo({top: 0, behavior: 'smooth'}), 200);
+        setTimeout(() => window.location.reload(), 800);
+      } catch (e) {
+        setSnackbar({open: true, message: 'Error while deleting', severity: 'error'});
+      }
+    };
   const [selectedCompany, setSelectedCompany] = React.useState<string>("");
   const [companyOptions, setCompanyOptions] = React.useState<string[]>([]);
   // List of global tags
@@ -123,9 +138,9 @@ const EmployeeList: React.FC = () => {
   const [deleteDialogOpen, setDeleteDialogOpen] = React.useState(false);
   const [rowToDelete, setRowToDelete] = React.useState<Row | null>(null);
 
-  // Add state for tag delete confirmation
-  const [openDeleteTagDialog, setOpenDeleteTagDialog] = React.useState(false);
-  const [tagToDelete, setTagToDelete] = React.useState<string | null>(null);
+  // Add state for role delete confirmation
+  const [openDeleteRoleDialog, setOpenDeleteRoleDialog] = React.useState(false);
+  const [RoleToDelete, setRoleToDelete] = React.useState<string | null>(null);
 
   React.useEffect(() => {
     const db = getDatabase(firebaseApp);
@@ -224,7 +239,7 @@ const EmployeeList: React.FC = () => {
                       style={{
                         borderRadius: 16,
                         fontWeight: 500,
-                        background: getTagColor(role),
+                        background: getRoleColor(role),
                         color: '#fff',
                         letterSpacing: 0.2,
                         boxShadow: '0 1px 4px #0001',
@@ -492,7 +507,104 @@ const EmployeeList: React.FC = () => {
             Add an employee
           </Button>
         </div>
-
+         {/* Global Manage Tags dialog */}
+                <Dialog open={openManageRolesDialog} onClose={() => setOpenManageRolesDialog(false)} TransitionProps={{ appear: true }}>
+                  <DialogTitle>Manage all Roles</DialogTitle>
+                  <DialogContent>
+                    <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 12 }}>
+                      <TextField
+                        label="New Role"
+                        size="small"
+                        value={newRoleName}
+                        onChange={e => setNewRoleName(e.target.value)}
+                        onKeyDown={e => {
+                          if (e.key === 'Enter' && newRoleName.trim()) {
+                            if (!allRoles.includes(newRoleName.trim())) {
+                              const newRoles = [...allRoles, newRoleName.trim()];
+                              setAllRoles(newRoles);
+                              const db = getDatabase(firebaseApp);
+                              import("firebase/database").then(({ ref, set }) =>
+                                set(ref(db, "/Roles"), newRoles)
+                              );
+                            }
+                            setNewRoleName("");
+                          }
+                        }}
+                        placeholder="Add a Role..."
+                      />
+                      <Button onClick={() => {
+                        if (newRoleName.trim()) {
+                          if (!allRoles.includes(newRoleName.trim())) {
+                            const newRoles = [...allRoles, newRoleName.trim()];
+                            setAllRoles(newRoles);
+                            const db = getDatabase(firebaseApp);
+                            import("firebase/database").then(({ ref, set }) =>
+                              set(ref(db, "/Roles"), newRoles)
+                            );
+                          }
+                          setNewRoleName("");
+                        }
+                      }} variant="contained" size="small">Add</Button>
+                    </div>
+                    <div style={{ marginTop: 8, fontSize: 13, color: '#888' }}>
+                      <b>Existing Roles:</b>
+                      <span style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 6 }}>
+                        {allRoles.map((role, idx) => (
+                          <Chip
+                            key={role + idx}
+                            label={role}
+                            size="small"
+                            style={{
+                              borderRadius: 16,
+                              fontWeight: 500,
+                              background: getRoleColor(role),
+                              color: '#fff',
+                              letterSpacing: 0.2,
+                              boxShadow: '0 1px 4px #0001',
+                              fontSize: 13
+                            }}
+                            onDelete={() => {
+                              setRoleToDelete(role);
+                              setOpenDeleteRoleDialog(true);
+                            }}
+                          />
+                        ))}
+                      </span>
+                    </div>
+                  </DialogContent>
+                  <DialogActions>
+                    <Button onClick={() => setOpenManageRolesDialog(false)}>Close</Button>
+                  </DialogActions>
+                </Dialog>
+        {/* Delete confirmation dialog */}
+                <Dialog open={deleteDialogOpen} onClose={() => setDeleteDialogOpen(false)}>
+                  <DialogTitle>Confirm deletion</DialogTitle>
+                  <DialogContent>
+                    <div style={{ fontSize: 16, marginBottom: 8 }}>
+                      Are you sure you want to delete&nbsp;
+                      <b>{rowToDelete?.employee_name}</b>?<br/>
+                      This action is irreversible.
+                    </div>
+                  </DialogContent>
+                  <DialogActions>
+                    <Button onClick={() => setDeleteDialogOpen(false)}>
+                      Cancel
+                    </Button>
+                    <Button
+                      variant="contained"
+                      color="error"
+                      onClick={() => {
+                        if (rowToDelete && typeof rowToDelete.id === 'number') {
+                          handleDeleteRow(rowToDelete.id);
+                        }
+                        setDeleteDialogOpen(false);
+                        setRowToDelete(null);
+                      }}
+                    >
+                      Delete
+                    </Button>
+                  </DialogActions>
+                </Dialog>    
         {/* Dialog to create a new employee with transition and focus */}
         <Dialog open={openCreateDialog} onClose={() => setOpenCreateDialog(false)} TransitionProps={{ appear: true }}>
           <DialogTitle>Create a new employee</DialogTitle>
@@ -696,28 +808,29 @@ const EmployeeList: React.FC = () => {
         )}
       </List>
     </>
+
   );
 };
 
 // Utility function to generate a color from a tag
 export default EmployeeList;
-function getTagColor(tag: string) {
+function getRoleColor(role: string) {
   // Normalize to ignore accents and case
   const norm = (str: string) => str.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase().trim();
-  const tagNorm = norm(tag);
-  if (tagNorm === 'amerique') {
+  const roleNorm = norm(role);
+  if (roleNorm === 'amerique') {
     return 'hsl(0, 75%, 48%)'; // bright red
   }
-  if (tagNorm === 'afrique subsaharienne') {
+  if (roleNorm === 'afrique subsaharienne') {
     return 'hsl(45, 90%, 52%)'; // golden yellow
   }
-  if (tagNorm === 'amerique latine et caraibes') {
+  if (roleNorm === 'amerique latine et caraibes') {
     return 'hsl(330, 80%, 70%)'; // pink
   }
   // Otherwise, varied color
   let hash = 0;
-  for (let i = 0; i < tag.length; i++) {
-    hash = tag.charCodeAt(i) + ((hash << 5) - hash);
+  for (let i = 0; i < role.length; i++) {
+    hash = role.charCodeAt(i) + ((hash << 5) - hash);
   }
   const hue = Math.abs(hash * 47) % 360;
   const sat = 55 + (Math.abs(hash * 31) % 35);
