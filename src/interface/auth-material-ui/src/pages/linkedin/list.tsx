@@ -727,13 +727,22 @@ export const LinkedinList: React.FC = () => {
 
 // Fonction utilitaire pour générer une couleur à partir d'un tag
 function getTagColor(tag: string) {
-  // Génère une couleur HSL unique pour chaque tag
+  // Normalisation pour ignorer accents et casse
+  const norm = (str: string) => str.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase().trim();
+  const tagNorm = norm(tag);
+  if (tagNorm === 'amerique') {
+    return 'hsl(0, 75%, 48%)'; // rouge vif
+  }
+  if (tagNorm === 'afrique subsaharienne') {
+    return 'hsl(45, 90%, 52%)'; // jaune doré
+  }
+  // Sinon, couleur variée
   let hash = 0;
   for (let i = 0; i < tag.length; i++) {
     hash = tag.charCodeAt(i) + ((hash << 5) - hash);
   }
-  // Utilise le hash pour générer une teinte sur 360°
-  const hue = Math.abs(hash) % 360;
-  // Saturation et luminosité fixes pour garder un bon contraste
-  return `hsl(${hue}, 60%, 48%)`;
+  const hue = Math.abs(hash * 47) % 360;
+  const sat = 55 + (Math.abs(hash * 31) % 35);
+  const light = 42 + (Math.abs(hash * 61) % 16);
+  return `hsl(${hue}, ${sat}%, ${light}%)`;
 }
