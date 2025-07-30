@@ -22,6 +22,8 @@ type Row = {
   employee_name: string;
   linkedin_url: string;
   description: string;
+  email?: string;
+  phone_number?: string;
   company: string;
   country?: string;
   roles?: string[];
@@ -68,6 +70,8 @@ const EmployeeList: React.FC = () => {
     employee_name: '',
     linkedin_url: '',
     description: '',
+    email: '',
+    phone_number: '',
     company: '',
     country: '',
     roles: [],
@@ -93,7 +97,7 @@ const EmployeeList: React.FC = () => {
         set(ref(db, `/Employee_list_with_country/${newId}`), { ...newEmployee })
       );
       setOpenCreateDialog(false);
-      setNewEmployee({ employee_name: '', linkedin_url: '', description: '', company: '', country: '', roles: [] });
+      setNewEmployee({ employee_name: '', linkedin_url: '', description: '', email: '', phone_number: '', company: '', country: '', roles: [] });
       setSnackbar({open: true, message: 'Employee created', severity: 'success'});
       setTimeout(() => window.scrollTo({top: 0, behavior: 'smooth'}), 200);
       setTimeout(() => window.location.reload(), 800);
@@ -287,9 +291,23 @@ const EmployeeList: React.FC = () => {
         editable: true,
       },
       {
+        field: "email",
+        headerName: "Email",
+        minWidth: 200,
+        flex: 1,
+        editable: true,
+      },
+      {
+        field: "phone_number",
+        headerName: "Phone",
+        minWidth: 120,
+        flex: 0.5,
+        editable: true,
+      },
+      {
         field: "description",
         headerName: "Description",
-        minWidth: 400,
+        minWidth: 180,
         flex: 2,
         editable: true,
       },
@@ -506,6 +524,19 @@ const EmployeeList: React.FC = () => {
               multiline
               minRows={2}
             />
+            <TextField
+              label="Email"
+              value={newEmployee.email}
+              onChange={e => setNewEmployee(c => ({ ...c, email: e.target.value }))}
+              fullWidth              
+            />
+            <TextField
+              label="Phone number"
+              value={newEmployee.phone_number}
+              onChange={e => setNewEmployee(c => ({ ...c, phone_number: e.target.value }))}
+              fullWidth
+              margin="dense"
+            />  
             <Autocomplete
               multiple
               options={companyOptions}
