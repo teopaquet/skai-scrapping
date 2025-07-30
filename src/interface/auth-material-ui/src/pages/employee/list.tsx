@@ -25,7 +25,7 @@ type Row = {
   email?: string;
   phone_number?: string;
   company: string;
-  country?: string;
+  location?: string;
   roles?: string[];
 };
 
@@ -73,7 +73,7 @@ const EmployeeList: React.FC = () => {
     email: '',
     phone_number: '',
     company: '',
-    country: '',
+    location: '',
     roles: [],
   });
   const firstInputRef = React.useRef<HTMLInputElement>(null);
@@ -97,7 +97,7 @@ const EmployeeList: React.FC = () => {
         set(ref(db, `/Employee_list_with_country/${newId}`), { ...newEmployee })
       );
       setOpenCreateDialog(false);
-      setNewEmployee({ employee_name: '', linkedin_url: '', description: '', email: '', phone_number: '', company: '', country: '', roles: [] });
+      setNewEmployee({ employee_name: '', linkedin_url: '', description: '', email: '', phone_number: '', company: '', location: '', roles: [] });
       setSnackbar({open: true, message: 'Employee created', severity: 'success'});
       setTimeout(() => window.scrollTo({top: 0, behavior: 'smooth'}), 200);
       setTimeout(() => window.location.reload(), 800);
@@ -299,8 +299,8 @@ const EmployeeList: React.FC = () => {
         ),
       },
       {
-        field: "country",
-        headerName: "Country",
+        field: "location",
+        headerName: "Location",
         minWidth: 120,
         flex: 0.5,
         editable: true,
@@ -670,9 +670,9 @@ const EmployeeList: React.FC = () => {
               openOnFocus
             />
             <TextField
-              label="Country"
-              value={newEmployee.country}
-              onChange={e => setNewEmployee(c => ({ ...c, country: e.target.value }))}
+              label="Location"
+              value={newEmployee.location}
+              onChange={e => setNewEmployee(c => ({ ...c, location: e.target.value }))}
               fullWidth
               margin="dense"
             />
