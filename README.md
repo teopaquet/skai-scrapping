@@ -1,47 +1,105 @@
-# 🛩️ Aircraft Fleet Data Scraper & Analyzer
+# Skai-Scrapping
 
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![GitHub stars](https://img.shields.io/github/stars/teopaquet/skai-scrapping.svg)](https://github.com/teopaquet/skai-scrapping/stargazers)
+## Présentation du projet
 
-Un système complet de collecte et d'analyse de données de flottes aériennes provenant de diverses sources publiques. Ce projet permet de scraper, analyser et visualiser les informations sur les avions individuels et les flottes des compagnies aériennes.
+Skai-Scrapping est une suite d’outils pour l’extraction, l’analyse et la visualisation de données sur les compagnies aériennes et leur flotte, à partir de sources publiques (FlightRadar24, LinkedIn, etc.). Le projet inclut des scripts de scraping, de traitement de données, d’analyse, ainsi qu’une interface web moderne pour l’exploration des résultats.
 
-## 🚀 Fonctionnalités principales
+## Installation et prérequis
 
-- **🔍 Scraping automatisé** : Collecte de données depuis FlightRadar24 et d'autres sources
-- **📊 Analyse avancée** : Statistiques détaillées sur les flottes et types d'avions
-- **📈 Visualisations** : Graphiques et charts interactifs
-- **📋 Export multi-format** : CSV, JSON, graphiques PNG
-- **🔄 Données en temps réel** : Mise à jour automatique des informations
+1. **Cloner le dépôt**
+   ```bash
+   git clone https://github.com/teopaquet/skai-scrapping
+   ```
+2. **Installer les dépendances Python**
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. **Installer Node.js** (pour l’interface web)
+4. **Configurer les accès Firebase et variables d’environnement** (voir `.env`)
 
-## 🛠️ Installation
+## Structure des dossiers
 
-### Prérequis
-- Python 3.8 ou supérieur
-- pip (gestionnaire de paquets Python)
+- `src/` : scripts principaux (scraping, analyse, utils, visualisation)
+- `data/` : données brutes, traitées, exports
+- `src/interface/auth-material-ui/` : interface web (React + Vite)
 
-# Cloner le repository
-git clone https://github.com/teopaquet/skai-scrapping.git
-cd skai-scrapping
+## Explication des scripts principaux
 
-# Installer les dépendances
-pip install -r requirements.txt
+### Analyseurs
 
-# Lancer l'analyseur principal
-python src/analyzers/analyzer_fleet_data.py
-`
+- **`analyzers/analyse_airlines.py`** : Analyse les données CSV des compagnies aériennes extraites de FlightRadar24, affiche le nom, le sigle et le nombre d’avions par compagnie, calcule des statistiques globales.
+- **`analyzers/analyzer_fleet_data.py`** : Classe d’analyse avancée des flottes (statistiques, top compagnies/types, export CSV, visualisations avec matplotlib/seaborn, interface Streamlit).
 
-## 📊 Utilisation
+### Scrapers 🤖
 
-### 1. Scraping de données FlightRadar24
+- **`scrapers/scraper_flightradar24.py`** : Scraping automatisé des flottes sur FlightRadar24 (récupération des détails, gestion des retries, sauvegarde intermédiaire, export JSON/CSV, envoi Telegram).
+- **`scrapers/main.py`** : Interface graphique Tkinter pour lancer le scraping LinkedIn selon des critères (taille de flotte, rôle, etc.).
+- **`scrapers/linkedin_scraper.py`** : (non détaillé ici) Scraping ciblé de profils LinkedIn selon les compagnies et rôles.
 
-`python
-from src.scrapers.scraper_flightradar24 import FlightRadar24Scraper
+### Utils (traitement de données) 🛠️
+
+- **`utils/csvtojson.py`** : Conversion de CSV en JSON.
+- **`utils/double_display.py`** : Détection et export des doublons dans un CSV.
+- **`utils/filtrer.py`** : Filtrage des compagnies selon des mots-clés (exclusion écoles, armée, etc.).
+- **`utils/fixer.py`** : Correction des tailles de flotte dans les données LinkedIn à partir des données réelles.
+- **`utils/fleet_size_by_company.py`** : Calcul de la taille de flotte par compagnie (normalisation des noms).
+- **`utils/fusion.py`** : Fusion des données LinkedIn et flotte par nom de compagnie normalisé.
+- **`utils/groupeur.py`** : Agrégation de plusieurs fichiers Excel LinkedIn en un seul DataFrame.
+- **`utils/pays.py`** : Ajout du pays d’immatriculation à chaque avion à partir d’un mapping.
+- **`utils/remove_columns.py`** : Suppression de colonnes inutiles dans les CSV.
+- **`utils/remove_useless.py`** : Suppression de lignes inutiles dans les CSV.
+- **`utils/remove_void.py`** : Nettoyage des lignes vides ou incomplètes.
+- **`utils/split.py`** : Découpage d’un gros CSV en petits fichiers.
+
+## Interface web Refine (React + Vite) 🖥️
+
+L’interface web, située dans `src/interface/auth-material-ui/`, permet d’explorer les données traitées via une interface moderne (React, Material UI, Vite). Elle propose :
+
+- Authentification sécurisée (Material UI, gestion des rôles)
+- Visualisation des flottes, des profils LinkedIn, des statistiques
+- Filtres avancés, recherche, export CSV
+- Intégration directe avec la base de données Firebase Realtime pour la synchronisation des données et la gestion des utilisateurs
+
+### Fonctionnement avec Firebase Realtime Database 🔥
+
+La base de données Firebase Realtime est utilisée pour :
+
+- Stocker les résultats de scraping, les profils enrichis, les logs d’activité
+- Gérer les utilisateurs, les droits d’accès, l’authentification
+- Permettre la mise à jour en temps réel de l’interface lors de l’ajout/modification de données
+
+Pour utiliser Firebase :
+
+1. Créer un projet Firebase et activer Realtime Database
+2. Récupérer la configuration (`apiKey`, `authDomain`, etc.) et la placer dans le fichier de config de l’interface web
+3. Adapter les règles de sécurité selon vos besoins
+
+## Exemples d’utilisation
+
+### Lancer le scraping Flightradar24
+
+```bash
+python src/scrapers/scraper_flightradar24.py
+```
+
+### Lancer l’interface web
+
+```bash
+cd src/interface/auth-material-ui
+npm install
+npm run dev
+```
+
+## Auteurs et contact
+
+Projet développé par SkaiTech
 
 # Créer une instance du scraper
+
 scraper = FlightRadar24Scraper()
 
 # Lancer le scraping
+
 data = scraper.scrape_fleet_data()
 `
 
@@ -51,34 +109,41 @@ data = scraper.scrape_fleet_data()
 from src.analyzers.analyzer_fleet_data import FleetDataAnalyzer
 
 # Créer une instance de l'analyseur
+
 analyzer = FleetDataAnalyzer()
 
 # Générer un rapport complet
+
 analyzer.generate_summary_report()
 analyzer.analyze_aircraft_types()
 analyzer.find_aircraft_specialists()
 
 # Créer des visualisations
+
 analyzer.create_visualizations()
 
 # Exporter les résultats
+
 analyzer.export_analysis_to_csv()
 `
 
 ## 📈 Données actuelles
 
 Le système analyse actuellement :
+
 - **884 avions individuels** enregistrés
 - **34 compagnies aériennes** différentes
 - **177 types d'avions** distincts
 - **Couverture géographique** : Mondiale
 
 ### Top compagnies par taille de flotte :
+
 1. **Aeroflot** - 169 avions (97.04% de couverture)
 2. **Aeromexico** - 125 avions (66.4% de couverture)
 3. **AeroGuard Flight Training Center** - 113 avions (98.23% de couverture)
 
 ### Types d'avions les plus communs :
+
 1. **Airbus A320-214** - 79 avions
 2. **Piper Archer III** - 48 avions
 3. **Airbus A321-211** - 32 avions
@@ -86,6 +151,7 @@ Le système analyse actuellement :
 ## 🔧 Configuration
 
 Les fichiers de données sont organisés comme suit :
+
 - **Données brutes** : data/raw/ - Données directement scrapées
 - **Données traitées** : data/processed/ - Données nettoyées et formatées
 - **Exports** : data/exports/ - Analyses et rapports CSV
@@ -93,42 +159,11 @@ Les fichiers de données sont organisés comme suit :
 
 ## 📚 Documentation
 
-- [Guide d'installation détaillé](docs/installation.md)
-- [Guide d'utilisation](docs/usage.md)
+- [Guide d&#39;installation détaillé](docs/installation.md)
+- [Guide d&#39;utilisation](docs/usage.md)
 - [API Reference](docs/api.md)
 - [Exemples avancés](examples/)
-
-## 🤝 Contribution
-
-Les contributions sont les bienvenues ! Pour contribuer :
-
-1. Fork le projet
-2. Créez votre branche feature (git checkout -b feature/AmazingFeature)
-3. Committez vos changements (git commit -m 'Add some AmazingFeature')
-4. Push vers la branche (git push origin feature/AmazingFeature)
-5. Ouvrez une Pull Request
 
 ## 📄 Licence
 
 Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de détails.
-
-## ⚠️ Disclaimer
-
-Ce projet est destiné à des fins éducatives et de recherche. Respectez les conditions d'utilisation des sites web scrapés et les réglementations locales sur la collecte de données.
-
-## 📞 Contact
-
-**Téo Paquet** - [@teopaquet](https://github.com/teopaquet)
-
-Lien du projet : [https://github.com/teopaquet/skai-scrapping](https://github.com/teopaquet/skai-scrapping)
-
-## 🙏 Remerciements
-
-- [FlightRadar24](https://www.flightradar24.com/) pour les données en temps réel
-- [Pandas](https://pandas.pydata.org/) pour l'analyse de données
-- [Matplotlib](https://matplotlib.org/) pour les visualisations
-- La communauté open source pour les outils et bibliothèques
-
----
-
-⭐ N'hésitez pas à donner une étoile au projet si vous le trouvez utile !
