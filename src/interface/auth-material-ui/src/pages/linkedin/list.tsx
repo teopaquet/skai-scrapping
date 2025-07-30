@@ -33,7 +33,7 @@ export const LinkedinList: React.FC = () => {
   const [rows, setRows] = React.useState<Row[]>([]);
   const [loading, setLoading] = React.useState(true);
   const [snackbar, setSnackbar] = React.useState<{open: boolean, message: string, severity: 'success'|'error'|'info'|'warning'}>({open: false, message: '', severity: 'success'});
-  // Filtres persistants
+// Persistent filters
   const getInitialFilter = (key: string, fallback: any) => {
     if (typeof window === 'undefined') return fallback;
     const val = localStorage.getItem(key);
@@ -41,23 +41,23 @@ export const LinkedinList: React.FC = () => {
     if (typeof fallback === 'number') return Number(val);
     return val;
   };
-  // Barre de recherche
+  // Search bar
   const [search, setSearch] = React.useState(() => getInitialFilter('linkedin_search', ""));
-  // Liste des tags globaux
+  // List of global tags
   const [allTags, setAllTags] = React.useState<string[]>([]);
-  // Pour création de tag en cours
+  // For tag creation in progress
   const [tagInput, setTagInput] = React.useState("");
-  // Dialog pour gestion des tags
+  // Dialog for tag management
   const [openTagDialog, setOpenTagDialog] = React.useState(false);
   const [selectedRow, setSelectedRow] = React.useState<Row | null>(null);
   const [dialogTags, setDialogTags] = React.useState<string[]>([]);
   const [newTagName, setNewTagName] = React.useState("");
 
-  // Pour la confirmation de suppression
+  // For delete confirmation
   const [deleteDialogOpen, setDeleteDialogOpen] = React.useState(false);
   const [rowToDelete, setRowToDelete] = React.useState<Row | null>(null);
 
-  // Ajout état pour confirmation suppression tag
+  // Add state for tag delete confirmation
   const [openDeleteTagDialog, setOpenDeleteTagDialog] = React.useState(false);
   const [tagToDelete, setTagToDelete] = React.useState<string | null>(null);
 
@@ -70,7 +70,7 @@ export const LinkedinList: React.FC = () => {
         const list: Row[] = Array.isArray(data) ? data : (data ? Object.values(data) : []);
         setRows(list);
       } catch (e) {
-        setSnackbar({open: true, message: 'Erreur lors du chargement des compagnies', severity: 'error'});
+        setSnackbar({open: true, message: 'Error loading companies', severity: 'error'});
       } finally {
         setLoading(false);
       }
@@ -83,7 +83,7 @@ export const LinkedinList: React.FC = () => {
         else if (data && typeof data === 'object') setAllTags((Object.values(data).filter(Boolean) as string[]));
         else setAllTags([]);
       } catch (e) {
-        setSnackbar({open: true, message: 'Erreur lors du chargement des tags', severity: 'error'});
+        setSnackbar({open: true, message: 'Error loading tags', severity: 'error'});
       }
     }
     fetchRows();
@@ -99,11 +99,11 @@ export const LinkedinList: React.FC = () => {
       await import("firebase/database").then(({ ref, remove }) =>
         remove(ref(db, `/Linkedin_list_with_country/${rowId}`))
       );
-      setSnackbar({open: true, message: 'Compagnie supprimée', severity: 'success'});
+      setSnackbar({open: true, message: 'Company deleted', severity: 'success'});
       setTimeout(() => window.scrollTo({top: 0, behavior: 'smooth'}), 200);
       setTimeout(() => window.location.reload(), 800);
     } catch (e) {
-      setSnackbar({open: true, message: 'Erreur lors de la suppression', severity: 'error'});
+      setSnackbar({open: true, message: 'Error while deleting', severity: 'error'});
     }
   };
 
@@ -144,7 +144,7 @@ export const LinkedinList: React.FC = () => {
                     setDialogTags(tags);
                     setOpenTagDialog(true);
                   }}
-                  title="Gérer les tags"
+                  title="Manage tags"
                 >
                   {tags.map((tag, idx) => (
                     <Chip
@@ -175,7 +175,7 @@ export const LinkedinList: React.FC = () => {
                     setDialogTags(tags);
                     setOpenTagDialog(true);
                   }}
-                  title="Ajouter ou modifier les tags"
+                  title="Add or edit tags"
                 >
                   <AddIcon fontSize="small" style={{ color: '#555', position: 'relative' }} />
                 </Button>
@@ -249,7 +249,7 @@ export const LinkedinList: React.FC = () => {
               setRowToDelete(params.row);
               setDeleteDialogOpen(true);
             }}
-            title="Supprimer la compagnie"
+            title="Delete company"
             style={{ minWidth: 0, padding: 4 }}
           >
             <DeleteIcon fontSize="small" />
@@ -265,14 +265,14 @@ export const LinkedinList: React.FC = () => {
   // Pagination state
   const [paginationModel, setPaginationModel] = React.useState({ pageSize: 25, page: 0 });
 
-  // Filtre min/max fleet_size
+  // Min/max fleet_size filter
   const fleetSizes = rows.map(r => Number(r.fleet_size)).filter(n => !isNaN(n));
   const minFleet = fleetSizes.length ? Math.min(...fleetSizes) : 1;
   const maxFleet = fleetSizes.length ? Math.max(...fleetSizes) : 1000;
   const [minFleetSize, setMinFleetSize] = React.useState(() => getInitialFilter('linkedin_minFleetSize', minFleet));
   const [maxFleetSize, setMaxFleetSize] = React.useState(() => getInitialFilter('linkedin_maxFleetSize', maxFleet));
 
-  // Persistance des filtres dans localStorage
+  // Persist filters in localStorage
   React.useEffect(() => {
     if (typeof window === 'undefined') return;
     localStorage.setItem('linkedin_search', search);
@@ -286,8 +286,8 @@ export const LinkedinList: React.FC = () => {
     localStorage.setItem('linkedin_maxFleetSize', String(maxFleetSize));
   }, [maxFleetSize]);
 
-  // Filtrer les rows selon fleet_size et recherche
-  // Ajoute l'index réel à chaque row pour DataGrid
+  // Filter rows by fleet_size and search
+  // Add real index to each row for DataGrid
   const filteredRows = rows
     .map((row, i) => ({ ...row, id: i }))
     .filter(row => {
@@ -297,7 +297,7 @@ export const LinkedinList: React.FC = () => {
       return val >= minFleetSize && val <= maxFleetSize && matchesSearch;
     });
 
-  // État pour la création
+  // State for creation
   const [openCreateDialog, setOpenCreateDialog] = React.useState(false);
   const [newCompany, setNewCompany] = React.useState<Row>({
     company_name: '',
@@ -314,11 +314,11 @@ export const LinkedinList: React.FC = () => {
     }
   }, [openCreateDialog]);
 
-  // Fonction pour créer une nouvelle compagnie
+  // Function to create a new company
   const handleCreateCompany = async () => {
     // Validation
     if (!newCompany.company_name.trim() || !newCompany.fleet_size.trim() || isNaN(Number(newCompany.fleet_size))) {
-      setSnackbar({open: true, message: 'Nom et taille de flotte requis', severity: 'warning'});
+      setSnackbar({open: true, message: 'Name and fleet size required', severity: 'warning'});
       return;
     }
     try {
@@ -330,15 +330,15 @@ export const LinkedinList: React.FC = () => {
       );
       setOpenCreateDialog(false);
       setNewCompany({ company_name: '', linkedin_url: '', description: '', fleet_size: '', country: '', tags: [] });
-      setSnackbar({open: true, message: 'Compagnie créée', severity: 'success'});
+      setSnackbar({open: true, message: 'Company created', severity: 'success'});
       setTimeout(() => window.scrollTo({top: 0, behavior: 'smooth'}), 200);
       setTimeout(() => window.location.reload(), 800);
     } catch (e) {
-      setSnackbar({open: true, message: 'Erreur lors de la création', severity: 'error'});
+      setSnackbar({open: true, message: 'Error while creating', severity: 'error'});
     }
   };
 
-  // Calcul de la somme des fleet_size filtrés
+  // Calculate the sum of filtered fleet_size
   const totalFleetSize = filteredRows.reduce((sum, row) => {
     const val = Number(row.fleet_size);
     return !isNaN(val) ? sum + val : sum;
@@ -365,7 +365,7 @@ export const LinkedinList: React.FC = () => {
         }
       `}</style>
       <List canCreate={false}>
-        {/* Snackbar pour feedback utilisateur */}
+        {/* Snackbar for user feedback */}
         <Snackbar
           open={snackbar.open}
           autoHideDuration={2500}
@@ -376,12 +376,12 @@ export const LinkedinList: React.FC = () => {
             {snackbar.message}
           </MuiAlert>
         </Snackbar>
-        {/* Dialog de création d'une nouvelle airline avec transition et focus */}
+        {/* Dialog to create a new airline with transition and focus */}
         <Dialog open={openCreateDialog} onClose={() => setOpenCreateDialog(false)} TransitionProps={{ appear: true }}>
-          <DialogTitle>Créer une nouvelle compagnie</DialogTitle>
+          <DialogTitle>Create a new company</DialogTitle>
           <DialogContent>
             <TextField
-              label="Nom de la compagnie"
+              label="Company name"
               value={newCompany.company_name}
               onChange={e => setNewCompany(c => ({ ...c, company_name: e.target.value }))}
               fullWidth
@@ -440,8 +440,8 @@ export const LinkedinList: React.FC = () => {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={() => setOpenCreateDialog(false)}>Annuler</Button>
-            <Button variant="contained" onClick={handleCreateCompany} color="primary">Créer</Button>
+            <Button onClick={() => setOpenCreateDialog(false)}>Cancel</Button>
+            <Button variant="contained" onClick={handleCreateCompany} color="primary">Create</Button>
           </DialogActions>
         </Dialog>
         <div style={{ fontWeight: 500, fontSize: 16, color: '#1976d2', marginBottom: 12, marginTop: 8 }}>
@@ -534,7 +534,7 @@ export const LinkedinList: React.FC = () => {
                     setNewTagName("");
                   }
                 }}
-                placeholder="Ajouter un tag..."
+                placeholder="Add a tag..."
               />
               <Button onClick={() => {
                 if (newTagName.trim()) {
@@ -582,25 +582,25 @@ export const LinkedinList: React.FC = () => {
                 set(ref(db, `/Linkedin_list_with_country/${selectedRow.id}`), { ...rowToSave })
               );
               setOpenTagDialog(false);
-              setSnackbar({open: true, message: 'Tags mis à jour', severity: 'success'});
+              setSnackbar({open: true, message: 'Tags updated', severity: 'success'});
               setTimeout(() => window.scrollTo({top: 0, behavior: 'smooth'}), 200);
               setTimeout(() => window.location.reload(), 800);
             }}>Save</Button>
           </DialogActions>
         </Dialog>
-        {/* Dialog de confirmation de suppression */}
+        {/* Delete confirmation dialog */}
         <Dialog open={deleteDialogOpen} onClose={() => setDeleteDialogOpen(false)}>
-          <DialogTitle>Confirmer la suppression</DialogTitle>
+          <DialogTitle>Confirm deletion</DialogTitle>
           <DialogContent>
             <div style={{ fontSize: 16, marginBottom: 8 }}>
-              Êtes-vous sûr de vouloir supprimer&nbsp;
-              <b>{rowToDelete?.company_name}</b> ?<br/>
-              Cette action est irréversible.
+              Are you sure you want to delete&nbsp;
+              <b>{rowToDelete?.company_name}</b>?<br/>
+              This action is irreversible.
             </div>
           </DialogContent>
           <DialogActions>
             <Button onClick={() => setDeleteDialogOpen(false)}>
-              Annuler
+              Cancel
             </Button>
             <Button
               variant="contained"
@@ -613,23 +613,23 @@ export const LinkedinList: React.FC = () => {
                 setRowToDelete(null);
               }}
             >
-              Supprimer
+              Delete
             </Button>
           </DialogActions>
         </Dialog>
-        {/* Dialog de confirmation de suppression de tag */}
+        {/* Tag delete confirmation dialog */}
         <Dialog open={openDeleteTagDialog} onClose={() => setOpenDeleteTagDialog(false)}>
-          <DialogTitle>Confirmer la suppression du tag</DialogTitle>
+          <DialogTitle>Confirm tag deletion</DialogTitle>
           <DialogContent>
             <div style={{ fontSize: 16, marginBottom: 8 }}>
-              Êtes-vous sûr de vouloir supprimer le tag&nbsp;
-              <b>{tagToDelete}</b> ?<br/>
-              Ce tag sera retiré de toutes les compagnies.
+              Are you sure you want to delete the tag&nbsp;
+              <b>{tagToDelete}</b>?<br/>
+              This tag will be removed from all companies.
             </div>
           </DialogContent>
           <DialogActions>
             <Button onClick={() => setOpenDeleteTagDialog(false)}>
-              Annuler
+              Cancel
             </Button>
             <Button
               variant="contained"
@@ -663,14 +663,14 @@ export const LinkedinList: React.FC = () => {
                 });
                 setOpenDeleteTagDialog(false);
                 setTagToDelete(null);
-                setSnackbar({open: true, message: `Tag supprimé`, severity: 'success'});
+                setSnackbar({open: true, message: `Tag deleted`, severity: 'success'});
               }}
             >
-              Supprimer
+              Delete
             </Button>
           </DialogActions>
         </Dialog>
-        {/* Loader skeleton pendant chargement */}
+        {/* Loader skeleton while loading */}
         {loading ? (
           <div style={{ padding: 32 }}>
             <Skeleton variant="rectangular" width="100%" height={48} style={{ marginBottom: 16 }} />
@@ -725,9 +725,9 @@ export const LinkedinList: React.FC = () => {
   );
 }
 
-// Fonction utilitaire pour générer une couleur à partir d'un tag
+// Utility function to generate a color from a tag
 function getTagColor(tag: string) {
-  // Normalisation pour ignorer accents et casse
+  // Normalize to ignore accents and case
   const norm = (str: string) => str.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase().trim();
   const tagNorm = norm(tag);
   if (tagNorm === 'amerique') {
@@ -736,7 +736,7 @@ function getTagColor(tag: string) {
   if (tagNorm === 'afrique subsaharienne') {
     return 'hsl(45, 90%, 52%)'; // jaune doré
   }
-  // Sinon, couleur variée
+  // Otherwise, varied color
   let hash = 0;
   for (let i = 0; i < tag.length; i++) {
     hash = tag.charCodeAt(i) + ((hash << 5) - hash);
