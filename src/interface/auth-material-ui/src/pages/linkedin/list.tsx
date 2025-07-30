@@ -731,10 +731,13 @@ function getTagColor(tag: string) {
   const norm = (str: string) => str.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase().trim();
   const tagNorm = norm(tag);
   if (tagNorm === 'amerique') {
-    return 'hsl(0, 75%, 48%)'; // rouge vif
+    return 'hsl(0, 75%, 48%)'; // bright red
   }
   if (tagNorm === 'afrique subsaharienne') {
-    return 'hsl(45, 90%, 52%)'; // jaune doré
+    return 'hsl(45, 90%, 52%)'; // golden yellow
+  }
+  if (tagNorm === 'amerique latine et caraibes') {
+    return 'hsl(330, 80%, 70%)'; // pink
   }
   // Otherwise, varied color
   let hash = 0;
