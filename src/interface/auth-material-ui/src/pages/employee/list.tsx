@@ -474,7 +474,14 @@ const EmployeeList: React.FC = () => {
           <Autocomplete
             options={["All companies", ...companyOptions]}
             value={selectedCompany || "All companies"}
-            onChange={(_, newValue) => setSelectedCompany(newValue === "All companies" ? "" : (newValue || ""))}
+            onChange={(_, newValue) => {
+              // If cleared or "All companies" selected, remove filter
+              if (!newValue || newValue === "All companies") {
+                setSelectedCompany("");
+              } else {
+                setSelectedCompany(newValue);
+              }
+            }}
             renderInput={(params) => (
               <TextField
                 {...params}
@@ -486,7 +493,8 @@ const EmployeeList: React.FC = () => {
             clearOnEscape
             isOptionEqualToValue={(option, value) => option === value}
             autoHighlight
-            disableClearable
+            // Allow clearing selection to remove filter
+            disableClearable={false}
           />
           <div style={{ flex: 1 }} />
           <Button
