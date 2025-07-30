@@ -150,9 +150,16 @@ export const LinkedinList: React.FC = () => {
                     <Chip
                       key={tag + idx}
                       label={tag}
-                      color="primary"
                       size="small"
-                      style={{ borderRadius: 16, fontWeight: 500, background: '#1976d2', color: '#fff' }}
+                      style={{
+                        borderRadius: 16,
+                        fontWeight: 500,
+                        background: getTagColor(tag),
+                        color: '#fff',
+                        letterSpacing: 0.2,
+                        boxShadow: '0 1px 4px #0001',
+                        fontSize: 13,
+                      }}
                     />
                   ))}
                 </span>
@@ -716,4 +723,17 @@ export const LinkedinList: React.FC = () => {
       </List>
     </>
   );
+}
+
+// Fonction utilitaire pour générer une couleur à partir d'un tag
+function getTagColor(tag: string) {
+  // Génère une couleur HSL unique pour chaque tag
+  let hash = 0;
+  for (let i = 0; i < tag.length; i++) {
+    hash = tag.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  // Utilise le hash pour générer une teinte sur 360°
+  const hue = Math.abs(hash) % 360;
+  // Saturation et luminosité fixes pour garder un bon contraste
+  return `hsl(${hue}, 60%, 48%)`;
 }
