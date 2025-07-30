@@ -64,15 +64,9 @@ L’interface web, située dans `src/interface/auth-material-ui/`, permet d’ex
 
 La base de données Firebase Realtime est utilisée pour :
 
-- Stocker les résultats de scraping, les profils enrichis, les logs d’activité
-- Gérer les utilisateurs, les droits d’accès, l’authentification
+- Stocker les résultats de scraping : Linkedin_list_with_country et fleet_data2800
+- Permettre d'associer un ou plusieurs tags à une compagnie aérienne
 - Permettre la mise à jour en temps réel de l’interface lors de l’ajout/modification de données
-
-Pour utiliser Firebase :
-
-1. Créer un projet Firebase et activer Realtime Database
-2. Récupérer la configuration (`apiKey`, `authDomain`, etc.) et la placer dans le fichier de config de l’interface web
-3. Adapter les règles de sécurité selon vos besoins
 
 ## 📝 Exemples d’utilisation
 
