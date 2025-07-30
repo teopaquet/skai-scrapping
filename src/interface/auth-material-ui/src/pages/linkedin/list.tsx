@@ -1,6 +1,9 @@
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import React from "react";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert, { AlertProps } from "@mui/material/Alert";
+import Skeleton from "@mui/material/Skeleton";
 import { List } from "@refinedev/mui";
 import { DataGrid, type GridColDef } from "@mui/x-data-grid";
 import TextField from "@mui/material/TextField";
@@ -28,6 +31,8 @@ type Row = {
 
 export const LinkedinList: React.FC = () => {
   const [rows, setRows] = React.useState<Row[]>([]);
+  const [loading, setLoading] = React.useState(true);
+  const [snackbar, setSnackbar] = React.useState<{open: boolean, message: string, severity: 'success'|'error'|'info'|'warning'}>({open: false, message: '', severity: 'success'});
   // Filtres persistants
   const getInitialFilter = (key: string, fallback: any) => {
     if (typeof window === 'undefined') return fallback;
@@ -48,22 +53,34 @@ export const LinkedinList: React.FC = () => {
   const [dialogTags, setDialogTags] = React.useState<string[]>([]);
   const [newTagName, setNewTagName] = React.useState("");
 
-  // ...existing code...
+  // Pour la confirmation de suppression
+  const [deleteDialogOpen, setDeleteDialogOpen] = React.useState(false);
+  const [rowToDelete, setRowToDelete] = React.useState<Row | null>(null);
+
   React.useEffect(() => {
     const db = getDatabase(firebaseApp);
     async function fetchRows() {
-      const snapshot = await get(ref(db, "/Linkedin_list_with_country"));
-      const data = snapshot.val();
-      // Si data est un tableau ou un objet, on le transforme en tableau
-      const list: Row[] = Array.isArray(data) ? data : (data ? Object.values(data) : []);
-      setRows(list);
+      try {
+        const snapshot = await get(ref(db, "/Linkedin_list_with_country"));
+        const data = snapshot.val();
+        const list: Row[] = Array.isArray(data) ? data : (data ? Object.values(data) : []);
+        setRows(list);
+      } catch (e) {
+        setSnackbar({open: true, message: 'Erreur lors du chargement des compagnies', severity: 'error'});
+      } finally {
+        setLoading(false);
+      }
     }
     async function fetchTags() {
-      const snapshot = await get(ref(db, "/tags"));
-      const data = snapshot.val();
-      if (Array.isArray(data)) setAllTags(data.filter(Boolean));
-      else if (data && typeof data === 'object') setAllTags((Object.values(data).filter(Boolean) as string[]));
-      else setAllTags([]);
+      try {
+        const snapshot = await get(ref(db, "/tags"));
+        const data = snapshot.val();
+        if (Array.isArray(data)) setAllTags(data.filter(Boolean));
+        else if (data && typeof data === 'object') setAllTags((Object.values(data).filter(Boolean) as string[]));
+        else setAllTags([]);
+      } catch (e) {
+        setSnackbar({open: true, message: 'Erreur lors du chargement des tags', severity: 'error'});
+      }
     }
     fetchRows();
     fetchTags();
@@ -72,14 +89,18 @@ export const LinkedinList: React.FC = () => {
 
 
   const handleDeleteRow = async (rowId: number) => {
-    // Suppression locale
-    setRows(prev => prev.filter((_, i) => i !== rowId));
-    // Suppression dans Firebase
-    const db = getDatabase(firebaseApp);
-    await import("firebase/database").then(({ ref, remove }) =>
-      remove(ref(db, `/Linkedin_list_with_country/${rowId}`))
-    );
-    window.location.reload();
+    try {
+      setRows(prev => prev.filter((_, i) => i !== rowId));
+      const db = getDatabase(firebaseApp);
+      await import("firebase/database").then(({ ref, remove }) =>
+        remove(ref(db, `/Linkedin_list_with_country/${rowId}`))
+      );
+      setSnackbar({open: true, message: 'Compagnie supprimée', severity: 'success'});
+      setTimeout(() => window.scrollTo({top: 0, behavior: 'smooth'}), 200);
+      setTimeout(() => window.location.reload(), 800);
+    } catch (e) {
+      setSnackbar({open: true, message: 'Erreur lors de la suppression', severity: 'error'});
+    }
   };
 
   const columns = React.useMemo<GridColDef<Row>[]>(
@@ -214,12 +235,8 @@ export const LinkedinList: React.FC = () => {
             size="small"
             onClick={e => {
               e.stopPropagation();
-              if (window.confirm("Supprimer cette compagnie ?")) {
-                const rowId = params.row.id;
-                if (typeof rowId === 'number') {
-                  handleDeleteRow(rowId);
-                }
-              }
+              setRowToDelete(params.row);
+              setDeleteDialogOpen(true);
             }}
             title="Supprimer la compagnie"
             style={{ minWidth: 0, padding: 4 }}
@@ -279,20 +296,35 @@ export const LinkedinList: React.FC = () => {
     country: '',
     tags: [],
   });
+  const firstInputRef = React.useRef<HTMLInputElement>(null);
+  React.useEffect(() => {
+    if (openCreateDialog && firstInputRef.current) {
+      setTimeout(() => firstInputRef.current?.focus(), 200);
+    }
+  }, [openCreateDialog]);
 
   // Fonction pour créer une nouvelle compagnie
   const handleCreateCompany = async () => {
-    // Ajout local
-    setRows(prev => [...prev, { ...newCompany }]);
-    // Ajout Firebase
-    const db = getDatabase(firebaseApp);
-    const newId = rows.length;
-    await import("firebase/database").then(({ ref, set }) =>
-      set(ref(db, `/Linkedin_list_with_country/${newId}`), { ...newCompany })
-    );
-    setOpenCreateDialog(false);
-    setNewCompany({ company_name: '', linkedin_url: '', description: '', fleet_size: '', country: '', tags: [] });
-    window.location.reload();
+    // Validation
+    if (!newCompany.company_name.trim() || !newCompany.fleet_size.trim() || isNaN(Number(newCompany.fleet_size))) {
+      setSnackbar({open: true, message: 'Nom et taille de flotte requis', severity: 'warning'});
+      return;
+    }
+    try {
+      setRows(prev => [...prev, { ...newCompany }]);
+      const db = getDatabase(firebaseApp);
+      const newId = rows.length;
+      await import("firebase/database").then(({ ref, set }) =>
+        set(ref(db, `/Linkedin_list_with_country/${newId}`), { ...newCompany })
+      );
+      setOpenCreateDialog(false);
+      setNewCompany({ company_name: '', linkedin_url: '', description: '', fleet_size: '', country: '', tags: [] });
+      setSnackbar({open: true, message: 'Compagnie créée', severity: 'success'});
+      setTimeout(() => window.scrollTo({top: 0, behavior: 'smooth'}), 200);
+      setTimeout(() => window.location.reload(), 800);
+    } catch (e) {
+      setSnackbar({open: true, message: 'Erreur lors de la création', severity: 'error'});
+    }
   };
 
   // Calcul de la somme des fleet_size filtrés
@@ -308,19 +340,33 @@ export const LinkedinList: React.FC = () => {
         .linkedin-link {
           color: var(--mui-link-color, #1976d2);
         }
-        body[data-mui-color-scheme='dark'] .linkedin-link {
-          color: #90caf9 !important;
+        .MuiDataGrid-row:hover {
+          background: #f5faff !important;
         }
-        .linkedin-link:hover {
-          color: #1565c0;
+        .MuiButton-containedPrimary {
+          transition: background 0.2s;
         }
-        body[data-mui-color-scheme='dark'] .linkedin-link:hover {
-          color: #42a5f5 !important;
+        .MuiButton-containedPrimary:active {
+          background: #115293;
+        }
+        .MuiDialog-root .MuiPaper-root {
+          transition: box-shadow 0.3s cubic-bezier(.4,0,.2,1);
         }
       `}</style>
       <List canCreate={false}>
-        {/* Dialog de création d'une nouvelle airline */}
-        <Dialog open={openCreateDialog} onClose={() => setOpenCreateDialog(false)}>
+        {/* Snackbar pour feedback utilisateur */}
+        <Snackbar
+          open={snackbar.open}
+          autoHideDuration={2500}
+          onClose={() => setSnackbar(s => ({...s, open: false}))}
+          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        >
+          <MuiAlert elevation={6} variant="filled" severity={snackbar.severity} sx={{ minWidth: 220 }}>
+            {snackbar.message}
+          </MuiAlert>
+        </Snackbar>
+        {/* Dialog de création d'une nouvelle airline avec transition et focus */}
+        <Dialog open={openCreateDialog} onClose={() => setOpenCreateDialog(false)} TransitionProps={{ appear: true }}>
           <DialogTitle>Créer une nouvelle compagnie</DialogTitle>
           <DialogContent>
             <TextField
@@ -329,6 +375,9 @@ export const LinkedinList: React.FC = () => {
               onChange={e => setNewCompany(c => ({ ...c, company_name: e.target.value }))}
               fullWidth
               margin="dense"
+              inputRef={firstInputRef}
+              required
+              autoFocus
             />
             <TextField
               label="LinkedIn URL"
@@ -336,6 +385,7 @@ export const LinkedinList: React.FC = () => {
               onChange={e => setNewCompany(c => ({ ...c, linkedin_url: e.target.value }))}
               fullWidth
               margin="dense"
+              placeholder="https://linkedin.com/company/..."
             />
             <TextField
               label="Description"
@@ -343,6 +393,8 @@ export const LinkedinList: React.FC = () => {
               onChange={e => setNewCompany(c => ({ ...c, description: e.target.value }))}
               fullWidth
               margin="dense"
+              multiline
+              minRows={2}
             />
             <TextField
               label="Fleet Size"
@@ -351,6 +403,8 @@ export const LinkedinList: React.FC = () => {
               type="number"
               fullWidth
               margin="dense"
+              required
+              inputProps={{ min: 1 }}
             />
             <TextField
               label="Country"
@@ -376,14 +430,13 @@ export const LinkedinList: React.FC = () => {
           </DialogContent>
           <DialogActions>
             <Button onClick={() => setOpenCreateDialog(false)}>Annuler</Button>
-            <Button variant="contained" onClick={handleCreateCompany}>Créer</Button>
+            <Button variant="contained" onClick={handleCreateCompany} color="primary">Créer</Button>
           </DialogActions>
         </Dialog>
-        <div style={{ fontWeight: 500, fontSize: 16, color: '#1976d2', marginBottom: 12 }}>
+        <div style={{ fontWeight: 500, fontSize: 16, color: '#1976d2', marginBottom: 12, marginTop: 8 }}>
           Total fleet size: {totalFleetSize}
         </div>
-
-        <div style={{ marginBottom: 16, display: 'flex', alignItems: 'center', gap: 16 }}>
+        <div style={{ marginBottom: 16, display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
           <TextField
             label="Search airline"
             size="small"
@@ -395,9 +448,10 @@ export const LinkedinList: React.FC = () => {
                   <SearchIcon />
                 </InputAdornment>
               ),
-              style: { width: 260 }
+              style: { width: 260 },
+              placeholder: '...'
             }}
-            style={{ marginRight: 16 }}
+            style={{ marginRight: 16, minWidth: 220 }}
           />
           <TextField
             label="Min fleet size"
@@ -405,7 +459,8 @@ export const LinkedinList: React.FC = () => {
             size="small"
             value={minFleetSize}
             onChange={e => setMinFleetSize(Number(e.target.value))}
-            style={{ marginRight: 16 }}
+            style={{ marginRight: 16, minWidth: 120 }}
+            inputProps={{ min: 1 }}
           />
           <TextField
             label="Max fleet size"
@@ -413,6 +468,8 @@ export const LinkedinList: React.FC = () => {
             size="small"
             value={maxFleetSize}
             onChange={e => setMaxFleetSize(Number(e.target.value))}
+            style={{ minWidth: 120 }}
+            inputProps={{ min: 1 }}
           />
           <div style={{ flex: 1 }} />
           <Button
@@ -420,12 +477,12 @@ export const LinkedinList: React.FC = () => {
             color="primary"
             startIcon={<AddIcon />}
             onClick={() => setOpenCreateDialog(true)}
-            style={{ marginLeft: 'auto', whiteSpace: 'nowrap' }}
+            style={{ marginLeft: 'auto', whiteSpace: 'nowrap', fontWeight: 600, fontSize: 15, boxShadow: '0 2px 8px #1976d220' }}
           >
             Add a company
           </Button>
         </div>
-        <Dialog open={openTagDialog} onClose={() => setOpenTagDialog(false)}>
+        <Dialog open={openTagDialog} onClose={() => setOpenTagDialog(false)} TransitionProps={{ appear: true }}>
           <DialogTitle>Manage tags for {selectedRow?.company_name}</DialogTitle>
           <DialogContent>
             <div style={{ marginBottom: 12 }}>
@@ -456,7 +513,6 @@ export const LinkedinList: React.FC = () => {
                       const newTags = [...allTags, newTagName.trim()];
                       setAllTags(newTags);
                       setDialogTags(prev => [...prev, newTagName.trim()]);
-                      // Save to Firebase
                       const db = getDatabase(firebaseApp);
                       import("firebase/database").then(({ ref, set }) =>
                         set(ref(db, "/tags"), newTags)
@@ -467,6 +523,7 @@ export const LinkedinList: React.FC = () => {
                     setNewTagName("");
                   }
                 }}
+                placeholder="Ajouter un tag..."
               />
               <Button onClick={() => {
                 if (newTagName.trim()) {
@@ -474,7 +531,6 @@ export const LinkedinList: React.FC = () => {
                     const newTags = [...allTags, newTagName.trim()];
                     setAllTags(newTags);
                     setDialogTags(prev => [...prev, newTagName.trim()]);
-                    // Save to Firebase
                     const db = getDatabase(firebaseApp);
                     import("firebase/database").then(({ ref, set }) =>
                       set(ref(db, "/tags"), newTags)
@@ -494,55 +550,98 @@ export const LinkedinList: React.FC = () => {
             <Button onClick={() => setOpenTagDialog(false)}>Cancel</Button>
             <Button variant="contained" onClick={async () => {
               if (!selectedRow) return;
-              // Met à jour localement
               setRows(prev => prev.map(r => r === selectedRow ? { ...r, tags: dialogTags } : r));
-              // Met à jour dans Firebase
               const db = getDatabase(firebaseApp);
               const { id, ...rowToSave } = { ...selectedRow, tags: dialogTags };
               await import("firebase/database").then(({ ref, set }) =>
                 set(ref(db, `/Linkedin_list_with_country/${selectedRow.id}`), { ...rowToSave })
               );
               setOpenTagDialog(false);
-              window.location.reload();
+              setSnackbar({open: true, message: 'Tags mis à jour', severity: 'success'});
+              setTimeout(() => window.scrollTo({top: 0, behavior: 'smooth'}), 200);
+              setTimeout(() => window.location.reload(), 800);
             }}>Save</Button>
           </DialogActions>
         </Dialog>
-        {/* Filtres déplacés ci-dessus */}
-
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            maxHeight: "calc(100vh - 320px)",
-          }}
-        >
-          <DataGrid
-            rows={filteredRows}
-            columns={columns}
-            pagination
-            paginationMode="client"
-            paginationModel={paginationModel}
-            onPaginationModelChange={setPaginationModel}
-            pageSizeOptions={[25, 50, 100]}
-            sx={{ minHeight: 400 }}
-            getRowHeight={() => 'auto'}
-            processRowUpdate={async (newRow, oldRow) => {
-              // Update locally
-              setRows(prev => prev.map((r, i) => i === newRow.id ? { ...newRow } : r));
-              // Update in Firebase
-              const db = getDatabase(firebaseApp);
-              const { id, ...rowToSave } = newRow;
-              await import("firebase/database").then(({ ref, set }) =>
-                set(ref(db, `/Linkedin_list_with_country/${newRow.id}`), { ...rowToSave })
-              );
-              return newRow;
+        {/* Dialog de confirmation de suppression */}
+        <Dialog open={deleteDialogOpen} onClose={() => setDeleteDialogOpen(false)}>
+          <DialogTitle>Confirmer la suppression</DialogTitle>
+          <DialogContent>
+            <div style={{ fontSize: 16, marginBottom: 8 }}>
+              Êtes-vous sûr de vouloir supprimer&nbsp;
+              <b>{rowToDelete?.company_name}</b> ?<br/>
+              Cette action est irréversible.
+            </div>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => setDeleteDialogOpen(false)}>
+              Annuler
+            </Button>
+            <Button
+              variant="contained"
+              color="error"
+              onClick={() => {
+                if (rowToDelete && typeof rowToDelete.id === 'number') {
+                  handleDeleteRow(rowToDelete.id);
+                }
+                setDeleteDialogOpen(false);
+                setRowToDelete(null);
+              }}
+            >
+              Supprimer
+            </Button>
+          </DialogActions>
+        </Dialog>
+        {/* Loader skeleton pendant chargement */}
+        {loading ? (
+          <div style={{ padding: 32 }}>
+            <Skeleton variant="rectangular" width="100%" height={48} style={{ marginBottom: 16 }} />
+            <Skeleton variant="rectangular" width="100%" height={48} style={{ marginBottom: 16 }} />
+            <Skeleton variant="rectangular" width="100%" height={48} />
+          </div>
+        ) : (
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              maxHeight: "calc(100vh - 320px)",
+              background: '#fff',
+              borderRadius: 12,
+              boxShadow: '0 2px 12px #1976d210',
+              overflow: 'hidden',
             }}
-            onProcessRowUpdateError={error => {
-              // Log error in console
-              console.error('Error while saving to Firebase:', error);
-            }}
-          />
-        </div>
+          >
+            <DataGrid
+              rows={filteredRows}
+              columns={columns}
+              pagination
+              paginationMode="client"
+              paginationModel={paginationModel}
+              onPaginationModelChange={setPaginationModel}
+              pageSizeOptions={[25, 50, 100]}
+              sx={{ minHeight: 400, fontSize: 15, border: 0, background: '#fff' }}
+              getRowHeight={() => 'auto'}
+              processRowUpdate={async (newRow, oldRow) => {
+                try {
+                  setRows(prev => prev.map((r, i) => i === newRow.id ? { ...newRow } : r));
+                  const db = getDatabase(firebaseApp);
+                  const { id, ...rowToSave } = newRow;
+                  await import("firebase/database").then(({ ref, set }) =>
+                    set(ref(db, `/Linkedin_list_with_country/${newRow.id}`), { ...rowToSave })
+                  );
+                  setSnackbar({open: true, message: 'Compagnie modifiée', severity: 'success'});
+                } catch (e) {
+                  setSnackbar({open: true, message: 'Erreur lors de la modification', severity: 'error'});
+                }
+                return newRow;
+              }}
+              onProcessRowUpdateError={error => {
+                setSnackbar({open: true, message: 'Erreur lors de la sauvegarde', severity: 'error'});
+                console.error('Error while saving to Firebase:', error);
+              }}
+            />
+          </div>
+        )}
       </List>
     </>
   );
