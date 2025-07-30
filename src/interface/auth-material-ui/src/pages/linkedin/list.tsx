@@ -160,6 +160,8 @@ export const LinkedinList: React.FC = () => {
         type: "number",
         editable: true,
         sortComparator: (v1, v2) => Number(v1) - Number(v2),
+        align: 'center',
+        headerAlign: 'center',
       },
       {
         field: "linkedin_url",
