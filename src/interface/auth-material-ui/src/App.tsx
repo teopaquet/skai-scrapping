@@ -24,7 +24,6 @@ import { LinkedinList } from "./pages/linkedin/list";
 import { FleetList } from "./pages/fleet/list";
 import EmployeeList from "./pages/employee/list";
 import { DrawerProvider } from "./contexts/drawer-context";
-import { Header } from "./components/header";
 import HomeIcon from "@mui/icons-material/Home";
 import LocalAirportIcon from "@mui/icons-material/LocalAirport";
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
@@ -109,7 +108,7 @@ function App() {
                     <Route
                       element={
                         <ThemedLayoutV2
-                          Header={Header}
+                          Header={() => null}
                           Sider={CustomSider}
                         >
                           <Outlet />

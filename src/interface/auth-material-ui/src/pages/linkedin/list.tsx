@@ -57,6 +57,10 @@ export const LinkedinList: React.FC = () => {
   const [deleteDialogOpen, setDeleteDialogOpen] = React.useState(false);
   const [rowToDelete, setRowToDelete] = React.useState<Row | null>(null);
 
+  // Ajout état pour confirmation suppression tag
+  const [openDeleteTagDialog, setOpenDeleteTagDialog] = React.useState(false);
+  const [tagToDelete, setTagToDelete] = React.useState<string | null>(null);
+
   React.useEffect(() => {
     const db = getDatabase(firebaseApp);
     async function fetchRows() {
@@ -551,35 +555,9 @@ export const LinkedinList: React.FC = () => {
                     label={tag}
                     size="small"
                     style={{ borderRadius: 16, fontWeight: 500, background: '#e3e3e3', color: '#333' }}
-                    onDelete={async () => {
-                      // Supprimer le tag de la liste globale
-                      const newTags = allTags.filter(t => t !== tag);
-                      setAllTags(newTags);
-                      setDialogTags(prev => prev.filter(t => t !== tag));
-                      setNewTagName("");
-                      // Supprimer le tag de toutes les compagnies qui l'ont
-                      setRows(prevRows => prevRows.map(r => ({ ...r, tags: Array.isArray(r.tags) ? r.tags.filter(t => t !== tag) : [] })));
-                      // Mettre à jour Firebase pour les tags
-                      const db = getDatabase(firebaseApp);
-                      await import("firebase/database").then(({ ref, set, get }) => {
-                        set(ref(db, "/tags"), newTags);
-                        // Mettre à jour tous les rows dans Firebase
-                        get(ref(db, "/Linkedin_list_with_country")).then(snapshot => {
-                          const data = snapshot.val();
-                          if (data) {
-                            const updates: Record<string, any> = {};
-                            Object.entries(data).forEach(([key, row]) => {
-                              const typedRow = row as Row;
-                              if (typedRow.tags && Array.isArray(typedRow.tags) && typedRow.tags.includes(tag)) {
-                                updates[key] = { ...typedRow, tags: typedRow.tags.filter((t: string) => t !== tag) };
-                              }
-                            });
-                            Object.entries(updates).forEach(([key, row]) => {
-                              set(ref(db, `/Linkedin_list_with_country/${key}`), row);
-                            });
-                          }
-                        });
-                      });
+                    onDelete={() => {
+                      setTagToDelete(tag);
+                      setOpenDeleteTagDialog(true);
                     }}
                   />
                 ))}
@@ -626,6 +604,59 @@ export const LinkedinList: React.FC = () => {
                 }
                 setDeleteDialogOpen(false);
                 setRowToDelete(null);
+              }}
+            >
+              Supprimer
+            </Button>
+          </DialogActions>
+        </Dialog>
+        {/* Dialog de confirmation de suppression de tag */}
+        <Dialog open={openDeleteTagDialog} onClose={() => setOpenDeleteTagDialog(false)}>
+          <DialogTitle>Confirmer la suppression du tag</DialogTitle>
+          <DialogContent>
+            <div style={{ fontSize: 16, marginBottom: 8 }}>
+              Êtes-vous sûr de vouloir supprimer le tag&nbsp;
+              <b>{tagToDelete}</b> ?<br/>
+              Ce tag sera retiré de toutes les compagnies.
+            </div>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => setOpenDeleteTagDialog(false)}>
+              Annuler
+            </Button>
+            <Button
+              variant="contained"
+              color="error"
+              onClick={async () => {
+                if (!tagToDelete) return;
+                const tag = tagToDelete;
+                const newTags = allTags.filter(t => t !== tag);
+                setAllTags(newTags);
+                setDialogTags(prev => prev.filter(t => t !== tag));
+                setNewTagName("");
+                setRows(prevRows => prevRows.map(r => ({ ...r, tags: Array.isArray(r.tags) ? r.tags.filter(t => t !== tag) : [] })));
+                const db = getDatabase(firebaseApp);
+                await import("firebase/database").then(({ ref, set, get }) => {
+                  set(ref(db, "/tags"), newTags);
+                  get(ref(db, "/Linkedin_list_with_country")).then(snapshot => {
+                    const data = snapshot.val();
+                    if (data) {
+                      const updates: Record<string, any> = {};
+                      Object.entries(data).forEach(([key, row]) => {
+                        const typedRow = row as Row;
+                        if (typedRow.tags && Array.isArray(typedRow.tags) && typedRow.tags.includes(tag)) {
+                          updates[key] = { ...typedRow, tags: typedRow.tags.filter((t: string) => t !== tag) };
+                        }
+                      });
+                      Object.entries(updates).forEach(([key, row]) => {
+                        set(ref(db, `/Linkedin_list_with_country/${key}`), row);
+                      });
+                    }
+                  });
+                });
+                setOpenDeleteTagDialog(false);
+                setTagToDelete(null);
+                setSnackbar({open: true, message: `Tag supprimé`, severity: 'success'});
               }}
             >
               Supprimer
