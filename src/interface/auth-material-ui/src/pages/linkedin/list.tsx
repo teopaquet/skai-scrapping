@@ -543,7 +543,47 @@ export const LinkedinList: React.FC = () => {
               }} variant="contained" size="small">Add</Button>
             </div>
             <div style={{ marginTop: 16, fontSize: 13, color: '#888' }}>
-              <b>Existing tags:</b> {allTags.join(', ')}
+              <b>Existing tags:</b>
+              <span style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 6 }}>
+                {allTags.map((tag, idx) => (
+                  <Chip
+                    key={tag + idx}
+                    label={tag}
+                    size="small"
+                    style={{ borderRadius: 16, fontWeight: 500, background: '#e3e3e3', color: '#333' }}
+                    onDelete={async () => {
+                      // Supprimer le tag de la liste globale
+                      const newTags = allTags.filter(t => t !== tag);
+                      setAllTags(newTags);
+                      setDialogTags(prev => prev.filter(t => t !== tag));
+                      setNewTagName("");
+                      // Supprimer le tag de toutes les compagnies qui l'ont
+                      setRows(prevRows => prevRows.map(r => ({ ...r, tags: Array.isArray(r.tags) ? r.tags.filter(t => t !== tag) : [] })));
+                      // Mettre à jour Firebase pour les tags
+                      const db = getDatabase(firebaseApp);
+                      await import("firebase/database").then(({ ref, set, get }) => {
+                        set(ref(db, "/tags"), newTags);
+                        // Mettre à jour tous les rows dans Firebase
+                        get(ref(db, "/Linkedin_list_with_country")).then(snapshot => {
+                          const data = snapshot.val();
+                          if (data) {
+                            const updates: Record<string, any> = {};
+                            Object.entries(data).forEach(([key, row]) => {
+                              const typedRow = row as Row;
+                              if (typedRow.tags && Array.isArray(typedRow.tags) && typedRow.tags.includes(tag)) {
+                                updates[key] = { ...typedRow, tags: typedRow.tags.filter((t: string) => t !== tag) };
+                              }
+                            });
+                            Object.entries(updates).forEach(([key, row]) => {
+                              set(ref(db, `/Linkedin_list_with_country/${key}`), row);
+                            });
+                          }
+                        });
+                      });
+                    }}
+                  />
+                ))}
+              </span>
             </div>
           </DialogContent>
           <DialogActions>
