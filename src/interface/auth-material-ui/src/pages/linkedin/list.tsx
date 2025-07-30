@@ -262,8 +262,31 @@ export const LinkedinList: React.FC = () => {
 
 
 
-  // Pagination state
-  const [paginationModel, setPaginationModel] = React.useState({ pageSize: 25, page: 0 });
+  // Pagination state with persistence
+  const getInitialPagination = () => {
+    if (typeof window === 'undefined') return { pageSize: 25, page: 0 };
+    const saved = localStorage.getItem('linkedin_pagination');
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (
+          typeof parsed === 'object' &&
+          typeof parsed.page === 'number' &&
+          typeof parsed.pageSize === 'number'
+        ) {
+          return parsed;
+        }
+      } catch {}
+    }
+    return { pageSize: 25, page: 0 };
+  };
+  const [paginationModel, setPaginationModel] = React.useState(getInitialPagination);
+
+  // Persist pagination in localStorage
+  React.useEffect(() => {
+    if (typeof window === 'undefined') return;
+    localStorage.setItem('linkedin_pagination', JSON.stringify(paginationModel));
+  }, [paginationModel]);
 
   // Min/max fleet_size filter
   const fleetSizes = rows.map(r => Number(r.fleet_size)).filter(n => !isNaN(n));
