@@ -1,4 +1,5 @@
 import AddIcon from "@mui/icons-material/Add";
+import DeleteIcon from "@mui/icons-material/Delete";
 import React from "react";
 import { List } from "@refinedev/mui";
 import { DataGrid, type GridColDef } from "@mui/x-data-grid";
@@ -27,8 +28,16 @@ type Row = {
 
 export const LinkedinList: React.FC = () => {
   const [rows, setRows] = React.useState<Row[]>([]);
+  // Filtres persistants
+  const getInitialFilter = (key: string, fallback: any) => {
+    if (typeof window === 'undefined') return fallback;
+    const val = localStorage.getItem(key);
+    if (val === null) return fallback;
+    if (typeof fallback === 'number') return Number(val);
+    return val;
+  };
   // Barre de recherche
-  const [search, setSearch] = React.useState("");
+  const [search, setSearch] = React.useState(() => getInitialFilter('linkedin_search', ""));
   // Liste des tags globaux
   const [allTags, setAllTags] = React.useState<string[]>([]);
   // Pour création de tag en cours
@@ -61,6 +70,17 @@ export const LinkedinList: React.FC = () => {
   }, []);
 
 
+
+  const handleDeleteRow = async (rowId: number) => {
+    // Suppression locale
+    setRows(prev => prev.filter((_, i) => i !== rowId));
+    // Suppression dans Firebase
+    const db = getDatabase(firebaseApp);
+    await import("firebase/database").then(({ ref, remove }) =>
+      remove(ref(db, `/Linkedin_list_with_country/${rowId}`))
+    );
+    window.location.reload();
+  };
 
   const columns = React.useMemo<GridColDef<Row>[]>(
     () => [
@@ -177,6 +197,35 @@ export const LinkedinList: React.FC = () => {
         flex: 2,
         editable: true,
       },
+      {
+        field: "actions",
+        headerName: "",
+        minWidth: 40,
+        width: 40,
+        flex: 0,
+        sortable: false,
+        filterable: false,
+        disableColumnMenu: true,
+        renderCell: (params) => (
+          <Button
+            color="error"
+            size="small"
+            onClick={e => {
+              e.stopPropagation();
+              if (window.confirm("Supprimer cette compagnie ?")) {
+                const rowId = params.row.id;
+                if (typeof rowId === 'number') {
+                  handleDeleteRow(rowId);
+                }
+              }
+            }}
+            title="Supprimer la compagnie"
+            style={{ minWidth: 0, padding: 4 }}
+          >
+            <DeleteIcon fontSize="small" />
+          </Button>
+        ),
+      },
     ],
     []
   );
@@ -190,8 +239,22 @@ export const LinkedinList: React.FC = () => {
   const fleetSizes = rows.map(r => Number(r.fleet_size)).filter(n => !isNaN(n));
   const minFleet = fleetSizes.length ? Math.min(...fleetSizes) : 1;
   const maxFleet = fleetSizes.length ? Math.max(...fleetSizes) : 1000;
-  const [minFleetSize, setMinFleetSize] = React.useState(minFleet);
-  const [maxFleetSize, setMaxFleetSize] = React.useState(maxFleet);
+  const [minFleetSize, setMinFleetSize] = React.useState(() => getInitialFilter('linkedin_minFleetSize', minFleet));
+  const [maxFleetSize, setMaxFleetSize] = React.useState(() => getInitialFilter('linkedin_maxFleetSize', maxFleet));
+
+  // Persistance des filtres dans localStorage
+  React.useEffect(() => {
+    if (typeof window === 'undefined') return;
+    localStorage.setItem('linkedin_search', search);
+  }, [search]);
+  React.useEffect(() => {
+    if (typeof window === 'undefined') return;
+    localStorage.setItem('linkedin_minFleetSize', String(minFleetSize));
+  }, [minFleetSize]);
+  React.useEffect(() => {
+    if (typeof window === 'undefined') return;
+    localStorage.setItem('linkedin_maxFleetSize', String(maxFleetSize));
+  }, [maxFleetSize]);
 
   // Filtrer les rows selon fleet_size et recherche
   // Ajoute l'index réel à chaque row pour DataGrid
@@ -203,6 +266,32 @@ export const LinkedinList: React.FC = () => {
       const matchesSearch = row.company_name.toLowerCase().includes(search.toLowerCase());
       return val >= minFleetSize && val <= maxFleetSize && matchesSearch;
     });
+
+  // État pour la création
+  const [openCreateDialog, setOpenCreateDialog] = React.useState(false);
+  const [newCompany, setNewCompany] = React.useState<Row>({
+    company_name: '',
+    linkedin_url: '',
+    description: '',
+    fleet_size: '',
+    country: '',
+    tags: [],
+  });
+
+  // Fonction pour créer une nouvelle compagnie
+  const handleCreateCompany = async () => {
+    // Ajout local
+    setRows(prev => [...prev, { ...newCompany }]);
+    // Ajout Firebase
+    const db = getDatabase(firebaseApp);
+    const newId = rows.length;
+    await import("firebase/database").then(({ ref, set }) =>
+      set(ref(db, `/Linkedin_list_with_country/${newId}`), { ...newCompany })
+    );
+    setOpenCreateDialog(false);
+    setNewCompany({ company_name: '', linkedin_url: '', description: '', fleet_size: '', country: '', tags: [] });
+    window.location.reload();
+  };
 
   // Calcul de la somme des fleet_size filtrés
   const totalFleetSize = filteredRows.reduce((sum, row) => {
@@ -228,8 +317,111 @@ export const LinkedinList: React.FC = () => {
         }
       `}</style>
       <List canCreate={false}>
-        <div style={{ marginBottom: 12, fontWeight: 500, fontSize: 16, color: '#1976d2' }}>
+        {/* Dialog de création d'une nouvelle airline */}
+        <Dialog open={openCreateDialog} onClose={() => setOpenCreateDialog(false)}>
+          <DialogTitle>Créer une nouvelle compagnie</DialogTitle>
+          <DialogContent>
+            <TextField
+              label="Nom de la compagnie"
+              value={newCompany.company_name}
+              onChange={e => setNewCompany(c => ({ ...c, company_name: e.target.value }))}
+              fullWidth
+              margin="dense"
+            />
+            <TextField
+              label="LinkedIn URL"
+              value={newCompany.linkedin_url}
+              onChange={e => setNewCompany(c => ({ ...c, linkedin_url: e.target.value }))}
+              fullWidth
+              margin="dense"
+            />
+            <TextField
+              label="Description"
+              value={newCompany.description}
+              onChange={e => setNewCompany(c => ({ ...c, description: e.target.value }))}
+              fullWidth
+              margin="dense"
+            />
+            <TextField
+              label="Fleet Size"
+              value={newCompany.fleet_size}
+              onChange={e => setNewCompany(c => ({ ...c, fleet_size: e.target.value }))}
+              type="number"
+              fullWidth
+              margin="dense"
+            />
+            <TextField
+              label="Country"
+              value={newCompany.country}
+              onChange={e => setNewCompany(c => ({ ...c, country: e.target.value }))}
+              fullWidth
+              margin="dense"
+            />
+            <Autocomplete
+              multiple
+              options={allTags}
+              value={newCompany.tags}
+              onChange={(_, newValue) => setNewCompany(c => ({ ...c, tags: newValue }))}
+              renderTags={(tagValue, getTagProps) =>
+                tagValue.map((option, index) => (
+                  <Chip variant="outlined" label={option} {...getTagProps({ index })} key={option} />
+                ))
+              }
+              renderInput={paramsInput => (
+                <TextField {...paramsInput} variant="standard" label="Tags" />
+              )}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => setOpenCreateDialog(false)}>Annuler</Button>
+            <Button variant="contained" onClick={handleCreateCompany}>Créer</Button>
+          </DialogActions>
+        </Dialog>
+        <div style={{ fontWeight: 500, fontSize: 16, color: '#1976d2', marginBottom: 12 }}>
           Total fleet size: {totalFleetSize}
+        </div>
+
+        <div style={{ marginBottom: 16, display: 'flex', alignItems: 'center', gap: 16 }}>
+          <TextField
+            label="Search airline"
+            size="small"
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon />
+                </InputAdornment>
+              ),
+              style: { width: 260 }
+            }}
+            style={{ marginRight: 16 }}
+          />
+          <TextField
+            label="Min fleet size"
+            type="number"
+            size="small"
+            value={minFleetSize}
+            onChange={e => setMinFleetSize(Number(e.target.value))}
+            style={{ marginRight: 16 }}
+          />
+          <TextField
+            label="Max fleet size"
+            type="number"
+            size="small"
+            value={maxFleetSize}
+            onChange={e => setMaxFleetSize(Number(e.target.value))}
+          />
+          <div style={{ flex: 1 }} />
+          <Button
+            variant="contained"
+            color="primary"
+            startIcon={<AddIcon />}
+            onClick={() => setOpenCreateDialog(true)}
+            style={{ marginLeft: 'auto', whiteSpace: 'nowrap' }}
+          >
+            Add a company
+          </Button>
         </div>
         <Dialog open={openTagDialog} onClose={() => setOpenTagDialog(false)}>
           <DialogTitle>Manage tags for {selectedRow?.company_name}</DialogTitle>
@@ -313,38 +505,7 @@ export const LinkedinList: React.FC = () => {
             }}>Save</Button>
           </DialogActions>
         </Dialog>
-        <div style={{ marginBottom: 16, display: 'flex', alignItems: 'center', gap: 16 }}>
-          <TextField
-            label="Search airline"
-            size="small"
-            value={search}
-            onChange={e => setSearch(e.target.value)}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon />
-                </InputAdornment>
-              ),
-              style: { width: 260 }
-            }}
-            style={{ marginRight: 16 }}
-          />
-          <TextField
-            label="Min fleet size"
-            type="number"
-            size="small"
-            value={minFleetSize}
-            onChange={e => setMinFleetSize(Number(e.target.value))}
-            style={{ marginRight: 16 }}
-          />
-          <TextField
-            label="Max fleet size"
-            type="number"
-            size="small"
-            value={maxFleetSize}
-            onChange={e => setMaxFleetSize(Number(e.target.value))}
-          />
-        </div>
+        {/* Filtres déplacés ci-dessus */}
 
         <div
           style={{
