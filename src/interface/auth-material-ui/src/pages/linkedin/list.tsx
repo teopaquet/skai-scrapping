@@ -129,15 +129,15 @@ export const LinkedinList: React.FC = () => {
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center',
+                justifyContent: 'flex-start',
                 width: '100%',
                 height: '100%',
                 gap: tags.length > 0 ? 8 : 0,
               }}
             >
-              {tags.length > 0 && (
+              {tags.length > 0 ? (
                 <span
-                  style={{ display: 'flex', gap: 6, flexWrap: 'wrap', cursor: 'pointer', userSelect: 'none' }}
+                  style={{ display: 'flex', gap: 6, flexWrap: 'wrap', cursor: 'pointer', userSelect: 'none', alignItems: 'center' }}
                   onClick={e => {
                     e.stopPropagation();
                     setSelectedRow(params.row);
@@ -159,12 +159,12 @@ export const LinkedinList: React.FC = () => {
                         letterSpacing: 0.2,
                         boxShadow: '0 1px 4px #0001',
                         fontSize: 13,
+                        marginRight: idx === tags.length - 1 ? 0 : 0,
                       }}
                     />
                   ))}
                 </span>
-              )}
-              <span style={{ display: 'flex', alignItems: 'center' }}>
+              ) : (
                 <Button
                   size="small"
                   variant="text"
@@ -179,7 +179,7 @@ export const LinkedinList: React.FC = () => {
                 >
                   <AddIcon fontSize="small" style={{ color: '#555', position: 'relative' }} />
                 </Button>
-              </span>
+              )}
             </span>
           );
         },
